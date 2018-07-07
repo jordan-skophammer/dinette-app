@@ -9,7 +9,6 @@ import User from "./pages/User"
 const App = () => (
   <Router>
     <div>
-      
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} />
       <Route exact path="/blog" component={Blog} />
