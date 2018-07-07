@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Ballot from "./pages/Ballot";
-import Login  from "./pages/Login";
+import LogIn  from "./pages/LogIn";
 import Search from "./pages/Search";
 import User from "./pages/User"
 import './App.css';
@@ -14,7 +14,7 @@ const App = () => (
     <div>
       <Route exact path="/" component={Home} />
       <Route path="/Ballot" component={Ballot} />
-      <Route path="/Login" component={Login} />
+      <Route path="/LogIn" component={LogIn} />
       <Route path="/Search" component={Search} />
       <Route path="/user" component={User} />
     </div>
