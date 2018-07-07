@@ -3,7 +3,7 @@ import "./Home.css"
 
 class Home extends Component {
     render () {
-        return
+        return (
         <div>
             {/* navbar */}
             <br/>
@@ -22,7 +22,7 @@ class Home extends Component {
 
             </div>
         </div>
-    }
+        )}
 }
 
 export default Home;
