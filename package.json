@@ -1,0 +1,33 @@
+{
+  "name": "dinette-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "build": "node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installDeps": "npm install && cd client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordan-skophammer/dinette-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jordan-skophammer/dinette-app/issues"
+  },
+  "homepage": "https://github.com/jordan-skophammer/dinette-app#readme",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.1"
+  }
+}
