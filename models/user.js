@@ -7,6 +7,6 @@ const userSchema = new Schema({
   zipCode: {type: Number, min: 5, max:5, required: true}
 });
 
-const user = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
