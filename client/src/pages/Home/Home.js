@@ -11,7 +11,7 @@ class Home extends Component {
                 <h1 className="text-center title">Dinette</h1>
                 <br/>
                 <div className="row">
-                    <button className="btn btn-danger btn-lg">Search Restaurants</button>
+                    <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/search'}>Search Restaurants</button>
                 </div>
                 <div className="row">
                     <button className="btn btn-danger btn-lg">Start a Group Vote</button>
