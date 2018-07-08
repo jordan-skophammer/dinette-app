@@ -16,7 +16,7 @@ const App = () => (
       <Route path="/Ballot" component={Ballot} />
       <Route path="/LogIn" component={LogIn} />
       <Route path="/Search" component={Search} />
-      <Route path="/User" component={User} />
+      <Route path="/user" component={User} />
     </div>
   </Router>
 );
