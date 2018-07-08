@@ -4,7 +4,7 @@ import "./Home.css"
 class Home extends Component {
     render () {
         return (
-        <div>
+        <div className="wrapper">
             {/* navbar */}
             <br/>
             <div className="container">
