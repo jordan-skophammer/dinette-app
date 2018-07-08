@@ -4,11 +4,11 @@ import "./Home.css"
 class Home extends Component {
     render () {
         return (
-        <div>
+        <div className="wrapper">
             {/* navbar */}
             <br/>
             <div className="container">
-                <h1 className="text-center">Dinette</h1>
+                <h1 className="text-center title">Dinette</h1>
                 <br/>
                 <div className="row">
                     <button className="btn btn-danger btn-lg">Search Restaurants</button>
