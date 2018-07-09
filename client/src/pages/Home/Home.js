@@ -19,7 +19,6 @@ class Home extends Component {
                 <div className="row">
                     <button className="btn btn-danger btn-lg">Restaurant Roulette</button>
                 </div>
-
             </div>
         </div>
         )}
