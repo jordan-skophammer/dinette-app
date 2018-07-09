@@ -18,3 +18,5 @@ const LogInForm = () => (
         </div>  
     </div>
 )
+
+export default LogInForm;
