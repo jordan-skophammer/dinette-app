@@ -7,18 +7,22 @@ class Home extends Component {
         <div className="wrapper">
             {/* navbar */}
             <br/>
-            <div className="container">
+            <div className="container home">
                 <h1 className="text-center title">Dinette</h1>
                 <br/>
                 <div className="row">
                     <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/search'}>Search Restaurants</button>
                 </div>
                 <div className="row">
-                    <button className="btn btn-danger btn-lg">Start a Group Vote</button>
+                    <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/ballot'}>Start a Group Vote</button>
                 </div>
                 <div className="row">
-                    <button className="btn btn-danger btn-lg">Restaurant Roulette</button>
+                    <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/roulette'}>Restaurant Roulette</button>
                 </div>
+                <div className="row text-center justify-content-center">
+                    <a href="/login" className="login">Log In or Sign Up</a>
+                </div>
+                
             </div>
         </div>
         )}
