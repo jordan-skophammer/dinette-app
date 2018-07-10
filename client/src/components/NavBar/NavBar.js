@@ -9,7 +9,7 @@ const NavBar = props => (
   </button>
 
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav ml-auto">
+    <ul className="navbar-nav ml-auto navbar-right">
     <li className="nav-item active">
         <a className="nav-link" href="/search">Search <span className="sr-only">(current)</span></a>
       </li>

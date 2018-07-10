@@ -1,3 +1,7 @@
+
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+ }
 .navbar-toggler {
     border: none;
     float: right;
@@ -6,4 +10,3 @@
   button {
     margin: 5px;
   }
-}
