@@ -16,6 +16,14 @@ button {
     margin: auto;
 }
 
+.home {
+    margin-top: 30px;
+}
+
+.login {
+    color: white;
+}
+
 .row {
     margin-bottom: 8px;
 }
