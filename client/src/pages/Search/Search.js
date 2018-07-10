@@ -13,8 +13,8 @@ class Search extends Component {
     search = () => {
         API.searchRestaurants()
         .then(res => {
-            this.setState({results: res.results})
-            console.log(res)
+            this.setState({results: res.data})
+            // console.log(this.state.results.data)
         })
     }
 
@@ -29,12 +29,13 @@ class Search extends Component {
             <br/>
             <h2>Search Results</h2>
             {this.state.results.map(restaurant => (
-                <SearchResults
-                    key = {restaurant.id}
-                    restaurantName = {restaurant.name}
-                    address = {restaurant.vicinity}
-                    image = {restaurant.photos.html_attribution}
-                />
+                console.log(restaurant.id)
+                // <SearchResults
+                //     key = {restaurant.id}
+                //     restaurantName = {restaurant.name}
+                //     address = {restaurant.vicinity}
+                //     image = {restaurant.photos.html_attribution}
+                // />
             ))}
         </div>
 
