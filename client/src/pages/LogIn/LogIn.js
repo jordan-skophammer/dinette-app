@@ -6,13 +6,14 @@ import NavBar from "../../components/NavBar";
  class LogIn extends Component {
      render () {
          return(
-             <div>
-               <Wrapper>
-                   <NavBar />
-                   <LogInForm />
-                   <h2>Other components</h2>
-               </Wrapper>
-             </div>
+            <div>
+                <Wrapper>
+                    <NavBar />
+                    <LogInForm />
+                    
+                    {/* <h2>Other components</h2> */}
+                </Wrapper>
+            </div>
          )
      }
  }

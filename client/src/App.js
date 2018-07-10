@@ -6,6 +6,7 @@ import Ballot from "./pages/Ballot";
 import LogIn  from "./pages/LogIn";
 import Search from "./pages/Search";
 import User from "./pages/User"
+import SignUp from "./pages/SignUp"
 import './App.css';
 // import logo from './logo.svg';
 
@@ -16,7 +17,8 @@ const App = () => (
       <Route path="/Ballot" component={Ballot} />
       <Route path="/LogIn" component={LogIn} />
       <Route path="/Search" component={Search} />
-      <Route path="/user" component={User} />
+      <Route path="/User" component={User} />
+      <Route path="/SignUp" component={SignUp} />
     </div>
   </Router>
 );
