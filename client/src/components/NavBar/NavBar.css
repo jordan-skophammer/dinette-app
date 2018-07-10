@@ -2,3 +2,8 @@
     border: none;
     float: right;
   }
+@media screen and (max-width:9992px){ 
+  button {
+    margin: 5px;
+  }
+}
