@@ -14,8 +14,8 @@ class Search extends Component {
     search = () => {
         API.searchRestaurants()
         .then(res => {
-            this.setState({results: res.results})
-            console.log(res)
+            this.setState({results: res.data})
+            // console.log(this.state.results.data)
         })
     }
 
@@ -28,6 +28,7 @@ class Search extends Component {
         <Wrapper>
             <NavBar/>
             <br/>
+
             <div className="container">
                 <div className="row">
                 <div className="col-md-12">
@@ -50,6 +51,7 @@ class Search extends Component {
             </div>
             
         </Wrapper>
+
 
         )
     }
