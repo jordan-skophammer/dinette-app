@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import Wrapper from "../../components/Wrapper"
+import NavBar from "../../components/NavBar"
 import "./Home.css"
 
 class Home extends Component {
     render () {
         return (
-        <div className="wrapper">
-            {/* navbar */}
+        <Wrapper>
+            <NavBar />
             <br/>
             <div className="container home">
                 <h1 className="text-center title">Dinette</h1>
@@ -21,10 +23,9 @@ class Home extends Component {
                 </div>
                 <div className="row text-center justify-content-center">
                     <a href="/login" className="login">Log In</a> or <a href="/SignUp" className="login">Sign Up</a>
-                </div>
-                
+                </div>    
             </div>
-        </div>
+        </Wrapper>
         )}
 }
 
