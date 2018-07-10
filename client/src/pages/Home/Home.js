@@ -20,7 +20,7 @@ class Home extends Component {
                     <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/roulette'}>Restaurant Roulette</button>
                 </div>
                 <div className="row text-center justify-content-center">
-                    <a href="/login" className="login">Log In or Sign Up</a>
+                    <a href="/login" className="login">Log In</a> or <a href="/SignUp" className="login">Sign Up</a>
                 </div>
                 
             </div>
