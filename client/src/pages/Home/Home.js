@@ -12,13 +12,13 @@ class Home extends Component {
             <div className="container home">
                 <h1 className="text-center title">Dinette</h1>
                 <br/>
-                <div className="row">
+                <div className="row justify-content-center">
                     <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/search'}>Search Restaurants</button>
                 </div>
-                <div className="row">
+                <div className="row justify-content-center">
                     <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/ballot'}>Start a Group Vote</button>
                 </div>
-                <div className="row">
+                <div className="row justify-content-center">
                     <button className="btn btn-danger btn-lg" onClick={() => window.location.href='/roulette'}>Restaurant Roulette</button>
                 </div>
                 <div className="row text-center justify-content-center">
