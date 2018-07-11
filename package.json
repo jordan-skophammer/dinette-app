@@ -27,8 +27,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "chart.js": "^2.7.2",
     "express": "^4.16.3",
-    "mongoose": "^5.2.1"
+    "mongoose": "^5.2.1",
+    "react-chartjs-2": "^2.7.2"
   },
   "description": ""
 }

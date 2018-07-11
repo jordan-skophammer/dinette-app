@@ -1,21 +1,61 @@
 import React, { Component } from "react";
 import NavBar from "../../components/NavBar";
+import RestaurantOption from "../../components/RestaurantOption";
+import VoteList from "../../components/VoteList";
+import VoteResults from "../../components/VoteResults";
+import {Bar} from 'react-chartjs-2';
+import API from "../../utils/API";
+
 class Ballot extends Component {
-    render() {
+    
+        state = {
+            restaurants: [],
+            name: "",
+            url: ""
+        }
+        componentDidMount() {
+            this.loadRestaurants();
+          }
+
+          loadRestaurants = () => {
+            API.getrestaurants()
+              .then(res =>
+                this.setState({ restaurants: res.data, name: "", url: "" })
+              )
+              .catch(err => console.log(err));
+          };
+
+          render() {
         return (
             <div>
                 <NavBar></NavBar>
                 <h1>Voting Page</h1>
-                <div className="list-group">
-                    <button type="button" className="list-group-item">Option 1</button>
-                    <button type="button" className="list-group-item">Option 2</button>
-                    <button type="button" className="list-group-item">Option 3</button>
-                    <button type="button" className="list-group-item">Add Option</button>
-                    </div>
-                    <h2>Other components</h2>
-                </div>
-                )
-            }
-        }
-        
+
+                {this.state.restaurants.length ? (
+                    <VoteList>
+                        {this.state.restaurants.map(restaurant => (
+                            <RestaurantOption key={restaurant._id}>
+                                        {restaurant.url}
+                            </RestaurantOption>
+                        ))}
+                    </VoteList>
+                ) : (
+                        <h3>choose some restaurants to vote on</h3>
+                    )}
+
+                    <button type="add" className="btn btn-primary add-restaurant">Add an option</button>
+                    <VoteResults>
+                        {this.state.restaurants.map(restaurant => (
+                            <RestaurantOption key={restaurant._id}>
+                            </RestaurantOption>
+                        ))}
+
+<Bar data= {this.state.chartData}/>
+
+                    </VoteResults>
+            </div>
+        )
+    }
+}
+
 export default Ballot;
