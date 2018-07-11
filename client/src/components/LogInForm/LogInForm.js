@@ -1,7 +1,7 @@
 import React from "react";
 import "./LogInForm.css"
 
-const LogInForm = () => (
+const LogInForm = (props) => (
     <div className="card">
         <div className="card-body">
             <form>
@@ -14,8 +14,8 @@ const LogInForm = () => (
                     <input type="password" className="form-control" id="loginPassword" placeholder="Enter Password" />
                 </div>
                 <button type="submit" className="btn btn-danger">Login</button>
-                <button type="submit" className="btn btn-outline-danger" onClick={() => window.location.href='/SignUp'}>Create User</button>
             </form>
+            <a href="/signup" className="SignUp"><button className="btn btn-outline-danger">Create User</button></a>
         </div>  
     </div>
 )
