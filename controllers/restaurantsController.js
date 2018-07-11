@@ -4,9 +4,7 @@ const nearbyQueryStringB = "&radius=45000&type=restaurant&key=AIzaSyCJ2pazcdZHkX
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=Mall+of+America&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 
 
-module.exports={
-    
-
+module.exports = {
     search: (req, res) => {
         axios.get(geolocateQueryString)
             .then(function(data){

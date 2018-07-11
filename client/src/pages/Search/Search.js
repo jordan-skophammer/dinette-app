@@ -64,6 +64,16 @@ class Search extends Component {
 
             <div className="container">
                 <div className="row">
+                    <div className="col-md-12">
+                        <div className="search_field">
+                            <div className="blankSpaceInput">Blank
+                            </div>
+                            <div className="aPlaceForButton">
+                                <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                            </div>
+                        </div>
+                    </div>
+
                 <div className="col-md-12">
                         <div className="results-card">
                             <h3 className="text-white text-center">Search Results</h3>
@@ -93,7 +103,7 @@ class Search extends Component {
                         <div className="col-md-12">
                             <button className="col-md-12 btn btn-lg yellow-grad text-white" id="saveRestaurants" onClick={this.saveRestaurants}>Save</button>
                         </div>
-             </div>
+            </div>
             
             
         </Wrapper>

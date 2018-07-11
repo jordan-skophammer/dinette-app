@@ -20,7 +20,16 @@
     background: linear-gradient(70deg, #eb5c00, #e17f00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
+.search_field {
+    background-color: #eb5c00;
+    height: 80px;
+    min-height: 60px;
+    background: linear-gradient(70deg, #eb5c00, #e17f00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 3%;
+    padding: 1%;
 
+}
 .result-block {
     color: rgb(88, 86, 86);
     background-color: white;
@@ -51,4 +60,31 @@
 .yellow-grad {
     background: linear-gradient(70deg, #ffba00, #ffde00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.yellow-grad-save {
+    min-height: 40px;
+    float: right;
+    margin-right: 2%;
+    width: 80%;
+    min-width: 100px;
+    background: linear-gradient(70deg, #ffba00, #ffde00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.blankSpaceInput {
+    background-color: white;
+    height: 100%;
+    width: 80%;
+    float: left;
+}
+.aPlaceForButton {
+    float: right;
+    height: 100%;
+    margin-left: 1%;
+    width: 19%;
+}
+
+@media screen and (max-height: 566px){ 
+    .wrapper {
+        height: 100%;
+    }  
 }
