@@ -10,8 +10,11 @@ const NavBar = props => (
 
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav ml-auto navbar-right">
-    <li className="nav-item active">
-        <a className="nav-link" href="/search">Search <span className="sr-only">(current)</span></a>
+      <li className="nav-item active">
+        <a className="nav-link" href="/LogIn">Login <span className="sr-only">(current)</span></a>
+      </li>
+      <li className="nav-item active">
+          <a className="nav-link" href="/search">Search <span className="sr-only">(current)</span></a>
       </li>
       <li className="nav-item active">
         <a className="nav-link" href="/ballot">Vote <span className="sr-only">(current)</span></a>
