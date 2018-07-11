@@ -7,6 +7,7 @@ import LogIn  from "./pages/LogIn";
 import Search from "./pages/Search";
 import User from "./pages/User"
 import SignUp from "./pages/SignUp"
+import Roulette from "./pages/Roulette"
 import './App.css';
 // import logo from './logo.svg';
 
@@ -19,6 +20,7 @@ const App = () => (
       <Route path="/Search" component={Search} />
       <Route path="/User" component={User} />
       <Route path="/SignUp" component={SignUp} />
+      <Route path="/Roulette" component={Roulette} />
     </div>
   </Router>
 );
