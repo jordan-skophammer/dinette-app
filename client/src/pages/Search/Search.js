@@ -15,7 +15,7 @@ class Search extends Component {
         API.searchRestaurants()
         .then(res => {
             this.setState({results: res.data})
-            // console.log(this.state.results.data)
+            // console.log(this.state.results)
         })
     }
 
