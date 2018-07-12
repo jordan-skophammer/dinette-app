@@ -25,7 +25,7 @@ module.exports = {
             
         },
     locationSearch: (req, res) => {
-        console.log(req.params)
+        console.log("req.params: ", req.params)
         res.send({type: "GET"})
 
     },
@@ -36,12 +36,4 @@ module.exports = {
 } 
 
 
-/*
-const express = require("express")
-const app = express()
-
-app.get("restaurants/api/:location", function(req,res) {
-    let location = req.params.location
-    res.send({location});
-})
-*/
+console.log("Gui's note: this file is not doing anything at the moment. We whould revisit if we want to enable some functionalities")
