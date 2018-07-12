@@ -8,6 +8,8 @@ import axios from "axios";
 // This returns the CORS error - you can't ping a domain from a script on your browser
 
 export default {
-    searchRestaurants: () => axios.get("/api/restaurants")
+    searchRestaurants: () => axios.get("/api/restaurants"),
+
+    // getRestaurants: (id) => axios.get("/api/restaurants" + id)
 }
 // This (AFAIK) should call back to our express server and allow us to make the call server side

@@ -53,7 +53,7 @@ class Search extends Component {
         } else {
             sessionStorage.setItem("saved", JSON.stringify(value))
         }
-        
+        console.log(sessionStorage)
     }
 
     render () {
