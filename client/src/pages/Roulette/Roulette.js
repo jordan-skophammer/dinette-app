@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
 import Wrapper from "../../components/Wrapper";
+import "./Roulette.css";
 
 class Roulette extends Component {
 
@@ -14,7 +15,6 @@ class Roulette extends Component {
         API.searchRestaurants()
         .then(res => {
             this.setState({results: res.data})
-            console.log(this.state.results)
             this.randomPick(this.state.results)
         })
 
@@ -49,8 +49,10 @@ class Roulette extends Component {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="row">
                         <div className="col-md-12">
-                            <div className="results-card">
+                            <div className="pick-card">
                                 <br/>
                                 <h2 className="text-white text-center">Your Pick</h2>
                                 <br/>
@@ -60,7 +62,7 @@ class Roulette extends Component {
                                             <h5>{this.state.roulettePick.name}</h5>
                                             <p className="address">{this.state.roulettePick.vicinity}</p>
                                         </label>
-                                        <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSession(this.state.roulettePick.name)} value={this.state.roulettePick.name} id="defaultCheck"></input>
+                                        
                                     </div>
                                 </div>
                             </div>
