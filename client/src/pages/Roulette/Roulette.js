@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
 import Wrapper from "../../components/Wrapper";
+import "./Roulette.css";
 
 class Roulette extends Component {
 
@@ -14,7 +15,6 @@ class Roulette extends Component {
         API.searchRestaurants()
         .then(res => {
             this.setState({results: res.data})
-            console.log(this.state.results)
             this.randomPick(this.state.results)
         })
 
@@ -37,28 +37,35 @@ class Roulette extends Component {
         return(
             <Wrapper>
                 <NavBar />
-
+                <br/>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="card-pick">
+                            <div className="search_field">
+                                <div className="blankSpaceInput">Blank
+                                </div>
+                                <div className="aPlaceForButton">
+                                    <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="pick-card">
                                 <br/>
                                 <h2 className="text-white text-center">Your Pick</h2>
                                 <br/>
-                                { 
-                                    <div key = {this.state.roulettePick.id} className="result-block">
-                                        <div className="form-check">
-                                            <label className="form-check-label" htmlFor="defaultCheck">
-                                                <h5>{this.state.roulettePick.name}</h5>
-                                                <p className="address">{this.state.roulettePick.vicinity}</p>
-                                            </label>
-                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSession(this.state.roulettePick.name)} value={this.state.roulettePick.name} id="defaultCheck"></input>
-                                        <br/>
-                                        </div>
+                                <div key = {this.state.roulettePick.id} className="result-block">
+                                    <div className="form-check">
+                                        <label className="form-check-label" htmlFor="defaultCheck">
+                                            <h5>{this.state.roulettePick.name}</h5>
+                                            <p className="address">{this.state.roulettePick.vicinity}</p>
+                                        </label>
+                                        
                                     </div>
-                                }
+                                </div>
                             </div>
-                        <br/>
                         </div>
                     </div>
                 </div>
