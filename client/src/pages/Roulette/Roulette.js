@@ -6,9 +6,15 @@ import "./Roulette.css";
 
 class Roulette extends Component {
 
-    state = {
-        results: [],
-        roulettePick: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: [],
+            roulettePick: [],
+            value: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     search = () => {
@@ -16,9 +22,25 @@ class Roulette extends Component {
         .then(res => {
             this.setState({results: res.data})
             this.randomPick(this.state.results)
-        })
+        })  
+    }
 
-        
+    handleChange(event){
+        this.setState({value: event.target.value})
+    }
+
+    handleSubmit(event){
+        // console.log("Data was submitted: ", this.state.value);
+        event.preventDefault();
+        API.getRestaurants(this.state.value)
+            .then(res => {
+                // console.log(res.statusText)
+                if(res.status !== 200) {
+                    throw new Error(res.statusText)
+                }
+                this.setState({...this.state,results: res.data})
+                this.randomPick(this.state.results)
+            })
     }
 
     randomPick = () => {
@@ -41,13 +63,14 @@ class Roulette extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
+                            <form onSubmit={this.handleSubmit}>
                             <div className="search_field">
-                                <div className="blankSpaceInput">Blank
-                                </div>
+                                <input type="text" className="blankSpaceInput" id="search-term" value={this.state.value} onChange={this.handleChange} />
                                 <div className="aPlaceForButton">
                                     <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div className="row">
