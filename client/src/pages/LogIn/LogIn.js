@@ -15,8 +15,6 @@ import NavBar from "../../components/NavBar";
                 <Wrapper>
                     <NavBar />
                     <LogInForm />
-                    
-                    {/* <h2>Other components</h2> */}
                 </Wrapper>
             </div>
          )

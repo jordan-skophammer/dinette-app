@@ -10,8 +10,6 @@ import SignUpForm from "../../components/SignUpForm"
                 <Wrapper>
                     <NavBar />
                     <SignUpForm />
-                    
-                    {/* <h2>Other components</h2> */}
                 </Wrapper>
             </div>
          )
