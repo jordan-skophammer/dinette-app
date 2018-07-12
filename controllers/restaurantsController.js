@@ -6,6 +6,8 @@ const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?
 
 module.exports = {
     search: (req, res) => {
+        // console.log(req.params)
+        // location = req.params.location
         axios.get(geolocateQueryString)
             .then(function(data){
                 console.log(data.data.results[0])
@@ -20,7 +22,15 @@ module.exports = {
                     .then(data => res.send(data.data.results))
                     // .then(data=>console.log(data.data))
             })
-        
+            
+        },
+    locationSearch: (req, res) => {
+        console.log(req.params)
 
-    }
+        res.send({type: "GET"})
+
+    },
+    nearbySearch: (req,res) => {
+        res.send({type: "GET"})
+    }    
 }
