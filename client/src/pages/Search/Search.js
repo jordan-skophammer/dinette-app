@@ -5,22 +5,42 @@ import NavBar from "../../components/NavBar"
 import Wrapper from "../../components/Wrapper"
 
 class Search extends Component {
-
-    state = {
-        results: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: [],
+            value: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
-    search = () => {
+    /*search = () => {
         API.searchRestaurants()
         .then(res => {
             this.setState({results: res.data})
             console.log(this.state.results)
         })
+    }*/
+    handleChange(event){
+        this.setState({value: event.target.value})
+    }
+    handleSubmit(event){
+        // console.log("Data was submitted: ", this.state.value);
+        event.preventDefault();
+        API.getRestaurants(this.state.value)
+            .then(res => {
+                console.log(res)
+                if(res.status !== 200) {
+                    throw new Error(res.statusText)
+                }
+                // console.log(res.data.response)// this.setState(res.data.response)
+            })
     }
 
+
     componentDidMount() {
-        this.search()
+        // this.search()
     }
 
     saveRestaurants = () => {
@@ -65,17 +85,16 @@ class Search extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="search_field row">
-                        {/* <div className="row"> */}
-                        
-                            <div className="col-sm-9 align-middle">
-                                <input type="text" className="form-control" id="searchLocation" placeholder="Search by ZIP or landmark"></input>
-                            </div>
-                            <div className="col-sm-3">
-                                <button className="btn btn-lg yellow text-white" onClick={this.searchLocation}>Search</button>
+                        <form onSubmit={this.handleSubmit}>
+                        <div className="search_field">
+                            <input type="text" className="blankSpaceInput" id="search-term" value={this.state.value} onChange={this.handleChange} />
+                            
+                            <div className="aPlaceForButton">
+                                <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
                             </div>
                         {/* </div> */}
                         </div>
+                        </form>
 
                     </div>
                 </div>
