@@ -17,10 +17,14 @@ class Ballot extends Component {
     }
 
     loadRestaurants = () => {
-        let restaurantArray = sessionStorage.getItem("saved")
-        JSON.parse(restaurantArray)
-        this.setState ({ restaurants: restaurantArray })
-        console.log(restaurantArray)
+        let restaurantsString = sessionStorage.getItem("saved")
+        var restaurants = JSON.parse(restaurantsString)
+        // var restaurants = [];
+        // for (var i = 0; i < restaurantArray.length; i++) {
+        //     restaurants.push(restaurantArray[i].name);
+        // }
+        this.setState ({ ...this.state, restaurants: restaurants })
+        console.log(restaurants)
     }
 
 
@@ -37,7 +41,7 @@ class Ballot extends Component {
                     <VoteList>
                         {this.state.restaurants.map(restaurant => (
                             <RestaurantOption key={restaurant.id}>
-                                { restaurant.name }
+                                { restaurant }
                             </RestaurantOption>
                         ))}
                     </VoteList>
