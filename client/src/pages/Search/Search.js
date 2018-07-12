@@ -95,6 +95,14 @@ class Search extends Component {
                         {/* </div> */}
                         </div>
                         </form>
+                        {/* alternate code couldn't be merged: <div className="search_field row">
+                        
+                        
+                            <div className="col-sm-9 align-middle">
+                                <input type="text" className="form-control" id="searchLocation" placeholder="Search by ZIP or landmark"></input>
+                            </div>
+                            <div className="col-sm-3">
+                                <button className="btn btn-lg yellow text-white" onClick={this.searchLocation}>Search</button>  */}
 
                     </div>
                 </div>

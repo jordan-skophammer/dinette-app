@@ -31,4 +31,5 @@ module.exports = {
     },
     nearbySearch: (req,res) => {
         res.send({type: "GET"})
-    }    
+    }   
+} 
