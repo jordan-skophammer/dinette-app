@@ -20,7 +20,36 @@ const restaurantsController = require("../../controllers/restaurantsController")
     // And this one doesn't fire for some reason.
 */
 
-router.route("/").get(restaurantsController.locationSearch)
+/*
+app.get("api/search/:location", function(req,res) {
+    let location = req.params.location
+    console.log("location in searchLocation.js: ", location)
+    res.send({location});
+})
+*/
+const axios = require ("axios")
+const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
+const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 
 
-module.exports = router;
+app.get("/api/restaurants/:location", function(req,res) {
+    let location = req.params.location
+    console.log("location in searchLocation.js: ", location)
+
+    axios.get(geolocateQueryString + location + geolocateKey)
+    .then(function(data){
+        // console.log(data.data.results[0])
+                let lat = data.data.results[0].geometry.location.lat
+                let lng = data.data.results[0].geometry.location.lng
+                console.log("lat: ", lat, " lng: ", lng)
+            // .then(data=>console.log(data.data))
+        })    
+    }
+)
+
+console.log("routes > api > searchLocation is executing")
+
+// router.route("/").get(restaurantsController.locationSearch)
+
+
+module.exports = app;

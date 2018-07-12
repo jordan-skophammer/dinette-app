@@ -35,3 +35,13 @@ module.exports = {
     }   
 } 
 
+
+/*
+const express = require("express")
+const app = express()
+
+app.get("restaurants/api/:location", function(req,res) {
+    let location = req.params.location
+    res.send({location});
+})
+*/

@@ -9,17 +9,15 @@ let currentURL = window.location.origin;
 // This returns the CORS error - you can't ping a domain from a script on your browser
 
 export default {
-
-
     searchRestaurants: () => axios.get("/api/restaurants/"),
     
     getRestaurants: function(searchTerm) {
         //console.log("Location searched: ",searchTerm)
-        // currentURL = "localhost:3000/" ? "http://localhost:3001" : window.location.origin
+        currentURL = "localhost:3000/" ? "http://localhost:3001" : window.location.origin
         searchTerm = searchTerm.replace(/ /g, "+").toLowerCase()
         console.log("Location Searched After regex: ", searchTerm)
 
-        return axios.get("/api/searchLocation/" + searchTerm)
+        return axios.get(currentURL + "/api/restaurants/" + searchTerm)
         // return searchTerm
     },
     searchNearby: () => {
