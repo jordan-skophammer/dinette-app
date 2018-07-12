@@ -15,5 +15,5 @@ router.route("/").get(restaurantsController.search)
     // .get(queryString).then(data=>console.log("result",data))
     // And this one doesn't fire for some reason.
 
-
+console.log("Gui's note: this file is not doing anything at the moment")
 module.exports = router;

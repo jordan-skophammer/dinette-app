@@ -34,7 +34,7 @@ class Search extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                console.log(res.data.location)
+                this.setState({...this.state,results: res.data})
             })
     }
 
