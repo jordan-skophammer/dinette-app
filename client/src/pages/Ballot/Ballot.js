@@ -3,39 +3,38 @@ import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
 import VoteList from "../../components/VoteList";
 import VoteResults from "../../components/VoteResults";
-import {Bar} from 'react-chartjs-2';
-import API from "../../utils/API";
+// import { Bar } from 'react-chartjs-2';
+// import API from "../../utils/API";
+// import Search from "./Search";
 
 class Ballot extends Component {
-    
-        state = {
-            restaurants: [],
-            name: "",
-            url: ""
-        }
-        componentDidMount() {
-            this.loadRestaurants();
-          }
 
-          loadRestaurants = () => {
-            API.getrestaurants()
-              .then(res =>
-                this.setState({ restaurants: res.data, name: "", url: "" })
-              )
-              .catch(err => console.log(err));
-          };
+    state = {
+        restaurants: []
+    }
+    componentDidMount() {
+        this.loadSavedArray();
+    }
 
-          render() {
+    loadSavedArray = () => {
+        sessionStorage.savedArray()
+            .then(res =>
+                this.setState({ savedArray: res.data })
+            )
+            .catch(err => console.log(err));
+    };
+
+    render() {
         return (
             <div>
                 <NavBar></NavBar>
                 <h1>Voting Page</h1>
 
-                {this.state.restaurants.length ? (
+                {this.state.savedArray.length ? (
                     <VoteList>
-                        {this.state.restaurants.map(restaurant => (
-                            <RestaurantOption key={restaurant._id}>
-                                        {restaurant.url}
+                        {this.state.savedArray.map(saved => (
+                            <RestaurantOption key={saved.id}>
+                                { saved.url }
                             </RestaurantOption>
                         ))}
                     </VoteList>
@@ -43,16 +42,16 @@ class Ballot extends Component {
                         <h3>choose some restaurants to vote on</h3>
                     )}
 
-                    <button type="add" className="btn btn-primary add-restaurant">Add an option</button>
-                    <VoteResults>
-                        {this.state.restaurants.map(restaurant => (
-                            <RestaurantOption key={restaurant._id}>
-                            </RestaurantOption>
-                        ))}
+                <button type="add" className="btn btn-primary add-restaurant">Add an option</button>
+                <VoteResults>
+                    {/* {this.state.restaurants.map(restaurant => (
+                        <RestaurantOption key={restaurant.id}>
+                        </RestaurantOption>
+                    ))} */}
 
-<Bar data= {this.state.chartData}/>
+                    {/* <Bar data={this.state.chartData} /> */}
 
-                    </VoteResults>
+                </VoteResults>
             </div>
         )
     }
