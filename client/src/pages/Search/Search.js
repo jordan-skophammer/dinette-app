@@ -15,13 +15,13 @@ class Search extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    /*search = () => {
+    search = () => {
         API.searchRestaurants()
         .then(res => {
             this.setState({results: res.data})
             console.log(this.state.results)
         })
-    }*/
+    }
     handleChange(event){
         this.setState({value: event.target.value})
     }
@@ -30,17 +30,17 @@ class Search extends Component {
         event.preventDefault();
         API.getRestaurants(this.state.value)
             .then(res => {
-                console.log(res)
+                // console.log(res.statusText)
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                // console.log(res.data.response)// this.setState(res.data.response)
+                console.log(res.data.location)
             })
     }
 
 
     componentDidMount() {
-        // this.search()
+        this.search()
     }
 
     saveRestaurants = () => {
