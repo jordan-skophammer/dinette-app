@@ -9,6 +9,8 @@ let currentURL = window.location.origin;
 // This returns the CORS error - you can't ping a domain from a script on your browser
 
 export default {
+
+
     searchRestaurants: () => axios.get("/api/restaurants/"),
     
     getRestaurants: function(searchTerm) {
@@ -23,5 +25,6 @@ export default {
     searchNearby: () => {
         return axios.get(currentURL + "/api/search")
     }
+
 }
 // This (AFAIK) should call back to our express server and allow us to make the call server side
