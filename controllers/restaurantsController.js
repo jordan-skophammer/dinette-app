@@ -1,6 +1,6 @@
 const axios = require ("axios")
 const nearbyQueryStringA = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
-const nearbyQueryStringB = "&radius=45000&type=restaurant&key=AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY"
+const nearbyQueryStringB = "&radius=10000&type=restaurant&key=AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY"
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=Mall+of+America&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 
 
@@ -23,4 +23,6 @@ module.exports = {
         
 
     }
+
+    
 }
