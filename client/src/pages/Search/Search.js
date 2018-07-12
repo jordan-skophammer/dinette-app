@@ -65,17 +65,24 @@ class Search extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="search_field">
-                            <div className="blankSpaceInput">Blank
+                        <div className="search_field row">
+                        {/* <div className="row"> */}
+                        
+                            <div className="col-sm-9 align-middle">
+                                <input type="text" className="form-control" id="searchLocation" placeholder="Search by ZIP or landmark"></input>
                             </div>
-                            <div className="aPlaceForButton">
-                                <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                            <div className="col-sm-3">
+                                <button className="btn btn-lg yellow text-white" onClick={this.searchLocation}>Search</button>
                             </div>
+                        {/* </div> */}
                         </div>
-                    </div>
 
-                <div className="col-md-12">
-                        <div className="results-card">
+                    </div>
+                </div>
+                <div className="row">
+
+                <div className="col-md-12 results-card">
+                        {/* <div className="results-card"> */}
                             <h3 className="text-white text-center">Search Results</h3>
                             <br/>
                                 
@@ -96,8 +103,8 @@ class Search extends Component {
 
                                 ))}
                             
-                        </div>
-                        <br/>
+                        {/* </div> */}
+                        {/* <br/> */}
                     </div>
                 </div>
                         <div className="col-md-12">
