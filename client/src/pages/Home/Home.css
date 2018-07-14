@@ -11,7 +11,7 @@ button {
     color: white;
 }
 
-.row {
+.home-btn {
     margin-bottom: 8px;
 }
 
@@ -19,9 +19,25 @@ button {
     font-size: 5rem;
     color: white;
     font-family: 'Lobster', cursive;
+    font-size: 7rem;
     /* font-family: 'Fugaz One', cursive; */
     /* font-family: 'Racing Sans One', cursive; */
     /* font-family: 'Sonsie One', cursive; */
     /* font-family: 'Dr Sugiyama', cursive; */
     /* font-family: 'Warnes', cursive; */
+}
+
+.yellow {
+    background: linear-gradient(70deg, #ffba00, #ffde00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.green {
+    background: linear-gradient(70deg, #94ca03, #bed736);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.orange {
+    background: linear-gradient(70deg, #eb5c00, #e17f00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }

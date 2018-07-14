@@ -2,58 +2,68 @@ import React, { Component } from "react";
 import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
 import VoteList from "../../components/VoteList";
-import VoteResults from "../../components/VoteResults";
-import {Bar} from 'react-chartjs-2';
-import API from "../../utils/API";
+import Wrapper from "../../components/Wrapper";
+
+// import VoteResults from "../../components/VoteResults";
+// import { Bar } from 'react-chartjs-2';
+// import API from "../../utils/API";
+// import Search from "./Search";
 
 class Ballot extends Component {
-    
-        state = {
-            restaurants: [],
-            name: "",
-            url: ""
-        }
-        componentDidMount() {
-            this.loadRestaurants();
-          }
 
-          loadRestaurants = () => {
-            API.getrestaurants()
-              .then(res =>
-                this.setState({ restaurants: res.data, name: "", url: "" })
-              )
-              .catch(err => console.log(err));
-          };
+    state = {
+        restaurants: []
+    }
+    componentDidMount() {
+        this.loadRestaurants();
+    }
 
-          render() {
+    loadRestaurants = () => {
+        let restaurantsString = sessionStorage.getItem("saved")
+        var restaurants = JSON.parse(restaurantsString)
+        // var restaurants = [];
+        // for (var i = 0; i < restaurantArray.length; i++) {
+        //     restaurants.push(restaurantArray[i].name);
+        // }
+        this.setState({ ...this.state, restaurants: restaurants })
+        console.log(restaurants)
+    }
+
+
+
+
+
+    render() {
         return (
-            <div>
-                <NavBar></NavBar>
-                <h1>Voting Page</h1>
+            <Wrapper>
+                <div>
+                    <NavBar></NavBar>
+                    {/* <h1>Voting Page</h1> */}
+                    <br />
+                    {this.state.restaurants.length ? (
+                        <VoteList>
+                            {this.state.restaurants.map(restaurant => (
+                                <RestaurantOption key={restaurant.id}>
+                                    {restaurant}
+                                </RestaurantOption>
+                            ))}
+                        </VoteList>
+                    ) : (
+                            <h3>choose some restaurants to vote on</h3>
+                        )}
 
-                {this.state.restaurants.length ? (
-                    <VoteList>
-                        {this.state.restaurants.map(restaurant => (
-                            <RestaurantOption key={restaurant._id}>
-                                        {restaurant.url}
-                            </RestaurantOption>
-                        ))}
-                    </VoteList>
-                ) : (
-                        <h3>choose some restaurants to vote on</h3>
-                    )}
+                    <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
+                    {/* <VoteResults> */}
+                    {/* {this.state.restaurants.map(restaurant => (
+                        <RestaurantOption key={restaurant.id}>
+                        </RestaurantOption>
+                    ))} */}
 
-                    <button type="add" className="btn btn-primary add-restaurant">Add an option</button>
-                    <VoteResults>
-                        {this.state.restaurants.map(restaurant => (
-                            <RestaurantOption key={restaurant._id}>
-                            </RestaurantOption>
-                        ))}
+                    {/* <Bar data={this.state.chartData} /> */}
 
-<Bar data= {this.state.chartData}/>
-
-                    </VoteResults>
-            </div>
+                    {/* </VoteResults> */}
+                </div>
+            </Wrapper>
         )
     }
 }

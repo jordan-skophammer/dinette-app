@@ -11,9 +11,11 @@ restaurantsArr = []
 
 module.exports = {
     search: (req, res) => {
+
         let geolocateQueryString = geolocateQueryStringA
         geolocateQueryString += "Mall+of+America"
         geolocateQueryString += geolocateQueryStringB
+
         axios.get(geolocateQueryString)
             .then(function(data){
                 console.log(data.data.results[0])
@@ -25,6 +27,7 @@ module.exports = {
                 nearbyStringFull += lng
                 nearbyStringFull += nearbyQueryStringB
                 axios.get(nearbyStringFull)
+
                     .then(function(data){
                         console.log(data.data.results)
                         let noDetailsDataArr = []
@@ -50,3 +53,4 @@ function getDetailsAddToArray(array, res){
             getDetailsAddToArray(array, res)
         })
 }
+
