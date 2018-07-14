@@ -83,7 +83,7 @@ class Search extends Component {
             <NavBar/>
             <br/>
 
-            <div className="container">
+
                 <div className="row">
                     <div className="col-md-12">
                         <form onSubmit={this.handleSubmit}>
@@ -129,7 +129,7 @@ class Search extends Component {
                         </a>
                     </div>
                 </div>
-            </div>
+
             
             
         </Wrapper>

@@ -7,11 +7,10 @@ const userSchema = new Schema({
   local: {
     userName: { type: String, required: false, unique: true },
     password: { type: String, required: false },
-    passwordConfirm: { type: String, required: false },
   },
-  google: {
-    googleID: { type: String, required: false },
-  },
+  // google: {
+  //   googleID: { type: String, required: false },
+  // },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   zipCode: { type: Number, min: 5, max: 5, required: true },
