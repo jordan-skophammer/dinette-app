@@ -86,8 +86,8 @@ class Search extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <form onSubmit={this.handleSubmit}>
-                        <div className="search_field">
-                            <input type="text" className="blankSpaceInput" id="search-term" value={this.state.value} onChange={this.handleChange} />
+                        <div className="search_field row">
+                            <input type="text" className="form-control blankSpaceInput" id="search-term"  placeholder="Search by ZIP or landmark" value={this.state.value} onChange={this.handleChange} />
                             
                             <div className="aPlaceForButton">
                                 <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
@@ -95,11 +95,9 @@ class Search extends Component {
                         {/* </div> */}
                         </div>
                         </form>
-                        {/* alternate code couldn't be merged: <div className="search_field row">
-                        
-                        
+                        {/* alternate code couldn't be merged: >
                             <div className="col-sm-9 align-middle">
-                                <input type="text" className="form-control" id="searchLocation" placeholder="Search by ZIP or landmark"></input>
+                                <input type="text" className="form-control" id="searchLocation" ></input>
                             </div>
                             <div className="col-sm-3">
                                 <button className="btn btn-lg yellow text-white" onClick={this.searchLocation}>Search</button>  */}
