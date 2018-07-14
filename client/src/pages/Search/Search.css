@@ -21,7 +21,7 @@
     background: linear-gradient(70deg, #eb5c00, #e17f00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
-.search_field {
+.search_box {
     background-color: #eb5c00;
     /* height: 80px; */
     min-height: 60px;

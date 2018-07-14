@@ -15,16 +15,20 @@ class Search extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    search = () => {
-        API.searchRestaurants()
-        .then(res => {
-            this.setState({results: res.data})
-            console.log(this.state.results)
-        })
-    }
+    //not really using this function. handleSubmit does searching
+    // search = () => {
+    //     API.searchRestaurants()
+    //     .then(res => {
+    //         this.setState({results: res.data})
+    //         console.log(this.state.results)
+    //     })
+    // }
+
     handleChange(event){
         this.setState({value: event.target.value})
+        console.log(this.state.value)
     }
+    
     handleSubmit(event){
         // console.log("Data was submitted: ", this.state.value);
         event.preventDefault();
@@ -34,19 +38,16 @@ class Search extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
+                console.log(res)
                 this.setState({...this.state,results: res.data})
             })
     }
 
 
-    componentDidMount() {
-        this.search()
-    }
+    // componentDidMount() {
+    //     this.search()
+    // }
 
-    saveRestaurants = () => {
-        let storage = JSON.parse(sessionStorage.getItem("saved"))
-        console.log("*~ Send to backend ~*")
-    }
 
     addToSessionStorage = (value) => {
         
@@ -86,23 +87,15 @@ class Search extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <form onSubmit={this.handleSubmit}>
-                        <div className="search_field">
-                            <input type="text" className="blankSpaceInput" id="search-term" value={this.state.value} onChange={this.handleChange} />
-                            
-                            <div className="aPlaceForButton">
-                                <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                            <div className="search_box row">
+                                <div className="col-sm-9">
+                                    <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                </div>
                             </div>
-                        {/* </div> */}
-                        </div>
                         </form>
-                        {/* alternate code couldn't be merged: <div className="search_field row">
-                        
-                        
-                            <div className="col-sm-9 align-middle">
-                                <input type="text" className="form-control" id="searchLocation" placeholder="Search by ZIP or landmark"></input>
-                            </div>
-                            <div className="col-sm-3">
-                                <button className="btn btn-lg yellow text-white" onClick={this.searchLocation}>Search</button>  */}
 
                     </div>
                 </div>
@@ -135,7 +128,9 @@ class Search extends Component {
                     </div>
                 </div>
                         <div className="col-md-12">
-                            <button className="col-md-12 btn btn-lg yellow-grad text-white" id="saveRestaurants" onClick={() => this.saveRestaurants}>Save</button>
+                            <a href="/ballot">
+                                <button className="col-md-12 btn btn-lg yellow-grad text-white" id="saveRestaurants">Add to Group Vote</button>
+                            </a>
                         </div>
             </div>
             
