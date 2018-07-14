@@ -76,8 +76,6 @@ class SignUp extends Component {
             lastNameEntry={this.handleChange.bind()}
             zipcodeEntry={this.handleChange.bind()}
           />
-
-          {/* <h2>Other components</h2> */}
         </Wrapper>
       </div>
     )
