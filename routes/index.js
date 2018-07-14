@@ -2,12 +2,15 @@
 const path = require("path");
 const router = require("express").Router();
 const apiRoutes = require("./api");
+const authRoutes = require("./auth");
 
+router.use("/auth", authRoutes);
 router.use("/api", apiRoutes);
 */
 const express = require("express")
 const app = express()
 
+// module.exports = router;
 
 const searchLocation = require("./api/searchLocation");
 
