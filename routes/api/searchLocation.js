@@ -6,6 +6,10 @@ const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?
 const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 const nearbyQueryStringA = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
 const nearbyQueryStringB = "&radius=10000&type=restaurant&key=AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY"
+const placesDetailsQueryStringA = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
+const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key=AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY"
+
+restaurantsArr = []
 
 app.get("/api/restaurants/:location", function(req,res) {
     let location = req.params.location
@@ -24,11 +28,13 @@ app.get("/api/restaurants/:location", function(req,res) {
                 nearbyStringFull += nearbyQueryStringB
                 // console.log(nearbyStringFull)
                 axios.get(nearbyStringFull)
-                    .then(data => {
-                        console.log("\nThis is searchLocation.js\nExample result from the 2nd API: ", data.data.results[0].name)
-                        res.send(data.data.results)
-                        console.log("\n***\nData sent to the Front End\n***\n")
-                    })
+                    .then(function(data){
+                        console.log(data.data.results)
+                        let noDetailsDataArr = []
+                        noDetailsDataArr = data.data.results
+                        getDetailsAddToArray(noDetailsDataArr, res)
+                    }
+            )
                 })
         }
     )
@@ -36,3 +42,18 @@ app.get("/api/restaurants/:location", function(req,res) {
 console.log("routes > api > searchLocation is executing")
 
 module.exports = app;
+
+function getDetailsAddToArray(array, res){
+    if (array.length == 0) res.send(restaurantsArr)
+    let element = array.pop()
+    let queryString = placesDetailsQueryStringA
+    queryString += element.place_id
+    queryString += placesDetailsQueryStringB
+    console.log("QUERY STRING",queryString)
+    axios.get(queryString)
+        .then(function(data){
+            console.log("data: ",data.data)
+            restaurantsArr.push(data.data)
+            getDetailsAddToArray(array, res)
+        })
+}
