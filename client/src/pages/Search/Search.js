@@ -83,24 +83,19 @@ class Search extends Component {
             <NavBar/>
             <br/>
 
-
+            <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <form onSubmit={this.handleSubmit}>
-                        <div className="search_field row">
-                            <input type="text" className="form-control blankSpaceInput" id="search-term"  placeholder="Search by ZIP or landmark" value={this.state.value} onChange={this.handleChange} />
-                            
-                            <div className="aPlaceForButton">
-                                <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                            <div className="search_box green row">
+                                <div className="col-sm-9">
+                                    <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
+                                </div>
+                                <div className="col-sm-3">
+                                    <button className="btn btn-lg save text-white yellow" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                </div>
                             </div>
-                        </div>
                         </form>
-                        {/* alternate code couldn't be merged: >
-                            <div className="col-sm-9 align-middle">
-                                <input type="text" className="form-control" id="searchLocation" ></input>
-                            </div>
-                            <div className="col-sm-3">
-                                <button className="btn btn-lg yellow text-white" onClick={this.searchLocation}>Search</button>  */}
 
                     </div>
                 </div>
@@ -134,8 +129,7 @@ class Search extends Component {
                         </a>
                     </div>
                 </div>
-
-            
+            </div>
             
         </Wrapper>
 
