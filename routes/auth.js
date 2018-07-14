@@ -21,7 +21,7 @@ const User = require('../models/user');
 // },
 // );
 
-router.post('/signup', (req, res) => {
+router.post('http:/signup', (req, res) => {
   console.log('=====Got to the Signup post route=====');
   
   const {

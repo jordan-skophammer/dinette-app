@@ -11,8 +11,9 @@ import React from 'react';
               className="form-control" 
               name="userName" 
               placeholder="Enter Username or Email"
-              // value={this.userName}
+              value={props.userName}
               onChange={props.userNameEntry}
+              // onChange={() => console.log(props)}
             />
           </div>
           <div className="form-group">
@@ -22,8 +23,9 @@ import React from 'react';
               className="form-control" 
               name="password" 
               placeholder="Enter Password"
-              // value={this.password}
+              // value={props.password}
               onChange={props.passwordEntry}
+              // onChange={() => console.log(props)}
             />
           </div>
           <div className="form-group">
@@ -33,7 +35,7 @@ import React from 'react';
               className="form-control" 
               name="confirmPassword" 
               placeholder="Enter Password"
-              // value={this.confirmPassword}
+              // value={props.confirmPassword}
               onChange={props.confirmPasswordEntry} 
             />
           </div>
@@ -44,7 +46,7 @@ import React from 'react';
               className="form-control" 
               name="firstName" 
               placeholder="Enter First Name"
-              // value={this.firstName}
+              // value={props.firstName}
               onChange={props.firstNameEntry}
               />
           </div>
@@ -55,7 +57,7 @@ import React from 'react';
               className="form-control" 
               name="lastName" 
               placeholder="Enter Last Name"
-              // value={this.lastName}
+              // value={props.lastName}
               onChange={props.lastNameEntry}
               />
           </div>
@@ -66,7 +68,7 @@ import React from 'react';
               className="form-control" 
               name="zipcode" 
               placeholder="55555"
-              // value={this.zipcode}
+              // value={props.zipcode}
               onChange={props.zipcodeEntry}
               />
           </div>
