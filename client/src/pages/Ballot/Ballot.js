@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
 import VoteList from "../../components/VoteList";
 import Wrapper from "../../components/Wrapper";
+import "./Ballot.css"
 
 // import VoteResults from "../../components/VoteResults";
 // import { Bar } from 'react-chartjs-2';
@@ -25,7 +26,7 @@ class Ballot extends Component {
         // for (var i = 0; i < restaurantArray.length; i++) {
         //     restaurants.push(restaurantArray[i].name);
         // }
-        this.setState({ ...this.state, restaurants: restaurants })
+        this.setState({ restaurants: restaurants })
         console.log(restaurants)
     }
 
@@ -40,16 +41,25 @@ class Ballot extends Component {
                     <NavBar></NavBar>
                     {/* <h1>Voting Page</h1> */}
                     <br />
-                    {this.state.restaurants.length ? (
+
+                    {this.state.restaurants && this.state.restaurants.length ? (
                         <VoteList>
                             {this.state.restaurants.map(restaurant => (
                                 <RestaurantOption key={restaurant.id}>
                                     {restaurant}
                                 </RestaurantOption>
                             ))}
+                                                        <input type="text" className="result-block" value={this.state.newItem}
+                                onChange={e => this.updateInput("newItem", e.target.value)}></input>
+                            <button type="add" className="btn btn-primary add-restaurant" onClick={() => this.addItem()}>Add a Restaurant</button>
                         </VoteList>
                     ) : (
-                            <h3>choose some restaurants to vote on</h3>
+                            <div className="results-card">
+                            <p className="result-block">choose some restaurants to vote on</p>
+                            <input type="text" className="result-block" value={this.state.newItem}
+                                onChange={e => this.updateInput("newItem", e.target.value)}></input>
+                            <button type="add" className="btn btn-primary add-restaurant" onClick={() => this.addItem()}>Add a Restaurant</button>
+                            </div>
                         )}
 
                     <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
