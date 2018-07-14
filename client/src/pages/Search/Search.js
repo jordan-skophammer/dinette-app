@@ -99,6 +99,7 @@ class Search extends Component {
 
                     </div>
                 </div>
+                <br/>
                 <div className="row">
 
                     <div className="col-md-12 results-card orange">
@@ -120,11 +121,14 @@ class Search extends Component {
                                 ))}
                     </div>
                 </div>
-                        <div className="col-md-12">
-                            <a href="/ballot">
-                                <button className="col-md-12 btn btn-lg yellow-grad text-white" id="saveRestaurants">Add to Group Vote</button>
-                            </a>
-                        </div>
+                <br/>
+                <div className="row">
+                    <div className="col-sm-12 justify-content-center">
+                        <a href="/ballot">
+                            <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
+                        </a>
+                    </div>
+                </div>
             </div>
             
             

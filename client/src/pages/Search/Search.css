@@ -1,8 +1,3 @@
-.form-check-input {
-    float: right;
-    position: relative;
-}
-
 .form-check {
     padding-left: 0;
 }
@@ -34,13 +29,19 @@
     margin-bottom: 0;
 }
 
-/* .save {
+.save {
     min-height: 40px;
-} */
+    margin: auto;
+}
 
 #searchLocation {
     margin-top: 1.5%;
     width: 100%;
+}
+
+#saveRestaurants {
+    width: 100%;
+    margin: auto;
 }
 
 /* @media screen and (max-height: 566px){ 
