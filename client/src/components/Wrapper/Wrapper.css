@@ -11,3 +11,9 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+@media screen and (max-height: 566px){ 
+    .wrapper {
+        height: 100%;
+    }  
+}
