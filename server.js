@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./passport');
 
-const morgan = require('morgan')
+const morgan = require('morgan');
 const routes = require('./routes');
 
 const app = express();
