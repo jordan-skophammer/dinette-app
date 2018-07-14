@@ -17,7 +17,7 @@ app.get("/api/restaurants/:location", function(req,res) {
 
     axios.get(geolocateQueryString + location + geolocateKey)
     .then(function(data){
-        // console.log(data.data.results[0])
+        console.log(data.data.results[0])
                 let lat = data.data.results[0].geometry.location.lat
                 let lng = data.data.results[0].geometry.location.lng
                 // console.log("lat: ", lat, " lng: ", lng)
@@ -26,7 +26,7 @@ app.get("/api/restaurants/:location", function(req,res) {
                 nearbyStringFull += ","
                 nearbyStringFull += lng
                 nearbyStringFull += nearbyQueryStringB
-                // console.log(nearbyStringFull)
+                console.log(nearbyStringFull)
                 axios.get(nearbyStringFull)
                     .then(function(data){
                         console.log(data.data.results)
