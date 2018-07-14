@@ -15,16 +15,20 @@ class Search extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    search = () => {
-        API.searchRestaurants()
-        .then(res => {
-            this.setState({results: res.data})
-            console.log(this.state.results)
-        })
-    }
+    //not really using this function. handleSubmit does searching
+    // search = () => {
+    //     API.searchRestaurants()
+    //     .then(res => {
+    //         this.setState({results: res.data})
+    //         console.log(this.state.results)
+    //     })
+    // }
+
     handleChange(event){
         this.setState({value: event.target.value})
+        console.log(this.state.value)
     }
+    
     handleSubmit(event){
         // console.log("Data was submitted: ", this.state.value);
         event.preventDefault();
@@ -34,19 +38,16 @@ class Search extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
+                console.log(res)
                 this.setState({...this.state,results: res.data})
             })
     }
 
 
-    componentDidMount() {
-        this.search()
-    }
+    // componentDidMount() {
+    //     this.search()
+    // }
 
-    saveRestaurants = () => {
-        let storage = JSON.parse(sessionStorage.getItem("saved"))
-        console.log("*~ Send to backend ~*")
-    }
 
     addToSessionStorage = (value) => {
         
@@ -92,7 +93,6 @@ class Search extends Component {
                             <div className="aPlaceForButton">
                                 <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
                             </div>
-                        {/* </div> */}
                         </div>
                         </form>
                         {/* alternate code couldn't be merged: >
@@ -104,10 +104,10 @@ class Search extends Component {
 
                     </div>
                 </div>
+                <br/>
                 <div className="row">
 
-                <div className="col-md-12 results-card">
-                        {/* <div className="results-card"> */}
+                    <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
                             <br/>
                                 
@@ -119,22 +119,21 @@ class Search extends Component {
                                                 <p className="address">{restaurant.vicinity}</p>
                                             </label>
                                             <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
-
-                                        {/* {restaurant.photos[0].html_attribution} */}
-                                        <br/>
                                         </div>
 
                                     </div>
 
                                 ))}
-                            
-                        {/* </div> */}
-                        {/* <br/> */}
                     </div>
                 </div>
-                        <div className="col-md-12">
-                            <button className="col-md-12 btn btn-lg yellow-grad text-white" id="saveRestaurants" onClick={() => this.saveRestaurants}>Save</button>
-                        </div>
+                <br/>
+                <div className="row">
+                    <div className="col-sm-12 justify-content-center">
+                        <a href="/ballot">
+                            <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
+                        </a>
+                    </div>
+                </div>
             </div>
             
             
