@@ -1,13 +1,15 @@
 const express = require ("express");
 const app = express()
 const axios = require ("axios")
+//************** DROP THE NEW PLACES KEY HERE ******************* */
+const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
 
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
 const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 const nearbyQueryStringA = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
-const nearbyQueryStringB = "&radius=10000&type=restaurant&key=AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY"
+const nearbyQueryStringB = "&radius=100&type=restaurant&key="+placesKey
 const placesDetailsQueryStringA = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
-const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key=AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY"
+const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key="+placesKey
 
 restaurantsArr = []
 
