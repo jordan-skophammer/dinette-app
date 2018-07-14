@@ -7,7 +7,7 @@ const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
 const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 const nearbyQueryStringA = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
-const nearbyQueryStringB = "&radius=100&type=restaurant&key="+placesKey
+const nearbyQueryStringB = "&radius=400&type=restaurant&key="+placesKey
 const placesDetailsQueryStringA = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
 const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key="+placesKey
 
@@ -31,13 +31,19 @@ app.get("/api/restaurants/:location", function(req,res) {
                 console.log(nearbyStringFull)
                 axios.get(nearbyStringFull)
                     .then(function(data){
-                        console.log(data.data.results)
-                        let noDetailsDataArr = []
-                        noDetailsDataArr = data.data.results
-                        getDetailsAddToArray(noDetailsDataArr, res)
+                        if (data.data.status !== "ZERO_RESULTS"){
+                            console.log(data.data.results)
+                            let noDetailsDataArr = []
+                            noDetailsDataArr = data.data.results
+                            getDetailsAddToArray(noDetailsDataArr, res)
+                        } else {
+                            let failMessage = "No Results Found"
+                            res.send(failMessage)
+                        }
+                        
                     }
-            )
-                })
+                )
+            })
         }
     )
 

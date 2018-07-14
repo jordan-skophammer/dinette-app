@@ -40,6 +40,7 @@ class Search extends Component {
                 }
                 console.log(res)
                 this.setState({...this.state,results: res.data})
+                console.log(this.state.results[0].result.name)
             })
     }
 
@@ -107,11 +108,11 @@ class Search extends Component {
                             <br/>
                                 
                                 {this.state.results.map(restaurant => (
-                                    <div key = {restaurant.id} className="result-block">
+                                    <div key = {restaurant.result.name} className="result-block">
                                         <div className="form-check">
                                             <label className="form-check-label" htmlFor="defaultCheck">
-                                                <h5>{restaurant.name}</h5>
-                                                <p className="address">{restaurant.vicinity}</p>
+                                                <h5>{restaurant.result.name}</h5>
+                                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                                             </label>
                                             <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
                                         </div>
