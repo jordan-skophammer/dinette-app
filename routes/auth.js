@@ -21,7 +21,7 @@ const User = require('../models/user');
 // },
 // );
 
-router.post('http:/signup', (req, res) => {
+router.post('/signup', (req, res) => {
   console.log('=====Got to the Signup post route=====');
   
   const {
@@ -44,6 +44,7 @@ router.post('http:/signup', (req, res) => {
     console.log(newUser);
     newUser.save((err, savedUser) => {
       if (err) return res.json(err);
+      console.log("user created");
       return res.json(savedUser);
     });
   });

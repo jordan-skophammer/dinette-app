@@ -17,21 +17,24 @@ class SignUp extends Component {
       zipcode: '',
       // redirectTo: null,
     };
-    this.handleSubmit = this.handleSubmit.bind();
-    this.handleChange = this.handleChange.bind();
+    // this.handleSubmit = this.handleSubmit.bind();
+    // this.handleChange = this.handleChange.bind();
   }
 
   handleChange = (event) => {
     // console.log(event);
-    console.log(this);
+    // console.log(this);
     const { name, value } = event.target;
     this.setState({ [name]: value });    
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+    // alert("handle submit!!!");
+    let currentURL = window.location.origin;
+    currentURL = "http://localhost:3001/auth/signup" ? "http://localhost:3000/auth/signup" : window.location.origin;
 
-    // if (this.state.password === this.state.confirmPassword) {
+    if (this.state.password === this.state.confirmPassword) {
       let newUser = {
         userName: this.state.userName,
         password: this.state.password,
@@ -40,10 +43,12 @@ class SignUp extends Component {
         zipcode: this.state.zipcode,
       }
 
+      console.log(newUser);
+
       axios
-        .post('http://localhost:3001/auth/signup', newUser)
+        .post(currentURL, newUser)
         .then(response => {
-          console.log(response)
+          console.log(`axios post response ${response}`);
           // if (!response.data.errmsg) {
           //   console.log('success')
           //   // this.setState({
@@ -55,11 +60,11 @@ class SignUp extends Component {
           // }
         })
     } 
-  //   else {
-  //     console.log("Passwords don't match");
+    else {
+      console.log("Passwords don't match");
       
-  //   }
-  // }
+    }
+  }
 
   render() {
     // if (this.state.redirectTo) {
@@ -76,6 +81,7 @@ class SignUp extends Component {
             firstNameEntry={this.handleChange.bind()}
             lastNameEntry={this.handleChange.bind()}
             zipcodeEntry={this.handleChange.bind()}
+            submitClicked={this.handleSubmit.bind()}
             userName={this.state.userName}
             password={this.state.password}
             confirmPassword={this.state.confirmPassword}

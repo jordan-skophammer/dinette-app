@@ -19,7 +19,7 @@ router.use("/restaurants", restaurantRoutes);
 */
 app.use(searchLocation);
 
-console.log("Routes > index.js is executing")
+// console.log("Routes > index.js is executing")
 module.exports = app;
 
 // export { app, router };

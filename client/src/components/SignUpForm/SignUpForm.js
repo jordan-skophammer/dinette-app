@@ -77,7 +77,7 @@ const SignUpForm = (props) => (
                   <button 
                     type="submit"
                     className="btn btn-danger"
-                    onClick={props.handleSubmit}
+                    onClick={props.submitClicked}
                     >
                     Submit
                   </button>
