@@ -83,8 +83,6 @@ class SignUp extends Component {
             lastName={this.state.lastName}
             zipcode={this.state.zipcode}
           />
-
-          {/* <h2>Other components</h2> */}
         </Wrapper>
       </div>
     )

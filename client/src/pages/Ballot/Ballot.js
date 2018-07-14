@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
 import VoteList from "../../components/VoteList";
+import Wrapper from "../../components/Wrapper";
+
 // import VoteResults from "../../components/VoteResults";
 // import { Bar } from 'react-chartjs-2';
 // import API from "../../utils/API";
@@ -23,7 +25,7 @@ class Ballot extends Component {
         // for (var i = 0; i < restaurantArray.length; i++) {
         //     restaurants.push(restaurantArray[i].name);
         // }
-        this.setState ({ ...this.state, restaurants: restaurants })
+        this.setState({ ...this.state, restaurants: restaurants })
         console.log(restaurants)
     }
 
@@ -33,24 +35,25 @@ class Ballot extends Component {
 
     render() {
         return (
-            <div>
-                <NavBar></NavBar>
-                <h1>Voting Page</h1>
+            <Wrapper>
+                <div>
+                    <NavBar></NavBar>
+                    {/* <h1>Voting Page</h1> */}
+                    <br />
+                    {this.state.restaurants.length ? (
+                        <VoteList>
+                            {this.state.restaurants.map(restaurant => (
+                                <RestaurantOption key={restaurant.id}>
+                                    {restaurant}
+                                </RestaurantOption>
+                            ))}
+                        </VoteList>
+                    ) : (
+                            <h3>choose some restaurants to vote on</h3>
+                        )}
 
-                {this.state.restaurants.length ? (
-                    <VoteList>
-                        {this.state.restaurants.map(restaurant => (
-                            <RestaurantOption key={restaurant.id}>
-                                { restaurant }
-                            </RestaurantOption>
-                        ))}
-                    </VoteList>
-                ) : (
-                        <h3>choose some restaurants to vote on</h3>
-                    )}
-
-                <button type="add" className="btn btn-primary add-restaurant">Add an option</button>
-                {/* <VoteResults> */}
+                    <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
+                    {/* <VoteResults> */}
                     {/* {this.state.restaurants.map(restaurant => (
                         <RestaurantOption key={restaurant.id}>
                         </RestaurantOption>
@@ -58,8 +61,9 @@ class Ballot extends Component {
 
                     {/* <Bar data={this.state.chartData} /> */}
 
-                {/* </VoteResults> */}
-            </div>
+                    {/* </VoteResults> */}
+                </div>
+            </Wrapper>
         )
     }
 }
