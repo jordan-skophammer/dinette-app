@@ -87,22 +87,22 @@ class Search extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <form onSubmit={this.handleSubmit}>
-                            <div className="search_box row">
+                            <div className="search_box green row">
                                 <div className="col-sm-9">
                                     <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
                                 </div>
                                 <div className="col-sm-3">
-                                    <button className="btn btn-lg yellow-grad-save text-white" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                    <button className="btn btn-lg save text-white yellow" id="searchLocation" onClick={this.searchLocation}>Search</button>
                                 </div>
                             </div>
                         </form>
 
                     </div>
                 </div>
+                <br/>
                 <div className="row">
 
-                <div className="col-md-12 results-card">
-                        {/* <div className="results-card"> */}
+                    <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
                             <br/>
                                 
@@ -114,24 +114,21 @@ class Search extends Component {
                                                 <p className="address">{restaurant.vicinity}</p>
                                             </label>
                                             <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
-
-                                        {/* {restaurant.photos[0].html_attribution} */}
-                                        <br/>
                                         </div>
 
                                     </div>
 
                                 ))}
-                            
-                        {/* </div> */}
-                        {/* <br/> */}
                     </div>
                 </div>
-                        <div className="col-md-12">
-                            <a href="/ballot">
-                                <button className="col-md-12 btn btn-lg yellow-grad text-white" id="saveRestaurants">Add to Group Vote</button>
-                            </a>
-                        </div>
+                <br/>
+                <div className="row">
+                    <div className="col-sm-12 justify-content-center">
+                        <a href="/ballot">
+                            <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
+                        </a>
+                    </div>
+                </div>
             </div>
             
             
