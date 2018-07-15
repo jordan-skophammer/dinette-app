@@ -48,7 +48,7 @@ class SignUp extends Component {
       axios
         .post(currentURL, newUser)
         .then(response => {
-          console.log(`axios post response ${response}`);
+          console.log(response);
           // if (!response.data.errmsg) {
           //   console.log('success')
           //   // this.setState({
