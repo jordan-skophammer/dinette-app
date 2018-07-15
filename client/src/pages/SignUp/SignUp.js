@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../../components/Wrapper"
 import NavBar from "../../components/NavBar";
@@ -15,22 +15,20 @@ class SignUp extends Component {
       firstName: '',
       lastName: '',
       zipcode: '',
-      // redirectTo: null,
+      redirectTo: null,
     };
-    // this.handleSubmit = this.handleSubmit.bind();
-    // this.handleChange = this.handleChange.bind();
+    this.handleSubmit = this.handleSubmit.bind();
+    this.handleChange = this.handleChange.bind();
   }
 
   handleChange = (event) => {
-    // console.log(event);
-    // console.log(this);
     const { name, value } = event.target;
     this.setState({ [name]: value });    
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    // alert("handle submit!!!");
+    event.preventDefault();
+
     let currentURL = window.location.origin;
     currentURL = "http://localhost:3001/auth/signup" ? "http://localhost:3000/auth/signup" : window.location.origin;
 
@@ -49,15 +47,14 @@ class SignUp extends Component {
         .post(currentURL, newUser)
         .then(response => {
           console.log(response);
-          // if (!response.data.errmsg) {
-          //   console.log('success')
-          //   // this.setState({
-          //   //   redirectTo: '/login'
-          //   // });
-          //   this.props.history.push('/login');
-          // } else {
-          //   console.log('duplicate')
-          // }
+          if (!response.data.errmsg) {
+            console.log('success')
+            this.setState({
+              redirectTo: '/login'
+            });
+          } else {
+            console.log('duplicate')
+          }
         })
     } 
     else {
@@ -67,21 +64,21 @@ class SignUp extends Component {
   }
 
   render() {
-    // if (this.state.redirectTo) {
-		// 	return <Redirect to={{ pathname: this.state.redirectTo }} />
-		// }
+    if (this.state.redirectTo) {
+			return <Redirect to={{ pathname: this.state.redirectTo }} />
+		}
     return (
       <div>
         <Wrapper>
           <NavBar />
           <SignUpForm
-            userNameEntry={this.handleChange.bind()}
-            passwordEntry={this.handleChange.bind()}
-            confirmPasswordEntry={this.handleChange.bind()}
-            firstNameEntry={this.handleChange.bind()}
-            lastNameEntry={this.handleChange.bind()}
-            zipcodeEntry={this.handleChange.bind()}
-            submitClicked={this.handleSubmit.bind()}
+            userNameEntry={this.handleChange}
+            passwordEntry={this.handleChange}
+            confirmPasswordEntry={this.handleChange}
+            firstNameEntry={this.handleChange}
+            lastNameEntry={this.handleChange}
+            zipcodeEntry={this.handleChange}
+            submitClicked={this.handleSubmit}
             userName={this.state.userName}
             password={this.state.password}
             confirmPassword={this.state.confirmPassword}

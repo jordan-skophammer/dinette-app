@@ -6,7 +6,7 @@ const User = require('../models/user');
 // require('../passport')(passport);
 
 router.post('/signup', (req, res) => {
-  console.log('=====Got to the Signup post route=====');
+  // console.log('=====Got to the Signup post route=====');
   
   const {
     userName, password, firstName, lastName, zipcode,
@@ -25,7 +25,7 @@ router.post('/signup', (req, res) => {
       lastName: lastName,
       zipcode: zipcode,
     });
-    console.log(newUser);
+
     newUser.save((err, newUser) => {
       if (err) return res.json(err);
       console.log('Saving new user');
