@@ -13,9 +13,8 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="userName" 
                       placeholder="Enter Username or Email"
-                      value={props.userName}
+                      // value={props.userName}
                       onChange={props.userNameEntry}
-                      // onChange={() => console.log(props)}
                     />
                   </div>
                   <div className="form-group">
@@ -27,7 +26,6 @@ const SignUpForm = (props) => (
                       placeholder="Enter Password"
                       // value={props.password}
                       onChange={props.passwordEntry}
-                      // onChange={() => console.log(props)}
                     />
                   </div>
                   <div className="form-group">
