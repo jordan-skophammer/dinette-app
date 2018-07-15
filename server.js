@@ -30,7 +30,7 @@ const db = mongoose.connection;
 
 // handle mongo error
 db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', () => console.log('connected'));
+db.once('open', () => console.log('connected to the database collection "dinette-app"'));
 
 // use sessions for tracking logins
 app.use(session({

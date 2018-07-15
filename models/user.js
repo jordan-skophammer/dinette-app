@@ -13,27 +13,27 @@ const userSchema = new Schema({
   // },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  zipCode: { type: Number, min: 5, max: 5, required: true },
+  zipcode: { type: Number, required: true },
   currentVoteURL: { type: String },
 });
 
 // Define schema methods
 userSchema.methods = {
   checkPassword: inputPassword => bcrypt.compareSync(inputPassword, this.local.password),
-  hashPassword: plainTextPassword => bcrypt.hashSync(plainTextPassword, 10),
 };
 
 // Define hooks for pre-saving
 userSchema.pre('save', function (next) {
+  console.log(`password entered is ${this.local.password}`);
   if (!this.local.password) {
     console.log('=======NO PASSWORD PROVIDED=======');
     next();
-  } else {
-    this.local.password = this.hashPassword(this.local.password);
-    next();
   }
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(this.local.password, salt);
+  this.local.password = hash;
+  next();
+
 });
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
