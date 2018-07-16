@@ -35,8 +35,14 @@ class Search extends Component {
                     throw new Error(res.statusText)
                 }
                 console.log(res)
+                if (res.data !== "No Results Found"){
+                    this.setState({...this.state,results: res.data})
+                } else {
+                    console.log("no results found")
+                    this.setState({...this.state,results: ["No Results Found"]})
+                }
                 this.setState({visibility: "", results: res.data})
-                console.log(this.state.results[0].result.name)
+
             })
     }
 
@@ -88,6 +94,31 @@ class Search extends Component {
     }
 
     render () {
+        let results;
+        if (this.state.results[0] === "No Results Found"){
+            console.log("No Results Render")
+            results = (
+                this.state.results.map(result=>(
+                    <h3 className="text-center text-white">{result}</h3>
+                ))
+            )
+        } else {
+            results = (
+                                                this.state.results.map(restaurant => (
+                                    <div key = {restaurant.result.photos[0].photo_reference} className="result-block">
+                                        <div className="form-check">
+                                            <label className="form-check-label">
+                                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos[0].photo_reference, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
+                                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
+                                            </label>
+                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
+                                        </div>
+
+                                    </div>
+
+                                ))
+            )
+        }
         return(
         <Wrapper>
             <NavBar/>
@@ -114,21 +145,10 @@ class Search extends Component {
 
                     <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
-                            <br/>
-                                
-                                {this.state.results.map(restaurant => (
-                                    <div key = {restaurant.result.photos[0].photo_reference} className="result-block">
-                                        <div className="form-check">
-                                            <label className="form-check-label">
-                                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos[0].photo_reference, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
-                                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
-                                            </label>
-                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
-                                        </div>
 
-                                    </div>
+                            <br/>                                
+                                {results}
 
-                                ))}
                     </div>
                 </div>
                 <br/>
