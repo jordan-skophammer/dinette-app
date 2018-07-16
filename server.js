@@ -17,12 +17,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(morgan('dev'))
 app.use(bodyParser.json());
-app.use(routes);
-
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dinette-app');
@@ -31,6 +25,10 @@ const db = mongoose.connection;
 // handle mongo error
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => console.log('connected to the database collection "dinette-app"'));
+
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // use sessions for tracking logins
 app.use(session({
@@ -43,9 +41,12 @@ app.use(session({
   }),
 }));
 
-// passport
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(routes);
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 // error handler
 // define as the last app.use callback

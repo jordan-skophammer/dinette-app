@@ -41,7 +41,7 @@ class SignUp extends Component {
         zipcode: this.state.zipcode,
       }
 
-      console.log(newUser);
+      // console.log(newUser);
 
       axios
         .post(currentURL, newUser)
@@ -72,12 +72,7 @@ class SignUp extends Component {
         <Wrapper>
           <NavBar />
           <SignUpForm
-            userNameEntry={this.handleChange}
-            passwordEntry={this.handleChange}
-            confirmPasswordEntry={this.handleChange}
-            firstNameEntry={this.handleChange}
-            lastNameEntry={this.handleChange}
-            zipcodeEntry={this.handleChange}
+            handleChange={this.handleChange}
             submitClicked={this.handleSubmit}
             userName={this.state.userName}
             password={this.state.password}
