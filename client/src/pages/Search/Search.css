@@ -44,6 +44,10 @@
     margin: auto;
 }
 
+.hidden{
+    visibility: hidden;
+}
+
 /* @media screen and (max-height: 566px){ 
     .wrapper {
         height: 100%;
