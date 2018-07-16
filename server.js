@@ -15,8 +15,9 @@ app.use(morgan('dev'));
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(morgan('dev'))
 app.use(bodyParser.json());
+app.use(require('cookie-parser')());
+
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dinette-app');
