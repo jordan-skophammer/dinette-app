@@ -2,7 +2,7 @@ import React from "react";
 import "./NavBar.css";
 
 const NavBar = props => (
-<nav className="navbar navbar-expand-lg bg-light">
+<nav className="navbar navbar-expand-lg navbar-light">
   <a className="navbar-brand" href="/">Dinette</a>
   <button className="navbar-toggler hidden-sm-up ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon ml-auto"></span>
