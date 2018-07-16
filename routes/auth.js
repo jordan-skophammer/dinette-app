@@ -44,8 +44,6 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log("Post to login before passport.");
-  console.log(req.body);
   next();
 },
   passport.authenticate('local', {
@@ -55,11 +53,12 @@ router.post('/login', (req, res, next) => {
   })
 );
 
-
-
-
-router.get('/user/:userName', (req, res) => {
-  let userName = req.params;
+router.post('/logout', (req, res) => {
+  req.session.destroy(err => res.redirect('/'))
 })
+
+// router.get('/user/:userName', authenticationMiddleware, (req, res) => {
+//   let userName = req.params;
+// })
 
 module.exports = router;
