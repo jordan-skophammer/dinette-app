@@ -9,6 +9,7 @@ class Search extends Component {
         super(props);
         this.state = {
             results: [],
+            noResults: "noTry",
             value: ""
         };
         this.handleChange = this.handleChange.bind(this);
@@ -39,8 +40,14 @@ class Search extends Component {
                     throw new Error(res.statusText)
                 }
                 console.log(res)
-                this.setState({...this.state,results: res.data})
-                console.log(this.state.results[0].result.name)
+                if (res.data !== "No Results Found"){
+                    this.setState({...this.state,results: res.data})
+                } else {
+                    console.log("no results found")
+                    this.setState({...this.state,results: ["No Results Found"]})
+                }
+                
+            
             })
     }
 
@@ -79,6 +86,31 @@ class Search extends Component {
     }
 
     render () {
+        let results;
+        if (this.state.results[0] === "No Results Found"){
+            console.log("No Results Render")
+            results = (
+                this.state.results.map(result=>(
+                    <h3 className="text-center text-white">{result}</h3>
+                ))
+            )
+        } else {
+            results = (
+                this.state.results.map(restaurant => (
+                    <div key = {restaurant.result.name} className="result-block">
+                        <div className="form-check">
+                            <label className="form-check-label" htmlFor="defaultCheck">
+                                <h5>{restaurant.result.name}</h5>
+                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
+                            </label>
+                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
+                        </div>
+
+                    </div>
+
+                ))
+            )
+        }
         return(
         <Wrapper>
             <NavBar/>
@@ -105,21 +137,8 @@ class Search extends Component {
 
                     <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
-                            <br/>
-                                
-                                {this.state.results.map(restaurant => (
-                                    <div key = {restaurant.result.name} className="result-block">
-                                        <div className="form-check">
-                                            <label className="form-check-label" htmlFor="defaultCheck">
-                                                <h5>{restaurant.result.name}</h5>
-                                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
-                                            </label>
-                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
-                                        </div>
-
-                                    </div>
-
-                                ))}
+                            <br/>                                
+                                {results}
                     </div>
                 </div>
                 <br/>
