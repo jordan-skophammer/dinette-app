@@ -1,40 +1,7 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
+const LocalStrategy = require('./localStrategy');
 // const GoogleStratgey = require('./googleStrategy');
 const User = require('../models/user');
-
-passport.use('local', new LocalStrategy(
-  {
-    usernameField: 'userName',
-    passwordField: 'password',
-  },
-  function (userName, password, done) {
-    console.log("==========Passport Local Strategy==========");
-
-    // bCrypt hashed password check function
-    const isValidPassword = function(enteredPass, userPass) {
-      console.log('checking password');
-      return bcrypt.compareSync(enteredPass, userPass);
-    };
-
-    User.findOne({ 'local.userName': userName }, (err, userMatch) => {
-      console.log(userMatch);
-      if (err) {
-        console.log(err);
-        return done(err);
-      }
-      if (!userMatch) {
-        return done(null, false, { message: 'Incorrect username' });
-      }
-      if (!isValidPassword(password, userMatch.local.password)) {
-        return done(null, false, { message: 'Incorrect password' });
-      }
-      return done(null, userMatch);
-    });
-  },
-));
-
 
 passport.serializeUser((user, done) => {
   console.log('Serialize');
@@ -57,7 +24,7 @@ passport.deserializeUser((id, done) => {
 });
 
 // ==== Register Strategies ====
-// passport.use('local', LocalStrategy);
+passport.use('local', LocalStrategy);
 // passport.use(GoogleStratgey);
 
 module.exports = passport;
