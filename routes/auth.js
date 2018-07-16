@@ -1,13 +1,19 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // const passport = require('passport');
+const passport = require('../passport/index');
 const router = require("express").Router();
 
 const User = require('../models/user');
-// require('../passport')(passport);
+
+// function authenticationMiddleware(req, res, next) {
+//   console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport.user)}`);
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   // res.redirect('/login');
+// }
 
 router.post('/signup', (req, res) => {
-  // console.log('=====Got to the Signup post route=====');
-  
   const {
     userName, password, firstName, lastName, zipcode,
   } = req.body;
@@ -37,21 +43,23 @@ router.post('/signup', (req, res) => {
   });
 });
 
-// router.post('/login', (req, res, next) => {
-//   console.log(req.body)
-//   console.log('================')
-//   next()
-// },
-// passport.authenticate('local'), (req, res) => {
-//   console.log('POST to /login')
-//   const user = JSON.parse(JSON.stringify(req.user)); // hack
-//   const cleanUser = Object.assign({}, user);
-//   if (cleanUser.local) {
-//     console.log(`Deleting ${cleanUser.local.password}`)
-//     delete cleanUser.local.password;
-//   }
-//   res.json({ user: cleanUser });
-// },
-// );
+router.post('/login', (req, res, next) => {
+  console.log("Post to login before passport.");
+  console.log(req.body);
+  next();
+},
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+  })
+);
+
+
+
+
+router.get('/user/:userName', (req, res) => {
+  let userName = req.params;
+})
 
 module.exports = router;

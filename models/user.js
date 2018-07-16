@@ -5,8 +5,8 @@ mongoose.promise = Promise;
 
 const userSchema = new Schema({
   local: {
-    userName: { type: String, required: false, unique: true },
-    password: { type: String, required: false },
+    userName: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
   },
   // google: {
   //   googleID: { type: String, required: false },
@@ -14,17 +14,12 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   zipcode: { type: Number, required: true },
-  currentVoteURL: { type: String },
+  currentVoteURL: { type: String, required: false },
+  favorites: [{ type: String, required: false }],
 });
-
-// Define schema methods
-userSchema.methods = {
-  checkPassword: inputPassword => bcrypt.compareSync(inputPassword, this.local.password),
-};
 
 // Define hooks for pre-saving
 userSchema.pre('save', function (next) {
-  console.log(`password entered is ${this.local.password}`);
   if (!this.local.password) {
     console.log('=======NO PASSWORD PROVIDED=======');
     next();
