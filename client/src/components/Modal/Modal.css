@@ -23,6 +23,10 @@
     height: auto;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 @media (min-width: 576px) {
 
     .modal-dialog {

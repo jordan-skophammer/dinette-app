@@ -11,7 +11,8 @@ class Search extends Component {
         this.state = {
             results: [],
             value: "",
-            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]]
+            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
+            visibility: "hidden"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,7 +35,7 @@ class Search extends Component {
                     throw new Error(res.statusText)
                 }
                 console.log(res)
-                this.setState({results: res.data})
+                this.setState({visibility: "", results: res.data})
                 console.log(this.state.results[0].result.name)
             })
     }
@@ -109,7 +110,7 @@ class Search extends Component {
                     </div>
                 </div>
                 <br/>
-                <div className="row">
+                <div className={"row " + this.state.visibility}>
 
                     <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
@@ -131,7 +132,7 @@ class Search extends Component {
                     </div>
                 </div>
                 <br/>
-                <div className="row">
+                <div className={"row " + this.state.visibility}>
                     <div className="col-sm-12 justify-content-center">
                         <a href="/ballot">
                             <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
