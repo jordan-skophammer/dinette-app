@@ -28,7 +28,7 @@ nav {
   color: white;
 }
 
-@media screen and (max-width:9992px){ 
+@media screen and (max-width:992px){ 
   button {
     margin: 5px;
   }
