@@ -1,0 +1,33 @@
+
+
+.hours {
+    line-height: .6;
+    font-size: .8rem;
+}
+
+.reviews-holder {
+    height: 400px;
+    overflow: scroll;
+}
+
+.photos-holder {
+    max-height: 400px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.rest-img {
+    /* max-width: 160%; */
+    /* height: 100%; */
+    max-width: 130%;
+    height: auto;
+}
+
+@media (min-width: 576px) {
+
+    .modal-dialog {
+        max-width: 60%;
+        margin: 1.75rem auto;
+    }
+
+}
