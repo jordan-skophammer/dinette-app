@@ -3,27 +3,22 @@ import "./Search.css"
 import API from "../../utils/API"
 import NavBar from "../../components/NavBar"
 import Wrapper from "../../components/Wrapper"
+import Modal from "../../components/Modal"
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
             results: [],
-            noResults: "noTry",
-            value: ""
+            value: "",
+            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
+            visibility: "hidden"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    //not really using this function. handleSubmit does searching
-    // search = () => {
-    //     API.searchRestaurants()
-    //     .then(res => {
-    //         this.setState({results: res.data})
-    //         console.log(this.state.results)
-    //     })
-    // }
+    
 
     handleChange(event){
         this.setState({value: event.target.value})
@@ -46,12 +41,25 @@ class Search extends Component {
                     console.log("no results found")
                     this.setState({...this.state,results: ["No Results Found"]})
                 }
-                
-            
+                this.setState({visibility: "", results: res.data})
+
             })
     }
 
+    
 
+    populateModal(photoRef, name, location, hours, phone, rating, review){
+        let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+        let reviewsArray = []
+        review.forEach(revObj => {
+            let individualReview = []
+            individualReview.push(revObj.author_name, revObj.author_url, revObj.rating, revObj.relative_time_description, revObj.text)
+            reviewsArray.push(individualReview)
+        })
+        let modalInfo = [photo, name, location, hours, phone, rating, reviewsArray];
+        console.log(modalInfo)
+        this.setState({modalArray: modalInfo})
+    }
     // componentDidMount() {
     //     this.search()
     // }
@@ -96,19 +104,19 @@ class Search extends Component {
             )
         } else {
             results = (
-                this.state.results.map(restaurant => (
-                    <div key = {restaurant.result.name} className="result-block">
-                        <div className="form-check">
-                            <label className="form-check-label" htmlFor="defaultCheck">
-                                <h5>{restaurant.result.name}</h5>
-                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
-                            </label>
-                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
-                        </div>
+                                                this.state.results.map(restaurant => (
+                                    <div key = {restaurant.result.photos[0].photo_reference} className="result-block">
+                                        <div className="form-check">
+                                            <label className="form-check-label">
+                                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos[0].photo_reference, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
+                                                <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
+                                            </label>
+                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
+                                        </div>
 
-                    </div>
+                                    </div>
 
-                ))
+                                ))
             )
         }
         return(
@@ -133,16 +141,18 @@ class Search extends Component {
                     </div>
                 </div>
                 <br/>
-                <div className="row">
+                <div className={"row " + this.state.visibility}>
 
                     <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
+
                             <br/>                                
                                 {results}
+
                     </div>
                 </div>
                 <br/>
-                <div className="row">
+                <div className={"row " + this.state.visibility}>
                     <div className="col-sm-12 justify-content-center">
                         <a href="/ballot">
                             <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
@@ -150,6 +160,18 @@ class Search extends Component {
                     </div>
                 </div>
             </div>
+
+            <Modal
+            
+            photo = {this.state.modalArray[0]}
+            restName = {this.state.modalArray[1]}
+            address = {this.state.modalArray[2]}
+            hours = {this.state.modalArray[3]}
+            phone = {this.state.modalArray[4]}
+            rating = {this.state.modalArray[5]}
+            reviews = {this.state.modalArray[6]}
+
+            />
             
         </Wrapper>
 

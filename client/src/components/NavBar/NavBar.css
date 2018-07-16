@@ -7,6 +7,8 @@ nav {
 .navbar-brand {
     color: white;
     font-family: 'Lobster', cursive;
+    font-size: 25pt;
+    margin-left: 2%;
  }
 
  .navbar-light {
@@ -26,7 +28,7 @@ nav {
   color: white;
 }
 
-@media screen and (max-width:9992px){ 
+@media screen and (max-width:992px){ 
   button {
     margin: 5px;
   }

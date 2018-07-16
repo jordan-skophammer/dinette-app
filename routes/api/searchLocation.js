@@ -1,5 +1,5 @@
-const express = require ("express");
-const app = express()
+const router = require("express").Router();
+
 const axios = require ("axios")
 //************** DROP THE NEW PLACES KEY HERE ******************* */
 const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
@@ -13,7 +13,7 @@ const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,t
 
 restaurantsArr = []
 
-app.get("/api/restaurants/:location", function(req,res) {
+router.get("/:location", function(req,res) {
     let location = req.params.location
     console.log("location in searchLocation.js: ", location)
 
@@ -49,7 +49,7 @@ app.get("/api/restaurants/:location", function(req,res) {
 
 console.log("routes > api > searchLocation is executing")
 
-module.exports = app;
+module.exports = router;
 
 function getDetailsAddToArray(array, res){
     if (array.length == 0) res.send(restaurantsArr)

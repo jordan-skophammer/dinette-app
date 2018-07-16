@@ -1,0 +1,15 @@
+.result-block {
+    color: rgb(88, 86, 86);
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
+
+}
+.results-card {
+    padding: 30px;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

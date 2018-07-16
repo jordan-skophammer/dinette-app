@@ -7,7 +7,7 @@ import SignUpForm from "../../components/SignUpForm"
 
 class SignUp extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       userName: '',
       password: '',
@@ -17,19 +17,20 @@ class SignUp extends Component {
       zipcode: '',
       redirectTo: null,
     };
-    // this.handleSubmit = this.handleSubmit.bind(this)
-    // this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind();
+    this.handleChange = this.handleChange.bind();
   }
 
   handleChange = (event) => {
-    // console.log(event);
-    // console.log(this);
     const { name, value } = event.target;
     this.setState({ [name]: value });    
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+
+    let currentURL = window.location.origin;
+    currentURL = "http://localhost:3001/auth/signup" ? "http://localhost:3000/auth/signup" : window.location.origin;
 
     if (this.state.password === this.state.confirmPassword) {
       let newUser = {
@@ -40,41 +41,45 @@ class SignUp extends Component {
         zipcode: this.state.zipcode,
       }
 
+      // console.log(newUser);
+
       axios
-        .post('auth/signup', newUser)
+        .post(currentURL, newUser)
         .then(response => {
-          console.log(response)
+          console.log(response);
           if (!response.data.errmsg) {
             console.log('success')
             this.setState({
               redirectTo: '/login'
             });
-            // this.props.history.push('/login');
           } else {
             console.log('duplicate')
           }
         })
-    } else {
+    } 
+    else {
       console.log("Passwords don't match");
       
     }
   }
 
   render() {
-    // if (this.state.redirectTo) {
-		// 	return <Redirect to={{ pathname: this.state.redirectTo }} />
-		// }
+    if (this.state.redirectTo) {
+			return <Redirect to={{ pathname: this.state.redirectTo }} />
+		}
     return (
       <div>
         <Wrapper>
           <NavBar />
           <SignUpForm
-            userNameEntry={this.handleChange.bind()}
-            passwordEntry={this.handleChange.bind()}
-            confirmPasswordEntry={this.handleChange.bind()}
-            firstNameEntry={this.handleChange.bind()}
-            lastNameEntry={this.handleChange.bind()}
-            zipcodeEntry={this.handleChange.bind()}
+            handleChange={this.handleChange}
+            submitClicked={this.handleSubmit}
+            userName={this.state.userName}
+            password={this.state.password}
+            confirmPassword={this.state.confirmPassword}
+            firstName={this.state.firstName}
+            lastName={this.state.lastName}
+            zipcode={this.state.zipcode}
           />
         </Wrapper>
       </div>

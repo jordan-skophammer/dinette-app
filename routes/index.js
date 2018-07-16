@@ -1,23 +1,13 @@
-/*
-const path = require("path");
+// const path = require("path");
+const app = require("express");
 const router = require("express").Router();
 const apiRoutes = require("./api");
 const authRoutes = require("./auth");
 
+// all routes coming from the auth.js file have extention /auth/...
 router.use("/auth", authRoutes);
+
+// all routes coming from the api folder will have extention /api/...
 router.use("/api", apiRoutes);
-*/
-const express = require("express")
-const app = express()
 
-// module.exports = router;
-
-const searchLocation = require("./api/searchLocation");
-
-/*
-router.use("/restaurants", restaurantRoutes);
-*/
-app.use(searchLocation);
-
-console.log("Routes > index.js is executing")
-module.exports = app;
+module.exports = router;
