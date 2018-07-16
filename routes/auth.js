@@ -45,15 +45,14 @@ router.post('/signup', (req, res) => {
 
 router.post(
   '/login',
-  (req, res, next) => {
-    next();
-  },
-  passport.authenticate('local',
+  passport.authenticate(
+    'local',
     {
       successRedirect: '/',
       failureRedirect: '/login',
-      failureFlash: true
-    })
+      failureFlash: true,
+    },
+  ),
 );
 
 router.post('/logout', (req, res) => {
