@@ -42,9 +42,9 @@ import "./VoteResults.css"
 //     render() {
 //         return (
             const VoteResults = props => (
-            <li className="result-block" >
+            <div className="result-block" >
             {props.children}                 
-            </li>
+            </div>
         
             )
     // }
