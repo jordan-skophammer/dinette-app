@@ -161,15 +161,14 @@ class Search extends Component {
             </div>
 
             <Modal
-            
-            photo = {this.state.modalArray[0]}
-            restName = {this.state.modalArray[1]}
-            address = {this.state.modalArray[2]}
-            hours = {this.state.modalArray[3]}
-            phone = {this.state.modalArray[4]}
-            rating = {this.state.modalArray[5]}
-            reviews = {this.state.modalArray[6]}
-
+                key = {this.state.restName}
+                photo = {this.state.modalArray[0]}
+                restName = {this.state.modalArray[1]}
+                address = {this.state.modalArray[2]}
+                hours = {this.state.modalArray[3]}
+                phone = {this.state.modalArray[4]}
+                rating = {this.state.modalArray[5]}
+                reviews = {this.state.modalArray[6]}
             />
             
         </Wrapper>
