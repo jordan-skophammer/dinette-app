@@ -51,16 +51,16 @@ class Search extends Component {
 
 
     addToSessionStorage = (value) => {
-        
+       sessionStorage.setItem("voted", []) 
         let savedArray = []
-        let storage = JSON.parse(sessionStorage.getItem("saved"))
+        let storage = JSON.parse(sessionStorage.getItem("restaurants"))
 
         //if there's something in session storage but it's not an array
-        if (sessionStorage.getItem("saved") && !Array.isArray(storage)){
+        if (sessionStorage.getItem("restaurants") && !Array.isArray(storage)){
             savedArray.push(storage, value)
-            sessionStorage.setItem("saved", JSON.stringify(savedArray))
+            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's something in session storage and it is an array
-        } else if (sessionStorage.getItem("saved") && Array.isArray(storage) && storage.length <= 5) {
+        } else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
             savedArray = storage
             //if value is not already in saved, pushes it
             if (savedArray.includes(value) === false){
@@ -70,10 +70,10 @@ class Search extends Component {
                 let index = savedArray.indexOf(value)
                 savedArray.splice(index, 1)
             }
-            sessionStorage.setItem("saved", JSON.stringify(savedArray))
+            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's nothing in session storage yet
         } else {
-            sessionStorage.setItem("saved", JSON.stringify(value))
+            sessionStorage.setItem("restaurants", JSON.stringify(value))
         }
         console.log(sessionStorage)
     }
@@ -114,7 +114,7 @@ class Search extends Component {
                                                 <h5>{restaurant.result.name}</h5>
                                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                                             </label>
-                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.name)} value={restaurant.name} id="defaultCheck"></input>
+                                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
                                         </div>
 
                                     </div>
