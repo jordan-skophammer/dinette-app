@@ -14,9 +14,32 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
-.results-card {
-    padding: 30px;
-    height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+
+.ordered_items {
+    margin-left: 3%;
+    padding: 2% 2% 3%;
+}
+.ordered_items:hover {
+    background-color: #b5cf1e;
+    color: white;
+}
+.ordered_items:active {
+    background-color: #90c209;
+    color: white;
+}
+.uncheck {
+    margin-left: 3%;
+}
+.horizontal_align {
+    display: flex;
+}
+.center {
+    margin: auto;
+}
+.add-restaurant {
+    width: 30%;
+    min-width: 110px;
+}
+ol {
+    margin-left: -40px;
 }

@@ -1,10 +1,13 @@
 .form-check {
     padding-left: 0;
 }
-
+/* We are re-using this element/styling in ballot.js, but the styling here takes over 
+(same name, but containing element). I need to comment-out the height, and it looks like 
+everything is okay ...but if that breaks things in search.js, we will re-assess)
+  */
 .results-card {
     padding: 30px;
-    height: 300px;
+    /* height: 300px; */
     overflow-y: scroll;
     overflow-x: hidden;
 }
