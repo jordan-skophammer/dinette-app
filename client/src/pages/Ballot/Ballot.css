@@ -29,3 +29,16 @@
 .uncheck {
     margin-left: 3%;
 }
+.horizontal_align {
+    display: flex;
+}
+.center {
+    margin: auto;
+}
+.add-restaurant {
+    width: 30%;
+    min-width: 110px;
+}
+ol {
+    margin-left: -40px;
+}

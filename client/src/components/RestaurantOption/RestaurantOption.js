@@ -2,9 +2,9 @@ import React from "react";
 import "./RestaurantOption.css"
 
 const RestaurantOption = props => (
-    <li className="list-group-item result-block">
+    <div className="list-group-item result-block">
         {props.children}  
-    </li>
+    </div>
 );
 
 export default RestaurantOption;
