@@ -18,3 +18,14 @@
     margin-left: 3%;
     padding: 2% 2% 3%;
 }
+.ordered_items:hover {
+    background-color: #b5cf1e;
+    color: white;
+}
+.ordered_items:active {
+    background-color: #90c209;
+    color: white;
+}
+.uncheck {
+    margin-left: 3%;
+}

@@ -19,7 +19,6 @@ class Ballot extends Component {
             restaurants: [],
             results: [],
             otherArray: [], 
-            num: 1
         }
     }
     handleResult(event) {
@@ -46,23 +45,43 @@ class Ballot extends Component {
     }
 
     addToResults = (value) => {
+        // getting the index of the restaurant clicked in the "restaurant" array
         let index = this.state.restaurants.indexOf(value)
+        
         let left = this.state.restaurants.slice(0, index)
         let right = this.state.restaurants.slice(index+1)
+        
         let restaurants = [...left, ...right]
         let results = [...this.state.results, value]
-        
+
         sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
         sessionStorage.setItem("results", JSON.stringify(results))
+        this.setState({...this.state, results, restaurants})
+    }
+
+    removeFromResults =(value) => {
+        // getting the index of the restaurant clicked in the "results" array
+        let index = this.state.results.indexOf(value)
+        
+        
+        let left = this.state.results.slice(0, index)
+        let right = this.state.results.slice(index + 1)
+
+        let results = [...left, ...right]
+        let restaurants = [...this.state.restaurants, value]
+
+        sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
+        sessionStorage.setItem("results", JSON.stringify(results))
+        
         this.setState({...this.state, results, restaurants})
     }
 
     handleInputChange = event => {
         const { name, value } = event.target;
             this.setState({
-          [name]: value
+            [name]: value
         });
-      };
+    };
 
 
     render() {
@@ -79,7 +98,8 @@ class Ballot extends Component {
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
                                         {restaurant}
-                                        <input className="form-check-input" data-state="unchecked" type="checkbox" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></input>
+                                        <i className="far fa-square form-check-input" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></i>
+                                        
                                     </RestaurantOption>
                                 ))}
                                 <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
@@ -108,12 +128,12 @@ class Ballot extends Component {
                         {this.state.results && this.state.results.length ? (
                             <ol type="1">
                                 <VoteResults>
-                                {this.state.results.map(result => (
-                                    <li className="ordered_items" key={result.id}>
-                                        {result}
-                                    </li>
-                                ))}
-                            </VoteResults>
+                                    {this.state.results.map(result => (
+                                        <li className="ordered_items" key={result.id}>
+                                            {result} <span className="uncheck" onClick={()=>this.removeFromResults(result)}><i className="far fa-check-square"></i></span>
+                                        </li>
+                                    ))}
+                                </VoteResults>
                             </ol>
                         ) : (
                                 <div className="row"></div>
