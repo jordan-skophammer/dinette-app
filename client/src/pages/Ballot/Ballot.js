@@ -18,10 +18,9 @@ class Ballot extends Component {
         this.state = {
             restaurants: [],
             results: [],
-            otherArray: []
+            otherArray: [], 
+            num: 1
         }
-        // this.handleResult = this.handleResult.bind(this);
-        // this.addToResults = this.addToResults.bind(this);
     }
     handleResult(event) {
         this.setState({ value: event.target.value })
@@ -98,7 +97,7 @@ class Ballot extends Component {
                                     <div className="row">
                                         <div className="col-sm-4"></div>
                                         <div className="col-sm-4">
-                                            <a href="/search" className="noresult-block text-white text-center yellow">choose some restaurants to vote on</a>
+                                            <a href="/search" className="noresult-block text-white text-center yellow">Choose restaurants to vote on!</a>
                                         </div>
                                         <div className="col-sm-4"></div>
                                     </div>
@@ -107,13 +106,15 @@ class Ballot extends Component {
                             )}
                         <br />
                         {this.state.results && this.state.results.length ? (
-                            <VoteResults>
+                            <ol type="1">
+                                <VoteResults>
                                 {this.state.results.map(result => (
-                                    <div key={result.id}>
+                                    <li className="ordered_items" key={result.id}>
                                         {result}
-                                    </div>
+                                    </li>
                                 ))}
                             </VoteResults>
+                            </ol>
                         ) : (
                                 <div className="row"></div>
                             )}
