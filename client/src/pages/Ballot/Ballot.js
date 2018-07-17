@@ -23,9 +23,9 @@ class Ballot extends Component {
         // this.handleResult = this.handleResult.bind(this);
         // this.addToResults = this.addToResults.bind(this);
     }
-    handleResult(event) {
-        this.setState({ value: event.target.value })
-    }
+    // handleResult(event) {
+    //     this.setState({ value: event.target.value })
+    // }
 
     componentDidMount() {
         this.loadSessionStorage();
@@ -52,6 +52,7 @@ class Ballot extends Component {
         let right = this.state.restaurants.slice(index+1)
         let restaurants = [...left, ...right]
         let results = [...this.state.results, value]
+        console.log(value)
         
         sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
         sessionStorage.setItem("results", JSON.stringify(results))
@@ -80,7 +81,7 @@ class Ballot extends Component {
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
                                         {restaurant}
-                                        <input className="form-check-input" data-state="unchecked" type="checkbox" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></input>
+                                        <input className="form-check-input" data-state="unchecked" type="checkbox" onClick={() => this.addToResults(restaurant)} value={restaurant} onChange="unchecked" id="defaultCheck"></input>
                                     </RestaurantOption>
                                 ))}
                                 <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
@@ -107,6 +108,7 @@ class Ballot extends Component {
                             )}
                         <br />
                         {this.state.results && this.state.results.length ? (
+                            <div className="col-md-12 results-card orange">
                             <VoteResults>
                                 {this.state.results.map(result => (
                                     <div key={result.id}>
@@ -114,6 +116,7 @@ class Ballot extends Component {
                                     </div>
                                 ))}
                             </VoteResults>
+                            </div>
                         ) : (
                                 <div className="row"></div>
                             )}
