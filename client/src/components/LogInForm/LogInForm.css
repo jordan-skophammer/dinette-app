@@ -2,20 +2,35 @@
     margin: 5%;
 }
 
+.card-body {
+    padding-bottom: 0px;
+}
+
 .login-card {
-    background-color: #eb5c00;
+    /* background-color: #eb5c00; */
     padding: 30px;
     width: 500px;
     height: 350px;
-    background: linear-gradient(70deg, #94ca03, #bed736);
-    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    /* background: linear-gradient(70deg, #94ca03, #bed736); */
+    /* box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2); */
+}
+
+.logIn {
+    /* display: inline-block; */
+}
+
+.SignUp {
+    /* display: inline-block; */
+    /* float: right; */
 }
 
 button {
     margin: 3px !important;
 }
 
-.create-button {
-    background: linear-gradient(70deg, #ffba00, #ffde00);
-    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+@media only screen and (max-width: 500px){ 
+    .login-card{
+        padding: 15px;
+    }
 }
+

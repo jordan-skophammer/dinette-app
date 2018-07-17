@@ -42,12 +42,12 @@ button {
     font-size: 1.2rem;
 }
 
-.yellow {
+/* .yellow {
     background: linear-gradient(70deg, #ffba00, #ffde00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
-}
+} */
 
-.yellow-btn {
+.yellow {
     background: linear-gradient(70deg, #ffae00, #ffbb00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
