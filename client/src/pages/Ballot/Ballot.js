@@ -21,9 +21,9 @@ class Ballot extends Component {
             otherArray: [], 
         }
     }
-    handleResult(event) {
-        this.setState({ value: event.target.value })
-    }
+    // handleResult(event) {
+    //     this.setState({ value: event.target.value })
+    // }
 
     componentDidMount() {
         this.loadSessionStorage();
@@ -53,6 +53,7 @@ class Ballot extends Component {
         
         let restaurants = [...left, ...right]
         let results = [...this.state.results, value]
+
 
         sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
         sessionStorage.setItem("results", JSON.stringify(results))
@@ -97,6 +98,7 @@ class Ballot extends Component {
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
                                         {restaurant}
+
                                         <i className="far fa-square form-check-input" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></i>
                                         
                                     </RestaurantOption>
@@ -124,6 +126,7 @@ class Ballot extends Component {
                             )}
                         </div>
                         <br />
+
                         <div className="container horizontal_align">
                             <div className="center">
                                 <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
