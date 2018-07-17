@@ -13,9 +13,7 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="userName" 
                       placeholder="Enter Username or Email"
-                      value={props.userName}
-                      onChange={props.userNameEntry}
-                      // onChange={() => console.log(props)}
+                      onChange={props.handleChange}
                     />
                   </div>
                   <div className="form-group">
@@ -25,9 +23,7 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="password" 
                       placeholder="Enter Password"
-                      // value={props.password}
-                      onChange={props.passwordEntry}
-                      // onChange={() => console.log(props)}
+                      onChange={props.handleChange}
                     />
                   </div>
                   <div className="form-group">
@@ -37,8 +33,7 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="confirmPassword" 
                       placeholder="Enter Password"
-                      // value={props.confirmPassword}
-                      onChange={props.confirmPasswordEntry} 
+                      onChange={props.handleChange}
                     />
                   </div>
                   <div className="form-group">
@@ -48,8 +43,7 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="firstName" 
                       placeholder="Enter First Name"
-                      // value={props.firstName}
-                      onChange={props.firstNameEntry}
+                      onChange={props.handleChange}
                       />
                   </div>
                   <div className="form-group">
@@ -59,8 +53,7 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="lastName" 
                       placeholder="Enter Last Name"
-                      // value={props.lastName}
-                      onChange={props.lastNameEntry}
+                      onChange={props.handleChange}
                       />
                   </div>
                   <div className="form-group">
@@ -70,14 +63,13 @@ const SignUpForm = (props) => (
                       className="form-control" 
                       name="zipcode" 
                       placeholder="55555"
-                      // value={props.zipcode}
-                      onChange={props.zipcodeEntry}
+                      onChange={props.handleChange}
                       />
                   </div>
                   <button 
                     type="submit"
                     className="btn btn-danger"
-                    onClick={props.handleSubmit}
+                    onClick={props.submitClicked}
                     >
                     Submit
                   </button>

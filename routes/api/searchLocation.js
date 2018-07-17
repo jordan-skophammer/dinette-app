@@ -1,5 +1,5 @@
-const express = require ("express");
-const app = express()
+const router = require("express").Router();
+
 const axios = require ("axios")
 //************** DROP THE NEW PLACES KEY HERE ******************* */
 const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
@@ -7,13 +7,13 @@ const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
 const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
 const nearbyQueryStringA = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
-const nearbyQueryStringB = "&radius=400&type=restaurant&key="+placesKey
+const nearbyQueryStringB = "&radius=50&type=restaurant&key="+placesKey
 const placesDetailsQueryStringA = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
 const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key="+placesKey
 
 restaurantsArr = []
 
-app.get("/api/restaurants/:location", function(req,res) {
+router.get("/:location", function(req,res) {
     let location = req.params.location
     console.log("location in searchLocation.js: ", location)
 
@@ -49,7 +49,7 @@ app.get("/api/restaurants/:location", function(req,res) {
 
 console.log("routes > api > searchLocation is executing")
 
-module.exports = app;
+module.exports = router;
 
 function getDetailsAddToArray(array, res){
     if (array.length == 0) res.send(restaurantsArr)

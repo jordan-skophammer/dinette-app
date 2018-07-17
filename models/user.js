@@ -5,35 +5,30 @@ mongoose.promise = Promise;
 
 const userSchema = new Schema({
   local: {
-    userName: { type: String, required: false, unique: true },
-    password: { type: String, required: false },
+    userName: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
   },
   // google: {
   //   googleID: { type: String, required: false },
   // },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  zipCode: { type: Number, min: 5, max: 5, required: true },
-  currentVoteURL: { type: String },
+  zipcode: { type: Number, required: true },
+  currentVoteURL: { type: String, required: false },
+  favorites: [{ type: String, required: false }],
 });
-
-// Define schema methods
-userSchema.methods = {
-  checkPassword: inputPassword => bcrypt.compareSync(inputPassword, this.local.password),
-  hashPassword: plainTextPassword => bcrypt.hashSync(plainTextPassword, 10),
-};
 
 // Define hooks for pre-saving
 userSchema.pre('save', function (next) {
   if (!this.local.password) {
     console.log('=======NO PASSWORD PROVIDED=======');
     next();
-  } else {
-    this.local.password = this.hashPassword(this.local.password);
-    next();
   }
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(this.local.password, salt);
+  this.local.password = hash;
+  next();
+
 });
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
