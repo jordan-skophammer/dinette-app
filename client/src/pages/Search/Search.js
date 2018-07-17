@@ -66,16 +66,16 @@ class Search extends Component {
 
 
     addToSessionStorage = (value) => {
-        
+       sessionStorage.setItem("voted", []) 
         let savedArray = []
-        let storage = JSON.parse(sessionStorage.getItem("saved"))
+        let storage = JSON.parse(sessionStorage.getItem("restaurants"))
 
         //if there's something in session storage but it's not an array
-        if (sessionStorage.getItem("saved") && !Array.isArray(storage)){
+        if (sessionStorage.getItem("restaurants") && !Array.isArray(storage)){
             savedArray.push(storage, value)
-            sessionStorage.setItem("saved", JSON.stringify(savedArray))
+            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's something in session storage and it is an array
-        } else if (sessionStorage.getItem("saved") && Array.isArray(storage) && storage.length <= 5) {
+        } else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
             savedArray = storage
             //if value is not already in saved, pushes it
             if (savedArray.includes(value) === false){
@@ -85,10 +85,10 @@ class Search extends Component {
                 let index = savedArray.indexOf(value)
                 savedArray.splice(index, 1)
             }
-            sessionStorage.setItem("saved", JSON.stringify(savedArray))
+            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's nothing in session storage yet
         } else {
-            sessionStorage.setItem("saved", JSON.stringify(value))
+            sessionStorage.setItem("restaurants", JSON.stringify(value))
         }
         console.log(sessionStorage)
     }
@@ -145,6 +145,7 @@ class Search extends Component {
 
                     <div className="col-md-12 results-card orange">
                             <h3 className="text-white text-center">Search Results</h3>
+
 
                             <br/>                                
                                 {results}
