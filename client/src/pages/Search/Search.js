@@ -41,7 +41,7 @@ class Search extends Component {
                     console.log("no results found")
                     this.setState({...this.state,results: ["No Results Found"]})
                 }
-                this.setState({visibility: "", results: res.data})
+                this.setState({visibility: ""})
 
             })
     }
@@ -96,9 +96,9 @@ class Search extends Component {
     render () {
         let results;
         if (this.state.results[0] === "No Results Found"){
-            console.log("No Results Render")
+            console.log(this.state.results,"************************")
             results = (
-                this.state.results.map(result=>(
+                this.state.results.map(result => (
                     <h3 className="text-center text-white">{result}</h3>
                 ))
             )
