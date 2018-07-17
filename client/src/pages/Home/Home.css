@@ -1,18 +1,29 @@
-
+/* 
 button {
     margin: auto;
-}
+} */
 
 .home {
     margin-top: 30px;
+    /* background-color: rgba(82, 40, 21, 0.4);
+    width: 80%;
+    padding-top: 30px;
+    padding-bottom: 40px; */
 }
 
 .login {
     color: white;
+    text-shadow: 1px 1px 10px rgba(32, 16, 8, 0.8);
+    font-size: 1.2rem;
 }
 
 .home-btn {
     margin-bottom: 8px;
+    /* width: 100%; */
+}
+
+.btn-home {
+    width: 60%;
 }
 
 .title {
@@ -27,17 +38,38 @@ button {
     /* font-family: 'Warnes', cursive; */
 }
 
+.or {
+    font-size: 1.2rem;
+}
+
 .yellow {
     background: linear-gradient(70deg, #ffba00, #ffde00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
+.yellow-btn {
+    background: linear-gradient(70deg, #ffae00, #ffbb00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
 .green {
-    background: linear-gradient(70deg, #94ca03, #bed736);
+    background: linear-gradient(70deg, #90c209, #b5cf1e);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 .orange {
     background: linear-gradient(70deg, #eb5c00, #e17f00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (min-width: 700px){ 
+    .btn-home {
+        width: 40%;
+    }  
+}
+
+@media only screen and (min-width: 900px){ 
+    .btn-home {
+        width: 30%;
+    }  
 }
