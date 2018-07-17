@@ -132,7 +132,7 @@ class Search extends Component {
                                     <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
                                 </div>
                                 <div className="col-sm-3">
-                                    <button className="btn btn-lg save text-white yellow" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                    <button className="btn btn-lg text-white yellow-btn"  id="search" onClick={this.searchLocation}>Search</button>
                                 </div>
                             </div>
                         </form>
@@ -154,7 +154,7 @@ class Search extends Component {
                 <div className={"row " + this.state.visibility}>
                     <div className="col-sm-12 justify-content-center">
                         <a href="/ballot">
-                            <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
+                            <button className="btn btn-lg yellow-btn text-white" id="saveRestaurants">Add to Group Vote</button>
                         </a>
                     </div>
                 </div>

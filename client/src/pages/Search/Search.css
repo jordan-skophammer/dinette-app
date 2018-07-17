@@ -32,10 +32,16 @@
 .save {
     min-height: 40px;
     margin: auto;
+    width: 100%;
+}
+#search {
+    width: 100%;
+    margin: 0px !important;
 }
 
 #searchLocation {
     margin-top: 1.5%;
+    margin-bottom: 5px;
     width: 100%;
 }
 
@@ -43,6 +49,11 @@
     width: 100%;
     margin: auto;
 }
+
+/* .yellow-btn {
+    background: linear-gradient(70deg, #ff9100, #ffbb00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+} */
 
 .hidden{
     visibility: hidden;
