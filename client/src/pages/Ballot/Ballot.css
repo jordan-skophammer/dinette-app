@@ -18,11 +18,11 @@
     margin-left: 3%;
     padding: 2% 2% 3%;
 }
-.ordered_items:hover {
+.result-block:hover {
     background-color: #b5cf1e;
     color: white;
 }
-.ordered_items:active {
+.result-block:active {
     background-color: #90c209;
     color: white;
 }
