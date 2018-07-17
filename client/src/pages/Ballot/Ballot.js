@@ -17,9 +17,11 @@ class Ballot extends Component {
         super(props);
         this.state = {
             restaurants: [],
-            results: []
+            results: [],
+            otherArray: []
         }
         // this.handleResult = this.handleResult.bind(this);
+        // this.addToResults = this.addToResults.bind(this);
     }
     handleResult(event) {
         this.setState({ value: event.target.value })
@@ -33,19 +35,24 @@ class Ballot extends Component {
         let restaurantsString = sessionStorage.getItem("restaurants")
         var restaurants = JSON.parse(restaurantsString)
         let resultsString = sessionStorage.getItem("results")
-        var results = JSON.parse(resultsString)
-        this.setState({ restaurants, results })
+        let results
+        if (resultsString === null) {
+            results = []
+        }
+        else {
+            results = JSON.parse(resultsString)
+        }
+        this.setState({...restaurants, restaurants})
+        this.setState({...results,results})
     }
 
     addToResults = (value) => {
         let index = this.state.restaurants.indexOf(value)
-        console.log(index)
         let left = this.state.restaurants.slice(0, index)
         let right = this.state.restaurants.slice(index+1)
         let restaurants = [...left, ...right]
         let results = [...this.state.results, value]
         
-
         sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
         sessionStorage.setItem("results", JSON.stringify(results))
         this.setState({...this.state, results, restaurants})

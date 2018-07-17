@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const axios = require ("axios")
 //************** DROP THE NEW PLACES KEY HERE ******************* */
-const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+const placesKey = "AIzaSyBsefQtQyAz_GgHERwuEkFClAWIl7eFUvs"
 
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
 const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
@@ -19,10 +19,10 @@ router.get("/:location", function(req,res) {
 
     axios.get(geolocateQueryString + location + geolocateKey)
     .then(function(data){
-        console.log(data.data.results[0])
+        // console.log(data.data.results[0])
                 let lat = data.data.results[0].geometry.location.lat
                 let lng = data.data.results[0].geometry.location.lng
-                // console.log("lat: ", lat, " lng: ", lng)
+                console.log("lat: ", lat, " lng: ", lng)
                 let nearbyStringFull = nearbyQueryStringA
                 nearbyStringFull += lat
                 nearbyStringFull += ","
