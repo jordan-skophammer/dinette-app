@@ -11,7 +11,9 @@ class Roulette extends Component {
         this.state = {
             results: [],
             roulettePick: [],
-            value: ""
+            value: "",
+            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
+            visibility: "hiddenRoulette"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,7 +40,7 @@ class Roulette extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                this.setState({...this.state,results: res.data})
+                this.setState({visibility: "",results: res.data})
                 this.randomPick(this.state.results)
             })
     }
@@ -49,9 +51,22 @@ class Roulette extends Component {
         console.log(this.state.roulettePick)
     }
 
-    componentDidMount() {
-        this.search()
+    populateModal(photoRef, name, location, hours, phone, rating, review){
+        let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+        let reviewsArray = []
+        review.forEach(revObj => {
+            let individualReview = []
+            individualReview.push(revObj.author_name, revObj.author_url, revObj.rating, revObj.relative_time_description, revObj.text)
+            reviewsArray.push(individualReview)
+        })
+        let modalInfo = [photo, name, location, hours, phone, rating, reviewsArray];
+        console.log(modalInfo)
+        this.setState({modalArray: modalInfo})
     }
+
+    // componentDidMount() {
+    //     this.search()
+    // }
 
 
 
@@ -73,11 +88,10 @@ class Roulette extends Component {
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                     <br/>
-                    <div className="row">
+                    <div className={"row " + this.state.visibility}>
                         <div className="col-md-12 pick-card orange">
                                 <h2 className="text-white text-center">Your Pick</h2>
                                 <br/>

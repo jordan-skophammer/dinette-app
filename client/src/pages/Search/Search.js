@@ -92,7 +92,6 @@ class Search extends Component {
         <Wrapper>
             <NavBar/>
             <br/>
-
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -106,7 +105,6 @@ class Search extends Component {
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <br/>
