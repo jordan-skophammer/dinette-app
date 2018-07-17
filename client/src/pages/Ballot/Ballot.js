@@ -92,7 +92,6 @@ class Ballot extends Component {
                     {/* <h1>Voting Page</h1> */}
                     <br />
                     <div className="container">
-
                         { this.state.restaurants ? (
                             <VoteList>
                                 {this.state.restaurants.map(restaurant => (
@@ -102,7 +101,7 @@ class Ballot extends Component {
                                         
                                     </RestaurantOption>
                                 ))}
-                                <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
+                                
 
                                 {/* <input type="text" className="result-block" value={this.state.newItem}
                                 // onChange={e => this.updateInput("newItem", e.target.value)}
@@ -121,26 +120,44 @@ class Ballot extends Component {
                                         </div>
                                         <div className="col-sm-4"></div>
                                     </div>
-
                                 </div>
                             )}
+                        </div>
                         <br />
-                        {this.state.results && this.state.results.length ? (
-                            <ol type="1">
-                                <VoteResults>
+                        <div className="container horizontal_align">
+                            <div className="center">
+                                <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
+                            </div>
+                        </div>
+                        
+                        <br />
+                        <div className="container">
+                            {this.state.results && this.state.results.length ? (
+                                <ol type="1">
+                                    <VoteResults>
+                                        {/* {this.state.results.map(result => (
+                                            <li className="ordered_items" key={result.id}>
+                                                {result} 
+                                                <i className="far fa-check-square" onClick={()=>this.removeFromResults(result)}></i>
+                                            </li>
+                                        ))} */}
+                                 
                                     {this.state.results.map(result => (
-                                        <li className="ordered_items" key={result.id}>
-                                            {result} <span className="uncheck" onClick={()=>this.removeFromResults(result)}><i className="far fa-check-square"></i></span>
-                                        </li>
+                                        <RestaurantOption key={result.id}>
+                                            <li className="ordered_items">
+                                            {result}
+                                            <i className="far fa-check-square form-check-input" onClick={() => this.removeFromResults(result)} value={result}></i>
+                                            </li>
+                                        </RestaurantOption>
                                     ))}
-                                </VoteResults>
-                            </ol>
-                        ) : (
-                                <div className="row"></div>
-                            )}
-
+                                    </VoteResults>
+                                </ol>
+                            ) : (
+                                    <div className="row"></div>
+                                )}
+                        </div>
                     </div>
-                </div>
+                {/* </div> */}
             </Wrapper>
         )
     }
