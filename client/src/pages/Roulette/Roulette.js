@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
 import Wrapper from "../../components/Wrapper";
+import Modal from "../../components/Modal";
 import "./Roulette.css";
 
 class Roulette extends Component {
@@ -40,7 +41,7 @@ class Roulette extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                this.setState({visibility: "",results: res.data})
+                this.setState({...this.state,results: res.data,visibility: ""})
                 this.randomPick(this.state.results)
             })
     }
@@ -100,13 +101,23 @@ class Roulette extends Component {
                                         <label className="form-check-label" htmlFor="defaultCheck">
                                             <h5>{this.state.roulettePick.name}</h5>
                                             <p className="address">{this.state.roulettePick.vicinity}</p>
-                                        </label>
-                                        
+                                        </label> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                <Modal
+        
+                photo = {this.state.modalArray[0]}
+                restName = {this.state.modalArray[1]}
+                address = {this.state.modalArray[2]}
+                hours = {this.state.modalArray[3]}
+                phone = {this.state.modalArray[4]}
+                rating = {this.state.modalArray[5]}
+                reviews = {this.state.modalArray[6]}
+
+                />
             </Wrapper>
         )
     }
