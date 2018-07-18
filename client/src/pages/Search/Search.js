@@ -138,7 +138,7 @@ class Search extends Component {
                                     <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
                                 </div>
                                 <div className="col-sm-3">
-                                    <button className="btn btn-lg save text-white yellow" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                    <button className="btn btn-lg text-white yellow"  id="search" onClick={this.searchLocation}>Search</button>
                                 </div>
                             </div>
                         </form>
@@ -167,15 +167,14 @@ class Search extends Component {
             </div>
 
             <Modal
-            
-            photo = {this.state.modalArray[0]}
-            restName = {this.state.modalArray[1]}
-            address = {this.state.modalArray[2]}
-            hours = {this.state.modalArray[3]}
-            phone = {this.state.modalArray[4]}
-            rating = {this.state.modalArray[5]}
-            reviews = {this.state.modalArray[6]}
-
+                key = {this.state.restName}
+                photo = {this.state.modalArray[0]}
+                restName = {this.state.modalArray[1]}
+                address = {this.state.modalArray[2]}
+                hours = {this.state.modalArray[3]}
+                phone = {this.state.modalArray[4]}
+                rating = {this.state.modalArray[5]}
+                reviews = {this.state.modalArray[6]}
             />
             
         </Wrapper>

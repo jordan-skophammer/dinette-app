@@ -1,10 +1,13 @@
 .form-check {
     padding-left: 0;
 }
-
+/* We are re-using this element/styling in ballot.js, but the styling here takes over 
+(same name, but containing element). I need to comment-out the height, and it looks like 
+everything is okay ...but if that breaks things in search.js, we will re-assess)
+  */
 .results-card {
     padding: 30px;
-    height: 300px;
+    /* height: 300px; */
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -32,10 +35,16 @@
 .save {
     min-height: 40px;
     margin: auto;
+    width: 100%;
+}
+#search {
+    width: 100%;
+    margin: 0px !important;
 }
 
 #searchLocation {
     margin-top: 1.5%;
+    margin-bottom: 5px;
     width: 100%;
 }
 
@@ -43,6 +52,11 @@
     width: 100%;
     margin: auto;
 }
+
+/* .yellow-btn {
+    background: linear-gradient(70deg, #ff9100, #ffbb00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+} */
 
 .hidden{
     visibility: hidden;
