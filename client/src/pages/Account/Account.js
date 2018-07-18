@@ -9,7 +9,9 @@ class Account extends Component {
         return(
             <div>
                 <Wrapper>
-                    <NavBar />
+                    <NavBar
+                      logout={this.logout}
+                    />
                     <AccountInfo />
                 </Wrapper>
             </div>

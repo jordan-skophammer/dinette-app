@@ -1,11 +1,12 @@
 .results-card {
     background-color: #eb5c00;
     padding: 30px;
-    height: 300px;
+    /* height: 300px; */
     overflow-y: scroll;
     overflow-x: hidden;
     background: linear-gradient(70deg, #eb5c00, #e17f00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    /* visibility: hidden; */
 }
 .result-block {
     color: rgb(88, 86, 86);

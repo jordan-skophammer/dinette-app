@@ -41,9 +41,15 @@ class Search extends Component {
                     console.log("no results found")
                     this.setState({...this.state,results: ["No Results Found"]})
                 }
-                this.setState({visibility: "", results: res.data})
+                this.setState({visibility: ""})
 
             })
+    }
+
+    createFireBaseVoteSession(){
+        let voteObject = JSON.stringify(sessionStorage.getItem("restaurants"))
+        // API.makeVoteSession(sessionStorage.getItem("restaurants"))
+        API.makeVoteSession(voteObject)
     }
 
     
@@ -89,16 +95,16 @@ class Search extends Component {
         //if there's nothing in session storage yet
         } else {
             sessionStorage.setItem("restaurants", JSON.stringify(value))
-        }
+        }   
         console.log(sessionStorage)
     }
 
     render () {
         let results;
         if (this.state.results[0] === "No Results Found"){
-            console.log("No Results Render")
+            console.log(this.state.results,"************************")
             results = (
-                this.state.results.map(result=>(
+                this.state.results.map(result => (
                     <h3 className="text-center text-white">{result}</h3>
                 ))
             )
@@ -130,7 +136,7 @@ class Search extends Component {
                                     <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
                                 </div>
                                 <div className="col-sm-3">
-                                    <button className="btn btn-lg save text-white yellow" id="searchLocation" onClick={this.searchLocation}>Search</button>
+                                    <button className="btn btn-lg text-white yellow"  id="search" onClick={this.searchLocation}>Search</button>
                                 </div>
                             </div>
                         </form>
@@ -152,22 +158,21 @@ class Search extends Component {
                 <div className={"row " + this.state.visibility}>
                     <div className="col-sm-12 justify-content-center">
                         <a href="/ballot">
-                            <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
+                            <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
                         </a>
                     </div>
                 </div>
             </div>
 
             <Modal
-            
-            photo = {this.state.modalArray[0]}
-            restName = {this.state.modalArray[1]}
-            address = {this.state.modalArray[2]}
-            hours = {this.state.modalArray[3]}
-            phone = {this.state.modalArray[4]}
-            rating = {this.state.modalArray[5]}
-            reviews = {this.state.modalArray[6]}
-
+                key = {this.state.restName}
+                photo = {this.state.modalArray[0]}
+                restName = {this.state.modalArray[1]}
+                address = {this.state.modalArray[2]}
+                hours = {this.state.modalArray[3]}
+                phone = {this.state.modalArray[4]}
+                rating = {this.state.modalArray[5]}
+                reviews = {this.state.modalArray[6]}
             />
             
         </Wrapper>
