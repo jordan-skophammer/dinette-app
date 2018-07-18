@@ -145,7 +145,7 @@ class Search extends Component {
                 <br/>
                 <div className={"row " + this.state.visibility}>
 
-                    <div className="col-md-12 results-card orange">
+                    <div className="col-md-12 orange" id="search-results-card">
                             <h3 className="text-white text-center">Search Results</h3>
 
 
