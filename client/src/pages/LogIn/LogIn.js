@@ -40,6 +40,7 @@ class LogIn extends Component {
       axios
         .post(currentURL, userLogin)
         .then(response => {
+          console.log('----response from axios request----');
           console.log(response);
           if (!response.data.errmsg) {
             console.log('success')

@@ -59,11 +59,17 @@ router.post(
 );
 
 router.post('/logout', (req, res) => {
+  res.clearCookie('connect.sid'); // not sure if necessary
   req.session.destroy(err => res.redirect('/'))
 });
 
-router.get('/user', authenticationMiddleware, (req, res) => {
+router.get('/user/:id', authenticationMiddleware, (req, res) => {
   // let userName = req.params;
+  if (req.user) {
+    return res.json({ user: req.user })
+  } else {
+    return res.json({ user: null })
+  }
   res.redirect('/user');
 });
 

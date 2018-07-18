@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./passport');
+const seedDB = require('./seedDB');
 
 const morgan = require('morgan');
 const routes = require('./routes');
@@ -43,6 +44,7 @@ app.use(session({
 }));
 
 app.use(routes);
+// app.use(seedDB);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
