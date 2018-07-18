@@ -113,9 +113,7 @@ class Search extends Component {
                             </label>
                             <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
                         </div>
-
                     </div>
-
                 ))
             )
         }

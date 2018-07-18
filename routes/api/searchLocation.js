@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const axios = require ("axios")
 //************** DROP THE NEW PLACES KEY HERE ******************* */
-const placesKey = "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+const placesKey = "AIzaSyBsefQtQyAz_GgHERwuEkFClAWIl7eFUvs"
 
 const geolocateQueryString = "https://maps.googleapis.com/maps/api/geocode/json?address=" 
 const geolocateKey = "&key=AIzaSyCB5tndG-nx3Z8RR-fnmeyXrEgkTRhYqSs"
