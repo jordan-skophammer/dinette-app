@@ -14,6 +14,9 @@ const NavBar = props => (
         <a className="nav-link text-light" href="/LogIn">Login <span className="sr-only">(current)</span></a>
       </li>
       <li className="nav-item active">
+        <a className="nav-link text-light" href="#" onClick={props.logout}>Log Out <span className="sr-only">(current)</span></a>
+      </li>
+      <li className="nav-item active">
           <a className="nav-link text-light" href="/search">Search <span className="sr-only">(current)</span></a>
       </li>
       <li className="nav-item active">
