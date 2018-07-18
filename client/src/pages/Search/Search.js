@@ -46,6 +46,12 @@ class Search extends Component {
             })
     }
 
+    createFireBaseVoteSession(){
+        let voteObject = JSON.stringify(sessionStorage.getItem("restaurants"))
+        // API.makeVoteSession(sessionStorage.getItem("restaurants"))
+        API.makeVoteSession(voteObject)
+    }
+
     
 
     populateModal(photoRef, name, location, hours, phone, rating, review){
@@ -89,7 +95,7 @@ class Search extends Component {
         //if there's nothing in session storage yet
         } else {
             sessionStorage.setItem("restaurants", JSON.stringify(value))
-        }
+        }   
         console.log(sessionStorage)
     }
 
@@ -154,7 +160,7 @@ class Search extends Component {
                 <div className={"row " + this.state.visibility}>
                     <div className="col-sm-12 justify-content-center">
                         <a href="/ballot">
-                            <button className="btn btn-lg yellow text-white" id="saveRestaurants">Add to Group Vote</button>
+                            <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
                         </a>
                     </div>
                 </div>

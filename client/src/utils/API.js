@@ -11,16 +11,22 @@ export default {
         // Transforming the current url in order to query the public API locally 
         // (Express port 3001 changed to React port 3000 where the API exists).
         // Once deployed, it should reset to the domain name used.
-        console.log("Before ternary: ", currentURL)
-        currentURL = "http://localhost:3000" ? "http://localhost:3001" : window.location.origin
+
+        // currentURL = "http://localhost:3001" ? "http://localhost:3000" : window.location.origin
+
         // Preparing the terms for the API query
         console.log("After Ternary: ", currentURL)
         searchTerm = searchTerm.replace(/ /g, "+").toLowerCase()
         // Querying our public API
-        return axios.get(currentURL + "/api/restaurants/" + searchTerm)
+        return axios.get("/api/restaurants/" + searchTerm)
     },
     searchNearby: () => {
         return axios.get(currentURL + "/api/search")
+    },
+    makeVoteSession: (restaurantsArr)=>{
+        // currentURL = "http://localhost:3001" ? "http://localhost:3000" : window.location.origin
+        console.log("client route works")
+        return axios.post("/api/vote", JSON.stringify(restaurantsArr))
     }
 
 }
