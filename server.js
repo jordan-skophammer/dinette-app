@@ -44,7 +44,6 @@ app.use(session({
 }));
 
 app.use(routes);
-// app.use(seedDB);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
