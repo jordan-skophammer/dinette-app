@@ -26,7 +26,10 @@ export default {
     makeVoteSession: (restaurantsArr)=>{
         // currentURL = "http://localhost:3001" ? "http://localhost:3000" : window.location.origin
         console.log("client route works")
-        return axios.post("/api/vote", JSON.stringify(restaurantsArr))
+        return axios.post("/api/vote", restaurantsArr)
+    },
+    getVoteSession: (userName) => {
+        return axios.get("/api/vote/"+userName)
     }
 
 }

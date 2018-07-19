@@ -21,6 +21,7 @@ const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,t
 restaurantsArr = []
 
 router.get("/:location", function(req,res) {
+    restaurantsArr = []
     let location = req.params.location
     console.log("location in searchLocation.js: ", location)
 
@@ -29,17 +30,17 @@ router.get("/:location", function(req,res) {
         // console.log(data.data.results[0])
                 let lat = data.data.results[0].geometry.location.lat
                 let lng = data.data.results[0].geometry.location.lng
-                console.log("lat: ", lat, " lng: ", lng)
+                // console.log("lat: ", lat, " lng: ", lng)
                 let nearbyStringFull = nearbyQueryStringA
                 nearbyStringFull += lat
                 nearbyStringFull += ","
                 nearbyStringFull += lng
                 nearbyStringFull += nearbyQueryStringB
-                console.log(nearbyStringFull)
+                // console.log(nearbyStringFull)
                 axios.get(nearbyStringFull)
                     .then(function(data){
                         if (data.data.status !== "ZERO_RESULTS"){
-                            console.log(data.data.results)
+                            // console.log(data.data.results)
                             let noDetailsDataArr = []
                             noDetailsDataArr = data.data.results
                             getDetailsAddToArray(noDetailsDataArr, res)
@@ -64,10 +65,10 @@ function getDetailsAddToArray(array, res){
     let queryString = placesDetailsQueryStringA
     queryString += element.place_id
     queryString += placesDetailsQueryStringB
-    console.log("QUERY STRING",queryString)
+    // console.log("QUERY STRING",queryString)
     axios.get(queryString)
         .then(function(data){
-            console.log("data: ",data.data)
+            // console.log("data: ",data.data)
             if (rateLimitReached(data.data, element, array, res)){
             restaurantsArr.push(data.data)
             getDetailsAddToArray(array, res)

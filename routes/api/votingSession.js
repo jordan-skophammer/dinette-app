@@ -16,12 +16,38 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 router.post("/",function(req, res){
-    console.log("FIREBASE")
-    database.ref().set({
-        TEST: "Hello World!"
-    })
+    console.log("************MAKE VOTE SESSION************")
+    // console.log(req.body)
+    // let username = req.body("username")
+    console.log(req.body)
+    let username = req.body.username
+    let restaurantsArrayVar = JSON.parse(req.body.restaurantsArr)
+    console.log.restaurantsArrayVar
+    // database.ref('voteSessions/'+username).set({
+    //     isOpen: 1,
+    //     voteEntries: "",
+    //     restaurants: restaurantsArrayVar
+    // })
+    database.ref('voteSessions/'+username).set({
+        userName: username,
+        votes: [],
+        restaurants: restaurantsArrayVar
+      })
+    // database.ref().set({
+    //     whyfailing: "Why/"
+    // })
+    // .then(function(data){res.send("Congratulations!")})
 }
+
     
 )
+
+router.get("/:username", function(req, res){
+    console.log("********JOIN VOTE SESSION**********")
+    let username = req.params.username
+    database.ref('voteSessions/'+username).on("value", function(snapshot){
+        console.log(snapshot)
+    })
+})
 
 module.exports = router;
