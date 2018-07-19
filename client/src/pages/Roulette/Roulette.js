@@ -10,7 +10,7 @@ class Roulette extends Component {
         this.state = {
             roulettePick: {result:{
                             name: "name",
-                            address: "address"}},
+                            address_components: "address"}},
             value: "",
             visibility: "hiddenRoulette"
         };
@@ -57,9 +57,9 @@ class Roulette extends Component {
 
     render () {
 
-        // let rouletteResults = this.state.roulettePick
+        let roulettePick = this.state.roulettePick
         // let displayResults = rouletteResults.result
-        // console.log(rouletteResults)
+        console.log(roulettePick.result)
 
         return(
             <Wrapper>
@@ -82,15 +82,14 @@ class Roulette extends Component {
                     </div>
                     <br/>
                     <div className={"row " + this.state.visibility}>
-
                         <div className="col-md-12 pick-card orange">
                                 <h2 className="text-white text-center">Your Pick</h2>
                                 <br/>
                                 <div className="result-block">
                                     <div className="form-check">
                                         <label className="form-check-label" htmlFor="defaultCheck">
-                                            <h5>{this.state.roulettePick.result.name}</h5>
-                                            <p className="address">{this.state.roulettePick.result.address}</p>
+                                            <h5>{roulettePick.result.name}</h5>
+                                            <p className="address">{roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name}</p>
                                         </label> 
                                     </div>
                                 </div>
