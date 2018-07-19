@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Wrapper from "../../components/Wrapper"
 import LogInForm from "../../components/LogInForm";
 import NavBar from "../../components/NavBar";
@@ -12,7 +12,7 @@ class LogIn extends Component {
     this.state = {
       loginUserName: '',
       loginPassword: '',
-      // redirectTo: null,
+      redirectTo: null,
     };
     this.handleSubmit = this.handleSubmit.bind();
     this.handleChange = this.handleChange.bind();
@@ -21,7 +21,7 @@ class LogIn extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    console.log(this.state);
+    // console.log(this.state);
     
   }
 
@@ -44,20 +44,31 @@ class LogIn extends Component {
           console.log(response);
           if (!response.data.errmsg) {
             console.log('success')
-            // this.setState({
-            //   redirectTo: `/user/${this.state.userName}`
-            // });
+            this.setState({
+              redirectTo: `/`
+            });
           } else {
             console.log('error logging in')
           }
+        }).catch(error => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);            
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
         })
     }
   }
 
   render() {
-    // if (this.state.redirectTo) {
-    //   return <Redirect to={{ pathname: this.state.redirectTo }} />
-    // }
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
+    }
     return (
       <div>
         <Wrapper>

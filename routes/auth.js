@@ -5,14 +5,6 @@ const router = require("express").Router();
 
 const User = require('../models/user');
 
-function authenticationMiddleware(req, res, next) {
-  console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport.user)}`);
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  // res.redirect('/login');
-}
-
 router.post('/signup', (req, res) => {
   const {
     userName, password, firstName, lastName, zipcode,
@@ -45,9 +37,9 @@ router.post('/signup', (req, res) => {
 
 router.post(
   '/login',
-  (req, res, next) => {
-    next();
-  },
+  // (req, res, next) => {
+  //   next();
+  // },
   passport.authenticate(
     'local',
     {
@@ -56,21 +48,15 @@ router.post(
       failureFlash: true,
     },
   ),
+  (req, res) => {
+    console.log('POST to /login')
+    res.send(res);
+  }
 );
 
 router.post('/logout', (req, res) => {
   res.clearCookie('connect.sid'); // not sure if necessary
   req.session.destroy(err => res.redirect('/'))
-});
-
-router.get('/user/:id', authenticationMiddleware, (req, res) => {
-  // let userName = req.params;
-  if (req.user) {
-    return res.json({ user: req.user })
-  } else {
-    return res.json({ user: null })
-  }
-  res.redirect('/user');
 });
 
 module.exports = router;

@@ -55,7 +55,7 @@ router.get("/:location", function(req,res) {
         }
     )
 
-console.log("routes > api > searchLocation is executing")
+// console.log("routes > api > searchLocation is executing")
 
 module.exports = router;
 
