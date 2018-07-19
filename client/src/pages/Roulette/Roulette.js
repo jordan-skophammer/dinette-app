@@ -14,7 +14,7 @@ class Roulette extends Component {
                             address_components: "address"}},
             value: "",
             results: {},
-            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
+            modalArray: [[1,2], "name", "address", [1,2], "phone", "rating", [1,2]],
             visibility: "hiddenRoulette"
         };
         this.handleChange = this.handleChange.bind(this);
@@ -58,17 +58,28 @@ class Roulette extends Component {
         console.log(pick)
     }
 
-    populateModal(photoRef, name, location, hours, phone, rating, review){
-        let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+
+    populateModal(photos, name, location, hours, phone, rating, review){
+        let photosArray = []
+        if(!photos){
+            photosArray = [1]
+        } else {
+            photos.forEach(photo => {
+                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photo.photo_reference + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+                photosArray.push(url)
+            })
+        }
+        // let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
         let reviewsArray = []
         review.forEach(revObj => {
             let individualReview = []
             individualReview.push(revObj.author_name, revObj.author_url, revObj.rating, revObj.relative_time_description, revObj.text)
             reviewsArray.push(individualReview)
         })
-        let modalInfo = [photo, name, location, hours, phone, rating, reviewsArray];
-        console.log(modalInfo)
+        let modalInfo = [photosArray, name, location, hours, phone, rating, reviewsArray];
+        // console.log(modalInfo)
         this.setState({modalArray: modalInfo})
+        console.log(this.state.modalArray[0[0]])
     }
 
     render () {
@@ -84,7 +95,7 @@ class Roulette extends Component {
         } else {
             displayResult = (
                 <div>
-                    <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(roulettePick.result.photos[0].photo_reference, roulettePick.result.name, roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name, roulettePick.result.opening_hours.weekday_text, roulettePick.result.formatted_phone_number, roulettePick.result.rating, roulettePick.result.reviews)}>{roulettePick.result.name}</h5>
+                    <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(roulettePick.result.photos, roulettePick.result.name, roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name, roulettePick.result.opening_hours.weekday_text, roulettePick.result.formatted_phone_number, roulettePick.result.rating, roulettePick.result.reviews)}>{roulettePick.result.name}</h5>
                     <p className="address">{roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name}</p>
                 </div>
             )
@@ -126,7 +137,8 @@ class Roulette extends Component {
                     </div>
                 <Modal
                     key = {this.state.restName}
-                    photo = {this.state.modalArray[0]}
+                    photos = {this.state.modalArray[0]}
+                    firstPhoto = {this.state.modalArray[0][0]}
                     restName = {this.state.modalArray[1]}
                     address = {this.state.modalArray[2]}
                     hours = {this.state.modalArray[3]}
