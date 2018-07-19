@@ -13,6 +13,7 @@ class Roulette extends Component {
                             name: "name",
                             address_components: "address"}},
             value: "",
+            results: {},
             modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
             visibility: "hiddenRoulette"
         };
@@ -73,8 +74,21 @@ class Roulette extends Component {
     render () {
 
         let roulettePick = this.state.roulettePick
-        // let displayResults = rouletteResults.result
-        console.log(this.state.modalArray)
+        let displayResult;
+        console.log(this.state.results)
+        
+        if (this.state.results[0] === "No Results Found") {
+            displayResult = (
+                <h5 className="text-center">No Results Found</h5>
+            )
+        } else {
+            displayResult = (
+                <div>
+                    <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(roulettePick.result.photos[0].photo_reference, roulettePick.result.name, roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name, roulettePick.result.opening_hours.weekday_text, roulettePick.result.formatted_phone_number, roulettePick.result.rating, roulettePick.result.reviews)}>{roulettePick.result.name}</h5>
+                    <p className="address">{roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name}</p>
+                </div>
+            )
+        }
 
         return(
             <Wrapper>
@@ -103,8 +117,7 @@ class Roulette extends Component {
                                 <div className="result-block">
                                     <div className="form-check">
                                         <label className="form-check-label" htmlFor="defaultCheck">
-                                        <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(roulettePick.result.photos[0].photo_reference, roulettePick.result.name, roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name, roulettePick.result.opening_hours.weekday_text, roulettePick.result.formatted_phone_number, roulettePick.result.rating, roulettePick.result.reviews)}>{roulettePick.result.name}</h5>
-                                            <p className="address">{roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name}</p>
+                                        {displayResult}
                                         </label> 
                                     </div>
                                 </div>
