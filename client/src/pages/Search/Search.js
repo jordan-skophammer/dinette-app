@@ -47,7 +47,13 @@ class Search extends Component {
     }
 
     createFireBaseVoteSession(){
-        let voteObject = JSON.stringify(sessionStorage.getItem("restaurants"))
+        let restaurantsArray = sessionStorage.getItem("restaurants")
+        console.log(restaurantsArray, ' is restaurantsArray')
+        let voteObject = {
+            username: "dummy owner",
+            restaurantsArr: restaurantsArray
+        }
+            
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         // API.makeVoteSession(voteObject)
     }

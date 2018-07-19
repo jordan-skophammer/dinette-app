@@ -21,6 +21,7 @@ const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,t
 let restaurantsArr = []
 
 router.get("/:location", function(req,res) {
+    restaurantsArr = []
     // getting the location search from the API route
     let location = req.params.location
     // first API call: the location + API key (geocode: provides the GPS coordinates of a location)
@@ -38,7 +39,6 @@ router.get("/:location", function(req,res) {
                 nearbyStringFull += nearbyQueryStringB
                 console.log("Full URL of the second API query: ", nearbyStringFull)
                 // resetting the restaurantArr 
-                restaurantsArr = []
                 axios.get(nearbyStringFull)
                     .then(function(data){
                         if (data.data.status !== "ZERO_RESULTS"){
@@ -72,11 +72,12 @@ function getDetailsAddToArray(array, res){
     let queryString = placesDetailsQueryStringA
     queryString += element.place_id
     queryString += placesDetailsQueryStringB
-    console.log("QUERY STRING",queryString)
+    // console.log("QUERY STRING",queryString)
     axios.get(queryString)
     .then(function(data){
         console.log("data pushed to restaurantsArr:\n",data.data, "\n")
         if (rateLimitReached(data.data, element, array, res)){
+
             restaurantsArr.push(data.data)
             // function is called recursively until length reaches 0, at which point data is sent
             getDetailsAddToArray(array, res)
