@@ -11,7 +11,7 @@ class Search extends Component {
         this.state = {
             results: [],
             value: "",
-            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
+            modalArray: [[1,2], "name", "address", [1,2], "phone", "rating", [1,2]],
             visibility: "hidden"
         };
         this.handleChange = this.handleChange.bind(this);
@@ -22,7 +22,7 @@ class Search extends Component {
 
     handleChange(event){
         this.setState({value: event.target.value})
-        console.log(this.state.value)
+        // console.log(this.state.value)
     }
     
     handleSubmit(event){
@@ -34,7 +34,7 @@ class Search extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                console.log(res)
+                // console.log(res)
                 if (res.data !== "No Results Found"){
                     this.setState({...this.state,results: res.data})
                 } else {
@@ -55,26 +55,34 @@ class Search extends Component {
         }
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
-        API.makeVoteSession(voteObject)
+        // API.makeVoteSession(voteObject)
     }
 
     
 
-    populateModal(photoRef, name, location, hours, phone, rating, review){
-        let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+    populateModal(photos, name, location, hours, phone, rating, review){
+        let photosArray = []
+        if(!photos){
+            photosArray = [1]
+        } else {
+            photos.forEach(photo => {
+                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photo.photo_reference + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+                photosArray.push(url)
+            })
+        }
+        // let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
         let reviewsArray = []
         review.forEach(revObj => {
             let individualReview = []
             individualReview.push(revObj.author_name, revObj.author_url, revObj.rating, revObj.relative_time_description, revObj.text)
             reviewsArray.push(individualReview)
         })
-        let modalInfo = [photo, name, location, hours, phone, rating, reviewsArray];
-        console.log(modalInfo)
+        let modalInfo = [photosArray, name, location, hours, phone, rating, reviewsArray];
+        // console.log(modalInfo)
         this.setState({modalArray: modalInfo})
+        console.log(this.state.modalArray[0[0]])
     }
-    // componentDidMount() {
-    //     this.search()
-    // }
+    
 
 
     addToSessionStorage = (value) => {
@@ -99,7 +107,7 @@ class Search extends Component {
             }
             sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's nothing in session storage yet
-        } else {
+        } else if (!sessionStorage.getItem("restaurants")){
             sessionStorage.setItem("restaurants", JSON.stringify(value))
         }   
         console.log(sessionStorage)
@@ -117,17 +125,15 @@ class Search extends Component {
         } else {
             results = (
                 this.state.results.map(restaurant => (
-                    <div key = {restaurant.result.photos[0].photo_reference} className="result-block">
+                    <div key = {restaurant.result.name} className="result-block">
                         <div className="form-check">
                             <label className="form-check-label">
-                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos[0].photo_reference, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
+                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
                             <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
                         </div>
-
                     </div>
-
                 ))
             )
         }
@@ -153,7 +159,7 @@ class Search extends Component {
                 <br/>
                 <div className={"row " + this.state.visibility}>
 
-                    <div className="col-md-12 results-card orange">
+                    <div className="col-md-12 orange" id="search-results-card">
                             <h3 className="text-white text-center">Search Results</h3>
 
 
@@ -174,7 +180,8 @@ class Search extends Component {
 
             <Modal
                 key = {this.state.restName}
-                photo = {this.state.modalArray[0]}
+                photos = {this.state.modalArray[0]}
+                firstPhoto = {this.state.modalArray[0][0]}
                 restName = {this.state.modalArray[1]}
                 address = {this.state.modalArray[2]}
                 hours = {this.state.modalArray[3]}
