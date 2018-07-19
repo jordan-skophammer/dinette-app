@@ -27,6 +27,5 @@ export default {
         // currentURL = "http://localhost:3001" ? "http://localhost:3000" : window.location.origin
         console.log("client route works")
         return axios.post("/api/vote", JSON.stringify(restaurantsArr))
-    }
-
+    },
 }
