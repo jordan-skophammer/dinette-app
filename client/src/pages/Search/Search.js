@@ -49,7 +49,7 @@ class Search extends Component {
     createFireBaseVoteSession(){
         let voteObject = JSON.stringify(sessionStorage.getItem("restaurants"))
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
-        API.makeVoteSession(voteObject)
+        // API.makeVoteSession(voteObject)
     }
 
     
