@@ -17,7 +17,7 @@
 
 .ordered_items {
     margin-left: 3%;
-    padding: 2% 2% 3%;
+    /* padding: 2% 2% 3%; */
 }
 .result-block:hover {
     background-color: #b5cf1e;

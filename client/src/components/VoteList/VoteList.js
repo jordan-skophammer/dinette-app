@@ -4,7 +4,7 @@ import "./VoteList.css"
 
 const VoteList = ({ children }) => {
     return (
-        <div className="list-overflow-container results-card">
+        <div>
             <ul className="list-group">
                 {children}
             </ul>
