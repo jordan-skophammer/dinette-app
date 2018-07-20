@@ -55,7 +55,7 @@ class Search extends Component {
         }
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
-        // API.makeVoteSession(voteObject)
+        API.makeVoteSession(voteObject)
     }
 
     
