@@ -3,29 +3,11 @@ const axios = require ("axios");
 
 const passport = require('../../passport/index');
 
-function checkUser(req, res, next) {
+
+router.get('/id', (req, res) => {
+  console.log('checking user and sending to client')
   console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport.user)}`);
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  // res.redirect('/login');
-}
-
-// router.get('/:id', (req, res) => {
-
-// });
-
-router.get('/:id', checkUser, (req, res) => {
-  let userName = req.params;
-  if (req.user) {
-    return res.json({ user: req.user })
-  } else {
-    return res.json({ user: null })
-  }
-  res.redirect('/user');
+  res.send(req.session.passport.user);
 });
-
-
-// console.log("routes > user is executing")
 
 module.exports = router;
