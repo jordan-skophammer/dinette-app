@@ -3,7 +3,7 @@ import React from "react";
 import "./VoteResults.css"
 
 const VoteResults = props => (
-    <div className="list-overflow-container results-card">
+    <div>
         <div>
         {props.children}                 
         </div>

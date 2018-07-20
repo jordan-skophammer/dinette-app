@@ -44,10 +44,8 @@ router.get("/:location", function(req,res) {
                         if (data.data.status !== "ZERO_RESULTS"){
                             console.log(data.data.results)
                             // Restaurants nearby a location are stored in an array 
-                            // could be: let noDetailsDataArr = noDetailsDataArr = data.data.results
-                            let noDetailsDataArr = []
-                            noDetailsDataArr = data.data.results
-                            // run the function to get details (aka: ratings, photo, type, etc.)
+                            let noDetailsDataArr = data.data.results
+                            // run the function to get details for each element of that array (aka: ratings, photo, type, etc.)
                             getDetailsAddToArray(noDetailsDataArr, res)
                         } else {
                             let failMessage = "No Results Found"
@@ -59,8 +57,6 @@ router.get("/:location", function(req,res) {
             })
         }
     )
-
-// console.log("routes > api > searchLocation is executing")
 
 module.exports = router;
 
