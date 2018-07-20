@@ -20,7 +20,7 @@ const NavBar = props => (
           <a className="nav-link text-light" href="/search">Search <span className="sr-only">(current)</span></a>
       </li>
       <li className="nav-item active">
-        <a className="nav-link text-light" href="/ballot">Vote <span className="sr-only">(current)</span></a>
+        <a className="nav-link text-light" href="/joinvote">Vote <span className="sr-only">(current)</span></a>
       </li>
       <li className="nav-item active">
         <a className="nav-link text-light" href="/roulette">Roulette <span className="sr-only">(current)</span></a>

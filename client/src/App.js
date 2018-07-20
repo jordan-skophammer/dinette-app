@@ -9,6 +9,7 @@ import User from "./pages/User";
 import SignUp from "./pages/SignUp";
 import Roulette from "./pages/Roulette";
 import Account from "./pages/Account";
+import JoinVote from "./pages/JoinVote";
 import './App.css';
 // import logo from './logo.svg';
 const axios = require("axios");
@@ -83,6 +84,7 @@ class App extends Component {
           <Route path="/SignUp" component={SignUp} />
           <Route path="/Roulette" component={Roulette} />
           <Route path="/Account" component={Account} />
+          <Route path="/JoinVote" component={JoinVote}/>
         </div>
       </Router>
     )

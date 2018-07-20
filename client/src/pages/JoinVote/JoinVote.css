@@ -1,0 +1,89 @@
+.white {
+    background-color: white;
+    /* padding: 20px; */
+}
+
+.form-check-input {
+    float: right;
+    position: relative;
+}
+
+.form-check {
+    padding-left: 0;
+}
+
+.pick-card {
+    background-color: #eb5c00;
+    padding: 30px;
+    max-height: 300px;
+    overflow: hidden;
+    background: linear-gradient(70deg, #eb5c00, #e17f00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.search_field {
+    background-color: #eb5c00;
+    height: 80px;
+    min-height: 60px;
+    background: linear-gradient(70deg, #eb5c00, #e17f00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 3%;
+    padding: 1%;
+
+}
+.result-block {
+    color: rgb(88, 86, 86);
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+.address {
+    margin-bottom: 0;
+}
+
+/* .wrapper{
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(
+        rgba(61, 58, 58, 0.45),
+        rgba(61, 58, 58, 0.45)
+    );
+    background-image: url("./restaurant.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} */
+
+.yellow-grad {
+    background: linear-gradient(70deg, #ffba00, #ffde00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.yellow-grad-save {
+    min-height: 40px;
+    float: right;
+    margin-right: 2%;
+    width: 80%;
+    min-width: 100px;
+    background: linear-gradient(70deg, #ffba00, #ffde00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.blankSpaceInput {
+    background-color: white;
+    height: 100%;
+    width: 80%;
+    float: left;
+}
+.aPlaceForButton {
+    float: right;
+    height: 100%;
+    margin-left: 1%;
+    width: 19%;
+}
+
+.hiddenRoulette{
+    visibility: hidden;
+}
