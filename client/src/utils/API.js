@@ -28,4 +28,8 @@ export default {
         console.log("client route works")
         return axios.post("/api/vote", JSON.stringify(restaurantsArr))
     },
+    // getUser: () => {
+    //   console.log("checking user from client side");
+    //   axios.post('/user/id');
+    // }
 }
