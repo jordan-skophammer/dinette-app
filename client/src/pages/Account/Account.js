@@ -8,7 +8,7 @@ const Account = props => {
     return(
         <div>
             <Wrapper>
-                {console.log(props)}
+                {/* {console.log(props)} */}
                 <div className="row">
                     <div className="col-md-6">
                         <AccountInfo 
