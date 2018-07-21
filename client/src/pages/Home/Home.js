@@ -9,6 +9,7 @@ class Home extends Component {
             <br/>
             <div className="home">
                 <h1 className="text-center title">Dinette</h1>
+              {/* <h1>{this.props.user.firstName}</h1> */}
                 
                 <div className="row home-btn justify-content-center">
                     <button className="btn btn-home btn-lg green text-white" onClick={() => window.location.href='/search'}>Search Restaurants</button>

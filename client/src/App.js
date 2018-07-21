@@ -36,7 +36,6 @@ class App extends PureComponent {
   
   componentDidMount() {
     axios.get('/user/id').then(response => {
-      // console.log(`response data: ${response.data}`)
       if (response.data && this.state.loggedIn === false) {
         console.log('THERE IS A USER')
         this.setState({
@@ -72,7 +71,6 @@ class App extends PureComponent {
     event.preventDefault()
     console.log('logging out')
     axios.post('/auth/logout').then(response => {
-      console.log(response.data)
       if (response.status === 200) {
         this.setState({
           loggedIn: false,
@@ -87,13 +85,14 @@ class App extends PureComponent {
       <div>
       <NavBar 
         loggedIn={this.state.loggedIn}
+        logout={this.logout}
       />
       <Router>
         <div>
           <Route exact path="/" render={ () => <Home loggedIn={this.state.loggedIn} user={this.state.user} /> }  />
           <Route path="/Ballot" render={ () => <Ballot loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/LogIn" component={LogIn} />
-          <Route path="/Search" component={Search} />
+          <Route path="/Search" render={ () => <Search loggedIn={this.state.loggedIn} user={this.state.user} />} />
           <Route path="/User" component={User} />
           <Route path="/SignUp" component={SignUp} />
           <Route path="/Roulette" component={Roulette} />
