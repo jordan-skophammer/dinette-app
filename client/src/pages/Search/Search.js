@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Search.css"
 import API from "../../utils/API"
-import NavBar from "../../components/NavBar"
 import Wrapper from "../../components/Wrapper"
 import Modal from "../../components/Modal"
 
@@ -17,7 +16,8 @@ class Search extends Component {
             value: "",
             modalArray: [[1,2], "name", "address", [1,2], "phone", "rating", [1,2]],
             visibility: "hidden",
-            rouletteVisable: "hidden"
+            rouletteVisable: "hidden",
+            loading: "hidden"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,9 +30,14 @@ class Search extends Component {
         this.setState({value: event.target.value})
         // console.log(this.state.value)
     }
+
+    controlSpinner(){
+
+    }
     
     handleSubmit(event){
         // console.log("Data was submitted: ", this.state.value);
+        this.setState({loading: "visible", visibility:"hidden"})
         event.preventDefault();
         API.getRestaurants(this.state.value)
             .then(res => {
@@ -47,7 +52,7 @@ class Search extends Component {
                     console.log("no results found")
                     this.setState({...this.state,results: ["No Results Found"]})
                 }
-                this.setState({visibility: ""})
+                this.setState({visibility: "", loading: "hidden"})
 
             })
     }
@@ -120,7 +125,8 @@ class Search extends Component {
 
 
     addToSessionStorage = (value) => {
-       sessionStorage.setItem("voted", []) 
+        console.log("What we are adding to Session Storage: ", value, " (should be a JSON object, currently, it is: ", typeof value,")")
+        sessionStorage.setItem("voted", []) 
         let savedArray = []
         let storage = JSON.parse(sessionStorage.getItem("restaurants"))
 
@@ -167,10 +173,13 @@ class Search extends Component {
                     <div key = {restaurant.result.name} className="result-block">
                         <div className="form-check">
                             <label className="form-check-label">
-                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
+                                <h5 className="restName" href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>
+                                {restaurant.result.name}
+                                </h5>
+                                <p className="details">details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
+                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} id="defaultCheck"></input>
                         </div>
                     </div>
                 ))
@@ -185,7 +194,6 @@ class Search extends Component {
         }
         return(
         <Wrapper>
-            <NavBar/>
             <br/>
             <div className="container">
                 <div className="row">
@@ -204,6 +212,11 @@ class Search extends Component {
                     </div>
                 </div>
                 <br/>
+                {/* <iframe src="https://giphy.com/embed/3o7bu3XilJ5BOiSGic" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/youtube-loading-gif-3o7bu3XilJ5BOiSGic">via GIPHY</a></p> */}
+                <div className="row justify-content-center spinner-div">
+                    <img className={this.state.loading} src="../../spinner.svg" alt=""/>
+                </div>
+
                 <div className={"row " + this.state.visibility}>
 
                     <div className="col-md-12 orange" id="search-results-card">
@@ -237,7 +250,6 @@ class Search extends Component {
             </div>
 
             <Modal
-                key = {this.state.restName}
                 photos = {this.state.modalArray[0]}
                 firstPhoto = {this.state.modalArray[0][0]}
                 restName = {this.state.modalArray[1]}
