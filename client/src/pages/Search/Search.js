@@ -182,6 +182,9 @@ class Search extends Component {
         console.log(this.state.votingArray)
 
     }
+    render() {
+        // let blockClass = this.state.white ? "result-block" : "green-result-block";
+
 
     render () {
         let roulettePick = this.state.roulettePick
@@ -239,12 +242,11 @@ class Search extends Component {
                                     <button className="btn btn-lg text-white yellow"  id="search" onClick={this.handleSubmit}>Search</button>
                                     <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
                                 </div>
-                                </div>
                             </form>
                         </div>
                     </div>
 
-                
+                </div>
                 <br/>
                 {/* <iframe src="https://giphy.com/embed/3o7bu3XilJ5BOiSGic" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/youtube-loading-gif-3o7bu3XilJ5BOiSGic">via GIPHY</a></p> */}
                 <div className="row justify-content-center spinner-div">
@@ -308,8 +310,7 @@ class Search extends Component {
                         </a>
                     </div>
                 </div>
-
-           
+            </div>
 
             <Modal
                 photos = {this.state.modalArray[0]}
@@ -321,7 +322,7 @@ class Search extends Component {
                 rating = {this.state.modalArray[5]}
                 reviews = {this.state.modalArray[6]}
             />
-            </div>
+            
         </Wrapper>
 
 
