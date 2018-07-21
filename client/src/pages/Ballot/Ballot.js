@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RestaurantOption from "../../components/RestaurantOption";
+import RankedRestaurants from "../../components/RankedRestaurants";
 import VoteList from "../../components/VoteList";
 import Wrapper from "../../components/Wrapper";
 import "./Ballot.css"
@@ -16,8 +17,7 @@ class Ballot extends Component {
         super(props);
         this.state = {
             restaurants: [],
-            results: [],
-            otherArray: [], 
+            results: []
         }
     }
     // handleResult(event) {
@@ -30,7 +30,7 @@ class Ballot extends Component {
 
     loadSessionStorage = () => {
         let restaurantsString = sessionStorage.getItem("restaurants")
-        var restaurants = JSON.parse(restaurantsString)
+        let restaurants = JSON.parse(restaurantsString)
         let resultsString = sessionStorage.getItem("results")
         let results
         if (resultsString === null) {
@@ -91,24 +91,17 @@ class Ballot extends Component {
                     <br />
                     <div className="container list-overflow-container results-card">
                         {/* relocation starts here */}
-
                         {this.state.results && this.state.results.length ? (
                                 <ol type="1">
                                     <VoteResults>
-                                        {/* {this.state.results.map(result => (
-                                            <li className="ordered_items" key={result.id}>
-                                                {result} 
-                                                <i className="far fa-check-square" onClick={()=>this.removeFromResults(result)}></i>
-                                            </li>
-                                        ))} */}
 
                                     {this.state.results.map(result => (
-                                        <RestaurantOption key={result.id}>
+                                        <RankedRestaurants key={result.id}>
                                             <li className="ordered_items">
-                                            {result}
+                                            {result.name}
                                             <i className="far fa-check-square form-check-input" onClick={() => this.removeFromResults(result)} value={result}></i>
                                             </li>
-                                        </RestaurantOption>
+                                        </RankedRestaurants>
                                     ))}
                                     <br />
                                         <div className="container horizontal_align">
@@ -122,14 +115,12 @@ class Ballot extends Component {
                             ) : (
                                     <div className="row"></div>
                                 )}
-
-
                         {/* relocation ends here */}
                         { this.state.restaurants ? (
                             <VoteList>
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
-                                        {restaurant}
+                                        {restaurant.name}
 
                                         <i className="far fa-square form-check-input" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></i>
                                         
