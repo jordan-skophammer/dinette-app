@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../../components/Wrapper"
-import NavBar from "../../components/NavBar";
 import SignUpForm from "../../components/SignUpForm"
 
 class SignUp extends Component {
@@ -70,7 +69,6 @@ class SignUp extends Component {
     return (
       <div>
         <Wrapper>
-          <NavBar />
           <SignUpForm
             handleChange={this.handleChange}
             submitClicked={this.handleSubmit}

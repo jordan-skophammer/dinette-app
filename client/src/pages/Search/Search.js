@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Search.css"
 import API from "../../utils/API"
-import NavBar from "../../components/NavBar"
 import Wrapper from "../../components/Wrapper"
 import Modal from "../../components/Modal"
 
@@ -9,23 +8,56 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            rouletteResults: [],
+            roulettePick: {result:{
+                name: "name",
+                address_components: "address"}},
             results: [],
             value: "",
-            modalArray: ["photo", "name", "address", [1,2], "phone", "rating", [1,2]],
-            visibility: "hidden"
+            modalArray: [[1,2], "name", "address", [1,2], "phone", "rating", [1,2]],
+            visibility: "hidden",
+            rouletteVisable: "hidden",
+            loading: "hidden"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRoulette = this.handleRoulette.bind(this);
     }
 
     
 
     handleChange(event){
         this.setState({value: event.target.value})
-        console.log(this.state.value)
+        // console.log(this.state.value)
+    }
+
+    controlSpinner(){
+
     }
     
     handleSubmit(event){
+        // console.log("Data was submitted: ", this.state.value);
+        this.setState({loading: "visible", visibility:"hidden"})
+        event.preventDefault();
+        API.getRestaurants(this.state.value)
+            .then(res => {
+                // console.log(res.statusText)
+                if(res.status !== 200) {
+                    throw new Error(res.statusText)
+                }
+                // console.log(res)
+                if (res.data !== "No Results Found"){
+                    this.setState({...this.state,results: res.data})
+                } else {
+                    console.log("no results found")
+                    this.setState({...this.state,results: ["No Results Found"]})
+                }
+                this.setState({visibility: "", loading: "hidden"})
+
+            })
+    }
+
+    handleRoulette(event){
         // console.log("Data was submitted: ", this.state.value);
         event.preventDefault();
         API.getRestaurants(this.state.value)
@@ -34,16 +66,23 @@ class Search extends Component {
                 if(res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                console.log(res)
+                // console.log(res)
                 if (res.data !== "No Results Found"){
-                    this.setState({...this.state,results: res.data})
+                    this.setState({...this.state,r: res.data})
                 } else {
                     console.log("no results found")
                     this.setState({...this.state,results: ["No Results Found"]})
                 }
-                this.setState({visibility: ""})
+                this.randomPick(res.data)
 
             })
+    }
+
+    randomPick = (data) => {
+        console.log("roulette picked")
+        let pick = data[Math.floor(Math.random()*data.length)]
+        this.setState({roulettePick: pick, rouletteVisable: ""})
+        console.log(pick)
     }
 
     createFireBaseVoteSession(){
@@ -61,25 +100,34 @@ class Search extends Component {
 
     
 
-    populateModal(photoRef, name, location, hours, phone, rating, review){
-        let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+    populateModal(photos, name, location, hours, phone, rating, review){
+        let photosArray = []
+        if(!photos){
+            photosArray = [1]
+        } else {
+            photos.forEach(photo => {
+                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photo.photo_reference + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+                photosArray.push(url)
+            })
+        }
+        // let photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photoRef + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
         let reviewsArray = []
         review.forEach(revObj => {
             let individualReview = []
             individualReview.push(revObj.author_name, revObj.author_url, revObj.rating, revObj.relative_time_description, revObj.text)
             reviewsArray.push(individualReview)
         })
-        let modalInfo = [photo, name, location, hours, phone, rating, reviewsArray];
-        console.log(modalInfo)
+        let modalInfo = [photosArray, name, location, hours, phone, rating, reviewsArray];
+        // console.log(modalInfo)
         this.setState({modalArray: modalInfo})
+        console.log(this.state.modalArray[0[0]])
     }
-    // componentDidMount() {
-    //     this.search()
-    // }
+    
 
 
     addToSessionStorage = (value) => {
-       sessionStorage.setItem("voted", []) 
+        console.log("What we are adding to Session Storage: ", value, " (should be a JSON object, currently, it is: ", typeof value,")")
+        sessionStorage.setItem("voted", []) 
         let savedArray = []
         let storage = JSON.parse(sessionStorage.getItem("restaurants"))
 
@@ -100,41 +148,53 @@ class Search extends Component {
             }
             sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's nothing in session storage yet
-        } else {
+        } else if (!sessionStorage.getItem("restaurants")){
             sessionStorage.setItem("restaurants", JSON.stringify(value))
         }   
         console.log(sessionStorage)
     }
 
     render () {
+        let roulettePick = this.state.roulettePick
         let results;
-        if (this.state.results[0] === "No Results Found"){
+        let displayRoulette
+        if (this.state.results[0] === "No Results Found" ){
             console.log(this.state.results,"************************")
             results = (
                 this.state.results.map(result => (
                     <h3 className="text-center text-white">{result}</h3>
                 ))
             )
+            displayRoulette = (
+                <h5 className="text-center">No Results Found</h5>
+            )
         } else {
             results = (
                 this.state.results.map(restaurant => (
-                    <div key = {restaurant.result.photos[0].photo_reference} className="result-block">
+                    <div key = {restaurant.result.name} className="result-block">
                         <div className="form-check">
                             <label className="form-check-label">
-                                <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos[0].photo_reference, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
+                                <h5 className="restName" href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>
+                                {restaurant.result.name}
+                                </h5>
+                                <p className="details">details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
+                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} id="defaultCheck"></input>
                         </div>
-
                     </div>
-
                 ))
+            )
+
+            displayRoulette = (
+                <div>
+                    <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(roulettePick.result.photos, roulettePick.result.name, roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name, roulettePick.result.opening_hours.weekday_text, roulettePick.result.formatted_phone_number, roulettePick.result.rating, roulettePick.result.reviews)}>{roulettePick.result.name}</h5>
+                    <p className="address">{roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name}</p>
+                </div>
             )
         }
         return(
         <Wrapper>
-            <NavBar/>
             <br/>
             <div className="container">
                 <div className="row">
@@ -145,24 +205,41 @@ class Search extends Component {
                                     <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
                                 </div>
                                 <div className="col-sm-3">
-                                    <button className="btn btn-lg text-white yellow"  id="search" onClick={this.searchLocation}>Search</button>
+                                    <button className="btn btn-lg text-white yellow"  id="search" onClick={this.handleSubmit}>Search</button>
+                                    <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <br/>
+                {/* <iframe src="https://giphy.com/embed/3o7bu3XilJ5BOiSGic" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/youtube-loading-gif-3o7bu3XilJ5BOiSGic">via GIPHY</a></p> */}
+                <div className="row justify-content-center spinner-div">
+                    <img className={this.state.loading} src="../../spinner.svg" alt=""/>
+                </div>
+
                 <div className={"row " + this.state.visibility}>
 
-                    <div className="col-md-12 results-card orange">
-                            <h3 className="text-white text-center">Search Results</h3>
-
-
-                            <br/>                                
-                                {results}
-
+                    <div className="col-md-12 orange" id="search-results-card">
+                        <h3 className="text-white text-center">Search Results</h3>
+                        <br/>                               
+                        {results}
+                        {displayRoulette}
                     </div>
                 </div>
+                <div className={"row " + this.state.rouletteVisable}>
+                    <div className="col-md-12 pick-card orange">
+                            <h2 className="text-white text-center">Your Pick</h2>
+                            <br/>
+                            <div className="result-block">
+                                <div className="form-check">
+                                    <label className="form-check-label" htmlFor="defaultCheck">
+                                    {displayRoulette}
+                                    </label> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <br/>
                 <div className={"row " + this.state.visibility}>
                     <div className="col-sm-12 justify-content-center">
@@ -174,8 +251,8 @@ class Search extends Component {
             </div>
 
             <Modal
-                key = {this.state.restName}
-                photo = {this.state.modalArray[0]}
+                photos = {this.state.modalArray[0]}
+                firstPhoto = {this.state.modalArray[0][0]}
                 restName = {this.state.modalArray[1]}
                 address = {this.state.modalArray[2]}
                 hours = {this.state.modalArray[3]}

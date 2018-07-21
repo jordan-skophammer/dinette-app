@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
+import RankedRestaurants from "../../components/RankedRestaurants";
 import VoteList from "../../components/VoteList";
 import Wrapper from "../../components/Wrapper";
 import "./Ballot.css"
@@ -17,8 +17,7 @@ class Ballot extends Component {
         super(props);
         this.state = {
             restaurants: [],
-            results: [],
-            otherArray: [], 
+            results: []
         }
     }
     // handleResult(event) {
@@ -60,10 +59,9 @@ class Ballot extends Component {
         this.setState({...this.state, results, restaurants})
     }
 
-    removeFromResults =(value) => {
+    removeFromResults = (value) => {
         // getting the index of the restaurant clicked in the "results" array
         let index = this.state.results.indexOf(value)
-        
         
         let left = this.state.results.slice(0, index)
         let right = this.state.results.slice(index + 1)
@@ -89,27 +87,45 @@ class Ballot extends Component {
         return (
             <Wrapper>
                 <div>
-                    <NavBar></NavBar>
                     {/* <h1>Voting Page</h1> */}
                     <br />
-                    <div className="container">
+                    <div className="container list-overflow-container results-card">
+                        {/* relocation starts here */}
+                        {this.state.results && this.state.results.length ? (
+                                <ol type="1">
+                                    <VoteResults>
+
+                                    {this.state.results.map(result => (
+                                        <RankedRestaurants key={result.id}>
+                                            <li className="ordered_items">
+                                            {result.name}
+                                            <i className="far fa-check-square form-check-input" onClick={() => this.removeFromResults(result)} value={result}></i>
+                                            </li>
+                                        </RankedRestaurants>
+                                    ))}
+                                    <br />
+                                        <div className="container horizontal_align">
+                                            <div className="center">
+                                                <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
+                                            </div>
+                                        </div>
+                                    </VoteResults>
+                                </ol>
+                                
+                            ) : (
+                                    <div className="row"></div>
+                                )}
+                        {/* relocation ends here */}
                         { this.state.restaurants ? (
                             <VoteList>
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
-                                        {restaurant}
+                                        {restaurant.name}
 
                                         <i className="far fa-square form-check-input" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></i>
                                         
                                     </RestaurantOption>
                                 ))}
-                                
-
-                                {/* <input type="text" className="result-block" value={this.state.newItem}
-                                // onChange={e => this.updateInput("newItem", e.target.value)}
-                                >
-                                </input>
-                            <button type="add" className="btn btn-primary add-restaurant" onClick={() => this.addItem()}>Add a Restaurant</button> */}
                             </VoteList>
                         ) : (
 
@@ -125,40 +141,7 @@ class Ballot extends Component {
                                 </div>
                             )}
                         </div>
-                        <br />
-
-                        <div className="container horizontal_align">
-                            <div className="center">
-                                <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
-                            </div>
-                        </div>
                         
-                        <br />
-                        <div className="container">
-                            {this.state.results && this.state.results.length ? (
-                                <ol type="1">
-                                    <VoteResults>
-                                        {/* {this.state.results.map(result => (
-                                            <li className="ordered_items" key={result.id}>
-                                                {result} 
-                                                <i className="far fa-check-square" onClick={()=>this.removeFromResults(result)}></i>
-                                            </li>
-                                        ))} */}
-                                 
-                                    {this.state.results.map(result => (
-                                        <RestaurantOption key={result.id}>
-                                            <li className="ordered_items">
-                                            {result}
-                                            <i className="far fa-check-square form-check-input" onClick={() => this.removeFromResults(result)} value={result}></i>
-                                            </li>
-                                        </RestaurantOption>
-                                    ))}
-                                    </VoteResults>
-                                </ol>
-                            ) : (
-                                    <div className="row"></div>
-                                )}
-                        </div>
                     </div>
                 {/* </div> */}
             </Wrapper>

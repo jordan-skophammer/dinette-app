@@ -5,12 +5,14 @@
 (same name, but containing element). I need to comment-out the height, and it looks like 
 everything is okay ...but if that breaks things in search.js, we will re-assess)
   */
-.results-card {
+#search-results-card {
     padding: 30px;
-    /* height: 300px; */
+    height: 300px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+ 
 
 .search_box {
     min-height: 60px;
@@ -43,7 +45,7 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 }
 
 #searchLocation {
-    margin-top: 1.5%;
+    min-height: 48px;
     margin-bottom: 5px;
     width: 100%;
 }
@@ -58,12 +60,39 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 } */
 
-.hidden{
-    visibility: hidden;
+.details {
+    size: .4rem;
+    color: #eb5c00;
+
+    text-decoration: underline;
+    font-style: italic;
+    margin-bottom: 5px;
 }
 
-/* @media screen and (max-height: 566px){ 
-    .wrapper {
-        height: 100%;
-    }  
-} */
+.hidden{
+    visibility: hidden;
+    height: 0px;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.spinner-div{
+    position: relative;
+}
+
+.spinner {
+    position: absolute;
+    top: 0;
+}
+
+@media screen and (max-height: 526px){ 
+    .details{
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .restName{
+        display: inline-block;
+    }
+}

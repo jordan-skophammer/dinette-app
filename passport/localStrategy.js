@@ -8,8 +8,6 @@ const strategy = new LocalStrategy(
     passwordField: 'password',
   },
   function (userName, password, done) {
-    console.log("==========Passport Local Strategy==========");
-
     // bCrypt hashed password check function
     const isValidPassword = function(enteredPass, userPass) {
       console.log('checking password');
@@ -17,7 +15,6 @@ const strategy = new LocalStrategy(
     };
 
     User.findOne({ 'local.userName': userName }, (err, userMatch) => {
-      console.log(userMatch);
       if (err) {
         console.log(err);
         return done(err);
