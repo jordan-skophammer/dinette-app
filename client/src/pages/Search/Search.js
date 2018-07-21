@@ -17,7 +17,9 @@ class Search extends Component {
             modalArray: [[1,2], "name", "address", [1,2], "phone", "rating", [1,2]],
             visibility: "hidden",
             rouletteVisable: "hidden",
-            loading: "hidden"
+            loading: "hidden",
+            votingArray: [],
+            savedArray: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -153,6 +155,13 @@ class Search extends Component {
             sessionStorage.setItem("restaurants", JSON.stringify(value))
         }   
         console.log(sessionStorage)
+        this.loadSessionStorage()
+    }
+
+    loadSessionStorage = () => {
+        let stringToVote = sessionStorage.getItem("restaurants")
+        let noStateVotingArray = JSON.parse(stringToVote)
+        this.setState({ votingArray: noStateVotingArray })
     }
 
     render () {
@@ -242,16 +251,37 @@ class Search extends Component {
                         </div>
                     </div>
                 <br/>
-                <div className={"row " + this.state.visibility}>
-                    <div className="col-sm-12 justify-content-center">
-                        <a href="/ballot">
-                            <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                {this.state.votingArray.length >= 1 && this.state.votingArray.length < 6 ? (
+                        this.state.votingArray.map(restaurant => (
+                            <div className="orange">
+                            <div key={restaurant.id} className="result-block">
+                            {restaurant.name}
+                            </div>
+                            </div>
+                        ))
+                    ) : (
+                            <div className="row">
+                            </div>
+                        )}
 
+                    {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
+                        <div className="row">
+                            <div className="col-sm-12 justify-content-center">
+                                <div className="btn btn-lg yellow text-white">
+                                    <a href="/ballot">
+                                        <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                            <div className="row">
+                            </div>
+                        )}
+            </div>
+            
             <Modal
+                key = {this.state.modalArray[1]}
                 photos = {this.state.modalArray[0]}
                 firstPhoto = {this.state.modalArray[0][0]}
                 restName = {this.state.modalArray[1]}
