@@ -251,19 +251,21 @@ class Search extends Component {
                         </div>
                     </div>
                 <br/>
+                <div className="row orange">
                 {this.state.votingArray.length >= 1 && this.state.votingArray.length < 6 ? (
                         this.state.votingArray.map(restaurant => (
-                            <div className="orange">
+                            <div className="col-md-12">
                             <div key={restaurant.id} className="result-block">
                             {restaurant.name}
                             </div>
                             </div>
+                            
                         ))
                     ) : (
-                            <div className="row">
+                            <div>
                             </div>
                         )}
-
+</div>
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
                         <div className="row">
                             <div className="col-sm-12 justify-content-center">
@@ -278,6 +280,7 @@ class Search extends Component {
                             <div className="row">
                             </div>
                         )}
+                        
             </div>
             
             <Modal
