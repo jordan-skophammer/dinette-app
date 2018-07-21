@@ -5,8 +5,9 @@
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
-    height: 300px;
-
+}
+.noresult-block a {
+    color: white;
 }
 .noresults-card {
     padding: 30px;

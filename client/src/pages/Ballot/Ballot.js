@@ -17,9 +17,7 @@ class Ballot extends Component {
         super(props);
         this.state = {
             restaurants: [],
-            results: [],
-            message1: "These are the options selected by your vote organizer.",
-            message2: "Click on your favorite places to rank them!"
+            results: []
         }
     }
     // handleResult(event) {
@@ -119,8 +117,8 @@ class Ballot extends Component {
                                     <div className="row"></div>
                                 )}
                         {/* relocation ends here */}
-                            {this.state.results.length < 1 ? 
-                                (<h3 className="instructions">{this.state.message1}<br/>{this.state.message2}</h3>) 
+                            {this.state.results.length < 1 && this.state.restaurants ? 
+                                (<h3 className="instructions">These are the options selected by your vote organizer.<br/>Click on your favorite places to rank them!</h3>) 
                                 : 
                                 (<div className="row"></div>)}
                         { this.state.restaurants ? (
@@ -141,7 +139,9 @@ class Ballot extends Component {
                                     <div className="row">
                                         <div className="col-sm-4"></div>
                                         <div className="col-sm-4">
-                                            <a href="/search" className="noresult-block text-white text-center yellow">Choose restaurants to vote on!</a>
+                                            <div className="noresult-block text-white text-center yellow">
+                                                <a href="/search">Choose restaurants to vote on!</a>    
+                                            </div>
                                         </div>
                                         <div className="col-sm-4"></div>
                                     </div>
