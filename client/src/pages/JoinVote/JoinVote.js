@@ -32,6 +32,9 @@ class JoinVote extends Component {
                     throw new Error(res.statusText)
                 }
                 console.log(res.data)
+                sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+                console.log(sessionStorage.getItem("restaurants"))
+                window.location.href = "/ballot"
 
             })
     }
@@ -57,9 +60,9 @@ class JoinVote extends Component {
                                     <div className="col-sm-9">
                                         <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Enter the username of the Vote Owner"></input>
                                     </div>
-                                    <a href="/ballot" className="col-sm-3">
+                                    <div className="col-sm-3">
                                         <button className="btn btn-lg save text-white yellow" id="searchLocation" onClick={this.joinVote}>Join a Vote Session</button>
-                                    </a>
+                                    </div>
                                 </div>
                             </form>
                         </div>

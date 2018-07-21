@@ -35,3 +35,4 @@ export default {
     return axios.get("/api/vote/" + userName)
   },
 };
+

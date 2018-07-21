@@ -89,6 +89,7 @@ class Search extends Component {
         let restaurantsArray = sessionStorage.getItem("restaurants")
         console.log(restaurantsArray, ' is restaurantsArray')
         let voteObject = {
+            // username: this.props.user.local.userName,
             username: "dummy owner",
             restaurantsArr: restaurantsArray
         }

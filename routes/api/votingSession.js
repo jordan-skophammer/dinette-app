@@ -46,7 +46,8 @@ router.get("/:username", function(req, res){
     console.log("********JOIN VOTE SESSION**********")
     let username = req.params.username
     database.ref('voteSessions/'+username).on("value", function(snapshot){
-        console.log(snapshot)
+        console.log(snapshot.val())
+        res.send(snapshot.val())
     })
 })
 
