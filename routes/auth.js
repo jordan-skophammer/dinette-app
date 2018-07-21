@@ -1,5 +1,3 @@
-// const mongoose = require('mongoose');
-// const passport = require('passport');
 const passport = require('../passport/index');
 const router = require("express").Router();
 
@@ -35,13 +33,7 @@ router.post('/signup', (req, res) => {
   });
 });
 
-router.post(
-  '/login',
-  // (req, res, next) => {
-  //   next();
-  // },
-  passport.authenticate(
-    'local',
+router.post('/login', passport.authenticate('local',
     {
       successRedirect: '/',
       failureRedirect: '/login',

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Wrapper from "../../components/Wrapper"
 import LogInForm from "../../components/LogInForm";
-import NavBar from "../../components/NavBar";
 
 const axios = require("axios");
 
@@ -40,8 +39,8 @@ class LogIn extends Component {
       axios
         .post(currentURL, userLogin)
         .then(response => {
-          console.log('----response from axios request----');
-          console.log(response);
+          // console.log('----response from axios request----');
+          // console.log(response);
           if (!response.data.errmsg) {
             console.log('success')
             this.setState({
@@ -72,7 +71,6 @@ class LogIn extends Component {
     return (
       <div>
         <Wrapper>
-          <NavBar />
           <LogInForm 
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit} 

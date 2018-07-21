@@ -11,6 +11,7 @@ import Roulette from "./pages/Roulette";
 import Account from "./pages/Account";
 import JoinVote from "./pages/JoinVote";
 import './App.css';
+import NavBar from "./components/NavBar";
 // import logo from './logo.svg';
 const axios = require("axios");
 // const API = require("./utils/API");
@@ -27,22 +28,24 @@ class App extends Component {
 
   
   componentDidMount() {
-
     axios.get('/user/id').then(response => {
-      console.log(`response data: ${response.data}`)
-      if (response.data) {
+      // console.log(`response data: ${response.data}`)
+      if (response.data && this.state.loggedIn === false) {
         console.log('THERE IS A USER')
         this.setState({
           loggedIn: true,
           user: response.data
         })
         console.log(this.state);
+      } else if (response.data && this.state.user === response.data) {
+        console.log("user data already stored in state");
       } else {
+        console.log("NO USER");
         this.setState({
           loggedIn: false,
           user: null
         })
-        
+        // console.log(this.state);
       }
     }).catch(error => {
       if (error.response) {
@@ -74,19 +77,24 @@ class App extends Component {
 
   render() {
     return (
+      <div>
+      <NavBar 
+        loggedIn={this.state.loggedIn}
+      />
       <Router>
         <div>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={ () => <Home loggedIn={this.state.loggedIn} user={this.state.user} /> }  />
           <Route path="/Ballot" component={Ballot} />
           <Route path="/LogIn" component={LogIn} />
           <Route path="/Search" component={Search} />
           <Route path="/User" component={User} />
           <Route path="/SignUp" component={SignUp} />
           <Route path="/Roulette" component={Roulette} />
-          <Route path="/Account" component={Account} />
+          <Route path="/Account" render={ () => <Account loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/JoinVote" component={JoinVote}/>
         </div>
       </Router>
+      </div>
     )
   }
 }
