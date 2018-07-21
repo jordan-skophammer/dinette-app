@@ -4,15 +4,13 @@ const AccountInfo = (props) => (
     <div className="card">
     {console.log(props)}
         <div className="card-body">
-            <h3>Name: {props.firstName} {props.lastName}</h3>
+            <h3>Username: jane.doe@gmail.com {props.userName}</h3>
             <br/>
-            <h3>Zip Code: {props.Zip}</h3>
+            <h3>Name: Jane{props.firstName} Doe{props.lastName}</h3>
             <br/>
-            <h3>Favorites:</h3>
+            <h3>Zip Code: 55405{props.zipcode}</h3>
             <br/>
-            <ul>
-                <li>{props.Favs}</li>
-            </ul>
+            <button className="btn green" data-toggle="modal" data-target="#editAccountModal">Edit Account</button>
         </div>
     </div>
 )

@@ -2,45 +2,44 @@
 import React from "react";
 import Wrapper from "../../components/Wrapper"
 import AccountInfo from "../../components/AccountInfo";
-
-// class Account extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       loggedIn: props.loggedIn,
-//       user: props.user,
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <Wrapper>
-//           {console.log(this.state.user)}
-//           <AccountInfo 
-//             loggedIn={this.state.loggedIn}
-//             user={this.state.user}
-//           />
-//           {/* <p>{this.state.loggedIn}</p> */}
-//         </Wrapper>
-//       </div>
-//     )
-//   }
-// }
+import EditAccountForm from "../../components/EditAccountForm";
 
 const Account = props => {
-  return (
-    <div>
-      <Wrapper>
-        {console.log(props)}
-        <AccountInfo 
-          loggedIn={props.loggedIn}
-          user={props.user}
-        />
-        {/* <p>{this.state.loggedIn}</p> */}
-      </Wrapper>
-    </div>
-  )
+    return(
+        <div>
+            <Wrapper>
+                {console.log(props)}
+                <div className="row">
+                    <div className="col-md-6">
+                        <AccountInfo 
+                          loggedIn={props.loggedIn}
+                          user={props.user}
+                        />
+                    </div>
+                    <div className="col-md-6"></div>
+                </div>
+
+                <div class="modal" id="editAccountModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                               <EditAccountForm />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Wrapper>
+        </div>
+    )
 }
 
 export default Account;
