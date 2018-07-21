@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import NavBar from "../../components/NavBar";
 import Wrapper from "../../components/Wrapper";
 import "./JoinVote.css";
 
@@ -49,7 +48,6 @@ class JoinVote extends Component {
     render() {
         return (
             <Wrapper>
-                <NavBar />
                 <br />
                 <div className="container">
                     <div className="row">

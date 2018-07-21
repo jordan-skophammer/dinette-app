@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Search.css"
 import API from "../../utils/API"
-import NavBar from "../../components/NavBar"
 import Wrapper from "../../components/Wrapper"
 import Modal from "../../components/Modal"
 
@@ -139,7 +138,6 @@ class Search extends Component {
         }
         return(
         <Wrapper>
-            <NavBar/>
             <br/>
             <div className="container">
                 <div className="row">

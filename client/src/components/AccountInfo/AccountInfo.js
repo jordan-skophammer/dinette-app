@@ -2,8 +2,9 @@ import React from "react";
 
 const AccountInfo = (props) => (
     <div className="card">
+    {console.log(props)}
         <div className="card-body">
-            <h3>Name: {props.FirstName} {props.LastName}</h3>
+            <h3>Name: {props.firstName} {props.lastName}</h3>
             <br/>
             <h3>Zip Code: {props.Zip}</h3>
             <br/>

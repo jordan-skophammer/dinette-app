@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
 import VoteList from "../../components/VoteList";
 import Wrapper from "../../components/Wrapper";
@@ -89,7 +88,6 @@ class Ballot extends Component {
         return (
             <Wrapper>
                 <div>
-                    <NavBar></NavBar>
                     {/* <h1>Voting Page</h1> */}
                     <br />
                     <div className="container">
