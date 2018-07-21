@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Ballot from "./pages/Ballot";
@@ -16,12 +16,19 @@ import NavBar from "./components/NavBar";
 const axios = require("axios");
 // const API = require("./utils/API");
 
-class App extends Component {
+class App extends PureComponent {
   constructor() {
     super()
     this.state = {
       loggedIn: false,
-      user: null
+      user: {
+        firstName: "first",
+        lastName: "last",
+        zipcode: 55104,
+        local: {
+          userName: "user"
+        },
+      }
     }
     this.logout = this.logout.bind(this)
   }
@@ -84,7 +91,7 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/" render={ () => <Home loggedIn={this.state.loggedIn} user={this.state.user} /> }  />
-          <Route path="/Ballot" component={Ballot} />
+          <Route path="/Ballot" render={ () => <Ballot loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/LogIn" component={LogIn} />
           <Route path="/Search" component={Search} />
           <Route path="/User" component={User} />
