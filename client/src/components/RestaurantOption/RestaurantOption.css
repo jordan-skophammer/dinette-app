@@ -10,6 +10,6 @@
     box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
 }
 .result-block-negative:hover {
-    background: linear-gradient(70deg, #90c209, #b5cf1e);
-    /* background: linear-gradient(70deg, #ffae00, #ffbb00); */
+    /* background: linear-gradient(70deg, #90c209, #b5cf1e); */
+    background: linear-gradient(70deg, #ffae00, #ffbb00);
 }

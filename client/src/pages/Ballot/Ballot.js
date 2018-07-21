@@ -17,7 +17,9 @@ class Ballot extends Component {
         super(props);
         this.state = {
             restaurants: [],
-            results: []
+            results: [],
+            message1: "These are the options selected by your vote organizer.",
+            message2: "Click on your favorite places to rank them!"
         }
     }
     // handleResult(event) {
@@ -91,6 +93,7 @@ class Ballot extends Component {
                     <br />
                     <div className="container list-overflow-container results-card">
                         {/* relocation starts here */}
+                        
                         {this.state.results && this.state.results.length ? (
                                 <ol type="1">
                                     <VoteResults>
@@ -116,6 +119,10 @@ class Ballot extends Component {
                                     <div className="row"></div>
                                 )}
                         {/* relocation ends here */}
+                            {this.state.results.length < 1 ? 
+                                (<h3 className="instructions">{this.state.message1}<br/>{this.state.message2}</h3>) 
+                                : 
+                                (<div className="row"></div>)}
                         { this.state.restaurants ? (
                             <VoteList>
                                 {this.state.restaurants.map(restaurant => (
