@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
 import RankedRestaurants from "../../components/RankedRestaurants";
 import VoteList from "../../components/VoteList";
@@ -88,7 +87,6 @@ class Ballot extends Component {
         return (
             <Wrapper>
                 <div>
-                    <NavBar></NavBar>
                     {/* <h1>Voting Page</h1> */}
                     <br />
                     <div className="container list-overflow-container results-card">
