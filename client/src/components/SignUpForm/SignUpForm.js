@@ -68,7 +68,7 @@ const SignUpForm = (props) => (
                   </div>
                   <button 
                     type="submit"
-                    className="btn btn-danger"
+                    className="btn yellow"
                     onClick={props.submitClicked}
                     >
                     Submit
