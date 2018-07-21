@@ -31,7 +31,7 @@ class Ballot extends Component {
 
     loadSessionStorage = () => {
         let restaurantsString = sessionStorage.getItem("restaurants")
-        var restaurants = JSON.parse(restaurantsString)
+        let restaurants = JSON.parse(restaurantsString)
         let resultsString = sessionStorage.getItem("results")
         let results
         if (resultsString === null) {

@@ -29,6 +29,7 @@ export default {
         return axios.post("/api/vote", restaurantsArr)
     },
     getVoteSession: (userName) => {
+        console.log("******************GET VOTE FOR "+userName+"*********************")
         return axios.get("/api/vote/"+userName)
     }
 
