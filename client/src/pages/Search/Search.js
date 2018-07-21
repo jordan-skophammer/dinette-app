@@ -199,6 +199,7 @@ class Search extends Component {
             displayRoulette = (
                 <div>
                     <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(roulettePick.result.photos, roulettePick.result.name, roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name, roulettePick.result.opening_hours.weekday_text, roulettePick.result.formatted_phone_number, roulettePick.result.rating, roulettePick.result.reviews)}>{roulettePick.result.name}</h5>
+                    <p className="details">details</p>
                     <p className="address">{roulettePick.result.address_components[0].short_name + " " + roulettePick.result.address_components[1].short_name + " " + roulettePick.result.address_components[3].short_name}</p>
                 </div>
             )
@@ -211,11 +212,14 @@ class Search extends Component {
                     <div className="col-md-12">
                         <form onSubmit={this.handleSubmit}>
                             <div className="search_box green row">
-                                <div className="col-sm-9">
+                                <div className="col-sm-8">
                                     <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
                                 </div>
-                                <div className="col-sm-3">
+                                <div className="col-sm-2 search-col">
                                     <button className="btn btn-lg text-white yellow"  id="search" onClick={this.handleSubmit}>Search</button>
+                                    
+                                </div>
+                                <div className="col-sm-2 roulette-col">
                                     <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
                                 </div>
                             </div>
@@ -234,7 +238,6 @@ class Search extends Component {
                         <h3 className="text-white text-center">Search Results</h3>
                         <br/>                               
                         {results}
-                        {displayRoulette}
                     </div>
                 </div>
                 <div className={"row " + this.state.rouletteVisable}>
