@@ -37,7 +37,7 @@ class Search extends Component {
     
     handleSubmit(event){
         // console.log("Data was submitted: ", this.state.value);
-        this.setState({loading: "visible", visibility:"hidden"})
+        this.setState({loading: "visible", visibility:"hidden", rouletteVisable:"hidden"})
         event.preventDefault();
         API.getRestaurants(this.state.value)
             .then(res => {
@@ -59,6 +59,7 @@ class Search extends Component {
 
     handleRoulette(event){
         // console.log("Data was submitted: ", this.state.value);
+        this.setState({loading: "visible", visibility:"hidden", rouletteVisable:"hidden"})
         event.preventDefault();
         API.getRestaurants(this.state.value)
             .then(res => {
@@ -81,7 +82,7 @@ class Search extends Component {
     randomPick = (data) => {
         console.log("roulette picked")
         let pick = data[Math.floor(Math.random()*data.length)]
-        this.setState({roulettePick: pick, rouletteVisable: ""})
+        this.setState({roulettePick: pick, rouletteVisable: "", loading: "hidden"})
         console.log(pick)
     }
 
