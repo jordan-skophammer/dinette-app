@@ -86,7 +86,8 @@ class Search extends Component {
 
 
     addToSessionStorage = (value) => {
-       sessionStorage.setItem("voted", []) 
+        console.log("What we are adding to Session Storage: ", value, " (should be a JSON object, currently, it is: ", typeof value,")")
+        sessionStorage.setItem("voted", []) 
         let savedArray = []
         let storage = JSON.parse(sessionStorage.getItem("restaurants"))
 
@@ -131,7 +132,7 @@ class Search extends Component {
                                 <h5 href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>{restaurant.result.name}</h5>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result.name)} value={restaurant.result.name} id="defaultCheck"></input>
+                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} id="defaultCheck"></input>
                         </div>
                     </div>
                 ))
