@@ -7,36 +7,31 @@ const Modal = ({key, photos, firstPhoto, restName, phone, address, hours, rating
             <div className="modal-content orange text-white">
                 <div className="modal-body">
 
-
-                    {/* <div className="photos-holder"> */}
-                        {/* <img className="rest-img" src={photo} alt=""/> */}
-
-                        <div id="carouselExampleControls" className="carousel slide photos-holder" data-ride="carousel">
-                            <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img className="rest-img" src={firstPhoto} alt=""/>
-                                </div>
-
-                                {photos.slice(1).map(url => (
-                                    <div className="carousel-item" key={url}>
-                                        <img className="rest-img" src={url} alt=""/>
-                                    </div>
-                                ))}
-                                
+                    <div id="carouselExampleControls" className="carousel slide photos-holder" data-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <img className="rest-img" src={firstPhoto} alt=""/>
                             </div>
-                            <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="sr-only">Previous</span>
-                            </a>
-                            <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="sr-only">Next</span>
-                            </a>
+
+                            {photos.slice(1).map(url => (
+                                <div className="carousel-item" key={url}>
+                                    <img className="rest-img" src={url} alt=""/>
+                                </div>
+                            ))}
+                            
                         </div>
+                        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="sr-only">Previous</span>
+                        </a>
+                        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="sr-only">Next</span>
+                        </a>
+                    </div>
 
 
-
-                    {/* </div> */}
+                 
                     <br/>
 
                     <h3 id="restName">{restName}</h3>

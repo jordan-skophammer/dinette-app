@@ -1,20 +1,27 @@
 .wrapper{
-    position: fixed;
-    overflow-y: scroll;
+    /* overflow: hidden;
     height: 100vh;
-    width: 100%;
-    background: linear-gradient(
-        rgba(61, 58, 58, 0.45),
-        rgba(61, 58, 58, 0.45)
-    );
+    min-width: 100%; */
+    /* background-image: url("./restaurant.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
+}
+
+.wrapper-img {
+    position: fixed;
+    top: 0px;
+    z-index: -1;
+    height: 100vh;
+    min-width: 100%; 
     background-image: url("./restaurant.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
-@media screen and (max-height: 566px){ 
+@media only screen and (max-height: 566px){ 
     .wrapper {
         height: 100%;
     }  

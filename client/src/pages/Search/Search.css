@@ -87,7 +87,7 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     top: 0;
 }
 
-@media screen and (max-height: 526px){ 
+@media only screen and (max-height: 526px){ 
     .details{
         display: inline-block;
         margin-left: 10px;

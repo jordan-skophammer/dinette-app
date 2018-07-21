@@ -178,7 +178,7 @@ class Search extends Component {
                                 <h5 className="restName" href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>
                                 {restaurant.result.name}
                                 </h5>
-                                <p className="details">details</p>
+                                <p className="details" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
                             <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} id="defaultCheck"></input>
@@ -225,7 +225,6 @@ class Search extends Component {
                         <h3 className="text-white text-center">Search Results</h3>
                         <br/>                               
                         {results}
-                        {displayRoulette}
                     </div>
                 </div>
                 <div className={"row " + this.state.rouletteVisable}>
