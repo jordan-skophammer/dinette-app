@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "../../components/NavBar";
 import RestaurantOption from "../../components/RestaurantOption";
+import RankedRestaurants from "../../components/RankedRestaurants";
 import VoteList from "../../components/VoteList";
 import Wrapper from "../../components/Wrapper";
 import "./Ballot.css"
@@ -105,12 +106,12 @@ class Ballot extends Component {
                                         ))} */}
 
                                     {this.state.results.map(result => (
-                                        <RestaurantOption key={result.id}>
+                                        <RankedRestaurants key={result.id}>
                                             <li className="ordered_items">
                                             {result}
                                             <i className="far fa-check-square form-check-input" onClick={() => this.removeFromResults(result)} value={result}></i>
                                             </li>
-                                        </RestaurantOption>
+                                        </RankedRestaurants>
                                     ))}
                                     <br />
                                         <div className="container horizontal_align">
