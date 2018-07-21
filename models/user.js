@@ -14,7 +14,6 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   zipcode: { type: Number, required: true },
-  currentVoteURL: { type: String, required: false },
   favorites: [{ type: String, required: false }],
 });
 

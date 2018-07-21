@@ -1,9 +1,15 @@
-.result-block {
-    color: rgb(88, 86, 86);
-    background-color: white;
+.result-block-negative {
+    background-color: rgb(204, 204, 204 );
+    color: white;
+    font-style: oblique;
+    text-shadow: 1px 1px 5px black;
+    /* rgb(86, 86, 86); */
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
-
+}
+.result-block-negative:hover {
+    /* background: linear-gradient(70deg, #90c209, #b5cf1e); */
+    background: linear-gradient(70deg, #ffae00, #ffbb00);
 }

@@ -1,0 +1,15 @@
+
+.result-block-fancy {
+    color: rgb(88, 86, 86);
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
+    
+}
+.result-block-fancy:hover {
+    color: white;
+    background: linear-gradient(70deg, #90c209, #b5cf1e);
+    /* background: linear-gradient(70deg, #ffae00, #ffbb00); */
+}

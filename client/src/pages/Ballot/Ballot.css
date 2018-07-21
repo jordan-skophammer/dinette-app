@@ -5,8 +5,9 @@
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
-    height: 300px;
-
+}
+.noresult-block a {
+    color: white;
 }
 .noresults-card {
     padding: 30px;
@@ -17,7 +18,7 @@
 
 .ordered_items {
     margin-left: 3%;
-    padding: 2% 2% 3%;
+    /* padding: 2% 2% 3%; */
 }
 .result-block:hover {
     background-color: #b5cf1e;
@@ -42,4 +43,16 @@
 }
 ol {
     margin-left: -40px;
+}
+
+.instructions {
+    font-size: 1.75rem;
+    text-align: center;
+    padding: 3% 0 3% 0;
+    margin: 2% auto 7% auto;
+    background-color: white;
+    width: 75%;
+    border-radius: 10px;
+    color: rgb(86,86,86);
+    font-weight: lighter;
 }
