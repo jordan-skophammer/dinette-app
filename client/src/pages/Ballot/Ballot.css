@@ -46,13 +46,19 @@ ol {
 }
 
 .instructions {
-    font-size: 1.75rem;
+    font-size: 150%;
     text-align: center;
-    padding: 3% 0 3% 0;
+    padding: 5%;
     margin: 2% auto 7% auto;
     background-color: white;
     width: 75%;
     border-radius: 10px;
     color: rgb(86,86,86);
     font-weight: lighter;
+}
+
+@media screen and (max-width: 900px){ 
+    .instructions {
+        font-size: 100%;
+    }  
 }
