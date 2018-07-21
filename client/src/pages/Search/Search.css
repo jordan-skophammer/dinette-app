@@ -45,7 +45,7 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 }
 
 #searchLocation {
-    margin-top: 1.5%;
+    min-height: 48px;
     margin-bottom: 5px;
     width: 100%;
 }
