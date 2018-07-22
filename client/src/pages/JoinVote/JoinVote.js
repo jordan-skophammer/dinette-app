@@ -34,6 +34,7 @@ class JoinVote extends Component {
                 console.log(res.data)
                 sessionStorage.setItem("restaurants",JSON.stringify(res.data))
                 console.log(sessionStorage.getItem("restaurants"))
+                sessionStorage.setItem("voteOwner",this.state.value)
                 window.location.href = "/ballot"
 
             })
