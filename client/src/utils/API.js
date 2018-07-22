@@ -25,7 +25,7 @@ export default {
   makeVoteSession: (restaurantsArr) => {
     // currentURL = "http://localhost:3001" ? "http://localhost:3000" : window.location.origin
     console.log("client route works")
-    return axios.post("/api/vote", restaurantsArr)
+    return axios.post("/api/vote/new", restaurantsArr)
   },
   // getUser: () => {
   //   console.log("checking user from client side");
@@ -34,5 +34,8 @@ export default {
   getVoteSession: (userName) => {
     return axios.get("/api/vote/" + userName)
   },
+  voteToFirebase: (voteObject) => {
+    return axios.post("/api/vote/submit", voteObject)
+  }
 };
 

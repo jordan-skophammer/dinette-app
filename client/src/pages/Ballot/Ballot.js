@@ -5,6 +5,7 @@ import VoteList from "../../components/VoteList";
 import Wrapper from "../../components/Wrapper";
 import "./Ballot.css"
 import VoteResults from "../../components/VoteResults";
+import API from "../../utils/API";
 // import { Bar } from 'react-chartjs-2';
 // import API from "../../utils/API";
 // import Search from "./Search";
@@ -31,6 +32,7 @@ class Ballot extends Component {
     loadSessionStorage = () => {
         let restaurantsString = sessionStorage.getItem("restaurants")
         let restaurants = JSON.parse(restaurantsString)
+        let restaurantsVal = restaurants.restaurants
         let resultsString = sessionStorage.getItem("results")
         let results
         if (resultsString === null) {
@@ -39,7 +41,7 @@ class Ballot extends Component {
         else {
             results = JSON.parse(resultsString)
         }
-        this.setState({...restaurants, restaurants})
+        this.setState({...restaurants, restaurantsVal})
         this.setState({...results,results})
     }
 
@@ -82,6 +84,18 @@ class Ballot extends Component {
         });
     };
 
+    pushVoteToFirebase = () => {
+        let voteOwner = sessionStorage.getItem("voteOwner")
+        let voteState = sessionStorage.getItem("results")
+        let parsedVoteState = JSON.parse(voteState)
+        let voteObject = {
+            votes: parsedVoteState,
+            owner: voteOwner
+        }
+        API.voteToFirebase(voteObject)
+
+    }
+
 
     render() {
         return (
@@ -106,7 +120,7 @@ class Ballot extends Component {
                                     <br />
                                         <div className="container horizontal_align">
                                             <div className="center">
-                                                <button type="vote" className="btn btn-primary add-restaurant">Vote</button>
+                                                <button type="vote" className="btn btn-primary add-restaurant" onClick={() => this.pushVoteToFirebase()}>Vote</button>
                                             </div>
                                         </div>
                                     </VoteResults>

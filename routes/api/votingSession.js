@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-router.post("/",function(req, res){
+router.post("/new",function(req, res){
     console.log("************MAKE VOTE SESSION************")
     // console.log(req.body)
     // let username = req.body("username")
