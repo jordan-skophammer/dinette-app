@@ -152,7 +152,8 @@ class Search extends Component {
             sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         //if there's nothing in session storage yet
         } else if (!sessionStorage.getItem("restaurants")){
-            sessionStorage.setItem("restaurants", JSON.stringify(value))
+            savedArray.push(value)
+            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
         }   
         console.log(sessionStorage)
         this.loadSessionStorage()
