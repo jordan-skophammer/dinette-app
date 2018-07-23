@@ -7,7 +7,6 @@ import LogIn from "./pages/LogIn";
 import Search from "./pages/Search";
 import User from "./pages/User";
 import SignUp from "./pages/SignUp";
-import Roulette from "./pages/Roulette";
 import Account from "./pages/Account";
 import JoinVote from "./pages/JoinVote";
 import './App.css';
@@ -95,7 +94,6 @@ class App extends PureComponent {
           <Route path="/Search" render={ () => <Search loggedIn={this.state.loggedIn} user={this.state.user} />} />
           <Route path="/User" component={User} />
           <Route path="/SignUp" component={SignUp} />
-          <Route path="/Roulette" component={Roulette} />
           <Route path="/Account" render={ () => <Account loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/JoinVote" component={JoinVote}/>
         </div>
