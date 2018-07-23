@@ -164,6 +164,15 @@ class Search extends Component {
         this.setState({ votingArray: noStateVotingArray })
     }
 
+    removeFromSessionStorage = (value) => {
+        let index = this.state.votingArray.indexOf(value)
+        let left = this.state.votingArray.slice(0, index)
+        let right = this.state.votingArray.slice(index + 1)
+        let votingArray = [...left, ...right]
+        sessionStorage.setItem("restaurants", JSON.stringify(votingArray))
+        this.setState({...this.state, votingArray})
+    }
+
     render () {
         let roulettePick = this.state.roulettePick
         let results;
@@ -260,6 +269,7 @@ class Search extends Component {
                             <div className="col-md-12">
                             <div key={restaurant.id} className="result-block">
                             {restaurant.name}
+                            <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant}>✗</button>
                             </div>
                             </div>
                             
