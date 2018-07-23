@@ -51,7 +51,6 @@ class App extends PureComponent {
           loggedIn: false,
           user: null
         })
-        // console.log(this.state);
       }
     }).catch(error => {
       if (error.response) {
