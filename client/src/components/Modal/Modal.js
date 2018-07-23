@@ -1,7 +1,7 @@
 import React from "react";
 import "./Modal.css"
 
-const Modal = ({key, photos, firstPhoto, restName, phone, address, hours, rating, reviews}) => (
+const Modal = ({photos, firstPhoto, restName, phone, address, hours, rating, reviews}) => (
     <div className="modal fade" id="detailsModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <div className="modal-content orange text-white">
