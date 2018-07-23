@@ -1,5 +1,6 @@
 // import React, { Component } from "react";
 import React from "react";
+import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
 import AccountInfo from "../../components/AccountInfo";
 import EditAccountForm from "../../components/EditAccountForm";
@@ -16,7 +17,14 @@ const Account = props => {
                           user={props.user}
                         />
                     </div>
-                    <div className="col-md-6"></div>
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h3>Open Ballots</h3>
+                                <button className="btn green">Close Ballot</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="modal" id="editAccountModal" tabIndex="-1" role="dialog">
