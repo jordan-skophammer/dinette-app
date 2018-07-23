@@ -5,6 +5,9 @@ const Wrapper = (props) => (
 
     <div>
         <div className="wrapper">
+            <div className="wrapper-img">
+                {/* <img src="../../restaurant.jpg" alt=""/> */}
+            </div>
             {props.children}
         </div>
     </div>
