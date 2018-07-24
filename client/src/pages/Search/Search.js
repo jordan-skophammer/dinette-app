@@ -43,22 +43,27 @@ class Search extends Component {
         // console.log("Data was submitted: ", this.state.value);
         this.setState({loading: "visible", visibility:"hidden", rouletteVisable:"hidden"})
         event.preventDefault();
-        API.getRestaurants(this.state.value)
-            .then(res => {
-                // console.log(res.statusText)
-                if(res.status !== 200) {
-                    throw new Error(res.statusText)
-                }
-                // console.log(res)
-                if (res.data !== "No Results Found"){
-                    this.setState({...this.state,results: res.data})
-                } else {
-                    console.log("no results found")
-                    this.setState({...this.state,results: ["No Results Found"]})
-                }
-                this.setState({visibility: "", loading: "hidden"})
+        if(this.state.value.length > 0) {
+            API.getRestaurants(this.state.value)
+                .then(res => {
+                    // console.log(res.statusText)
+                    if(res.status !== 200) {
+                        throw new Error(res.statusText)
+                    }
+                    // console.log(res)
+                    if (res.data !== "No Results Found"){
+                        this.setState({...this.state,results: res.data})
+                    } else {
+                        console.log("No Results found")
+                        this.setState({...this.state,results: ["No Results Found"]})
+                    }
+                    this.setState({visibility: "", loading: "hidden"})
 
-            })
+                })
+            }
+        else {
+            this.setState({visibility: "hidden", loading: "hidden"})
+            }
     }
 
     handleRoulette(event){
