@@ -88,12 +88,13 @@ class Search extends Component {
         console.log(pick)
     }
 
-    createFireBaseVoteSession(){
+    createFireBaseVoteSession(userName){
+        console.log(`Local user: ${userName}`);
         let restaurantsArray = sessionStorage.getItem("restaurants")
         console.log(restaurantsArray, ' is restaurantsArray')
         let voteObject = {
             // username: this.props.user.local.userName,
-            username: "dummy owner",
+            username: userName,
             restaurantsArr: restaurantsArray
         }
             
@@ -223,7 +224,7 @@ class Search extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <div className="search_box green row">
                                 <div className="col-sm-8">
-                                    <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Search by ZIP or landmark"></input>
+                                    <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder={this.props.user.local.userName}></input>
                                 </div>
                                 <div className="col-sm-2 search-col">
                                     <button className="btn btn-lg text-white yellow"  id="search" onClick={this.handleSubmit}>Search</button>
@@ -284,9 +285,13 @@ class Search extends Component {
                         <div className="row">
                             <div className="col-sm-12 justify-content-center">
                                 <div className="btn btn-lg yellow text-white">
-                                    <a href="/ballot">
-                                        <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
-                                    </a>
+                                    {/* <a href="/ballot"> */}
+                                    <div>
+                                        <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                                        </div>
+                                        
+
+                                    {/* </a> */}
                                 </div>
                             </div>
                         </div>
