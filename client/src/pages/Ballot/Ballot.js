@@ -93,6 +93,7 @@ class Ballot extends Component {
             owner: voteOwner
         }
         API.voteToFirebase(voteObject)
+        sessionStorage.setItem("results","")
 
     }
 
