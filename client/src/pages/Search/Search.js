@@ -19,7 +19,8 @@ class Search extends Component {
             rouletteVisable: "hidden",
             loading: "hidden",
             votingArray: [],
-            savedArray: []
+            savedArray: [],
+            favoritedRestaurants: [],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -139,33 +140,48 @@ class Search extends Component {
 
 
     addToSessionStorage = (value) => {
-        console.log("What we are adding to Session Storage: ", value, " (should be a JSON object, currently, it is: ", typeof value,")")
+        console.log("Name of object we are adding to Session Storage: ", value.name)
         sessionStorage.setItem("voted", []) 
         let savedArray = []
         let storage = JSON.parse(sessionStorage.getItem("restaurants"))
-
-        //if there's something in session storage but it's not an array
-        if (sessionStorage.getItem("restaurants") && !Array.isArray(storage)){
-            savedArray.push(storage, value)
-            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
-        //if there's something in session storage and it is an array
-        } else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
-            savedArray = storage
-            //if value is not already in saved, pushes it
-            if (savedArray.includes(value) === false){
+        console.log("parsed data from local storage: ", storage)
+        // ***************
+        // This prevents from favoriting the same restaurant more than once,
+        // by storing the names of favorited restaurants in the state, and checking 
+        // against the state each time user favorites a restaurant
+        let alreadyFavorited = this.state.favoritedRestaurants
+        if (alreadyFavorited.indexOf(value.name) == -1) {
+        // ***************
+            // This logic grabs what currently is in the session storage 
+            // and transforms it in order to manipulate it
+            
+            // if there's something in session storage but it's not an array
+            if (sessionStorage.getItem("restaurants") && !Array.isArray(storage)){
+                savedArray.push(storage, value)
+                sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
+            // if there's something in session storage and it is an array
+            } else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
+                savedArray = storage
+                //if value is not already in saved, pushes it
+                if (savedArray.includes(value) === false){
+                    savedArray.push(value)
+                //if value was already in saved and is now unchecked, delete from saved
+                } else {
+                    let index = savedArray.indexOf(value)
+                    savedArray.splice(index, 1)
+                }
+                sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
+            // if there's nothing in session storage yet
+            } else if (!sessionStorage.getItem("restaurants")){
                 savedArray.push(value)
-            //if value was already in saved and is now unchecked, delete from saved
-            } else {
-                let index = savedArray.indexOf(value)
-                savedArray.splice(index, 1)
+                sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             }
-            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
-        //if there's nothing in session storage yet
-        } else if (!sessionStorage.getItem("restaurants")){
-            savedArray.push(value)
-            sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
-        }   
-        console.log(sessionStorage)
+        
+        // ***************
+            alreadyFavorited.push(value.name)
+            this.setState(...this.state, alreadyFavorited)
+        }
+        // ***************   
         this.loadSessionStorage()
     }
 
@@ -176,12 +192,18 @@ class Search extends Component {
     }
 
     removeFromSessionStorage = (value) => {
+        // logic to remove restaurants from the state once they are
+        // unfavorited (so that they can be re-selected if need be)
+        let alreadyFavorited = this.state.favoritedRestaurants
+        let restaurantToRemove = alreadyFavorited.indexOf(value.name)
+        alreadyFavorited.splice(restaurantToRemove,1)
+        // **********************
         let index = this.state.votingArray.indexOf(value)
         let left = this.state.votingArray.slice(0, index)
         let right = this.state.votingArray.slice(index + 1)
         let votingArray = [...left, ...right]
         sessionStorage.setItem("restaurants", JSON.stringify(votingArray))
-        this.setState({...this.state, votingArray})
+        this.setState({...this.state, alreadyFavorited, votingArray})
     }
 
     render () {
@@ -210,8 +232,10 @@ class Search extends Component {
                                 <p className="details" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-                            <button className="form-check-input" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></button>
-                        </div>
+                            
+                            <i className="fas fa-plus form-check-input" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
+                        
+                            </div>
                     </div>
                 ))
             )
@@ -274,8 +298,8 @@ class Search extends Component {
                         </div>
                     </div>
                 <br/>
+                {this.state.votingArray.length > 0 ? ( 
                 <div className="row picker-card-selected">
-                {/* <div className="col-md-12 pick-card orange"> */}
                 {this.state.votingArray.length >= 1 ? (
                         this.state.votingArray.map(restaurant => (
                             <div className="form-check-selected">
@@ -298,19 +322,16 @@ class Search extends Component {
                             </div>
                         )}
                 </div>
+                ): (<br/>)} 
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
                         <div className="row">
-                            <div className="col-sm-12 justify-content-center">
-                                <div className="btn btn-lg yellow text-white">
-                                    {/* <a href="/ballot"> */}
-                                    <div>
-                                        <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
-                                        </div>
-                                        
-
-                                    {/* </a> */}
+                            
+                                <div className="col-sm-4"></div>
+                                <div className="col-sm-4">
+                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
                                 </div>
-                            </div>
+                                <div className="col-sm-4"></div>
+                            
                         </div>
                     ) : (
                             <div className="row">
