@@ -93,12 +93,14 @@ class Search extends Component {
     createFireBaseVoteSession(userName){
         console.log(`Local user: ${userName}`);
         let restaurantsArray = sessionStorage.getItem("restaurants")
+        sessionStorage.setItem("voteOwner", "dummy owner")
         console.log(restaurantsArray, ' is restaurantsArray')
         let voteObject = {
-            // username: this.props.user.local.userName,
-            username: userName,
+
+            username: "test owner",
             restaurantsArr: restaurantsArray
         }
+        console.log("vote session info:",this.props.firstName)
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
