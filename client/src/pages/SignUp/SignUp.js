@@ -28,9 +28,6 @@ class SignUp extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    // let currentURL = window.location.origin;
-    // currentURL = "http://localhost:3001/auth/signup" ? "http://localhost:3000/auth/signup" : window.location.origin;
-
     if (this.state.password === this.state.confirmPassword) {
       let newUser = {
         userName: this.state.userName,
