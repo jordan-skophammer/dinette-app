@@ -27,9 +27,6 @@ class LogIn extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    // let currentURL = window.location.origin;
-    // currentURL = "http://localhost:3001/auth/login" ? "http://localhost:3000/auth/login" : window.location.origin;
-
     if (this.state.loginPassword && this.state.loginUserName) {
       let userLogin = {
         userName: this.state.loginUserName,
