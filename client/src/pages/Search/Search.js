@@ -274,27 +274,30 @@ class Search extends Component {
                         </div>
                     </div>
                 <br/>
-                <div className="row ">
+                <div className="row picker-card-selected">
                 {/* <div className="col-md-12 pick-card orange"> */}
                 {this.state.votingArray.length >= 1 ? (
                         this.state.votingArray.map(restaurant => (
-                            <div className="col-md-12 picker-card orange">
-                            <div className="form-check">
-                                    <label className="form-check-label" htmlFor="defaultCheck">
-                            <div key={restaurant.id} className="result-block">
-                            {restaurant.name}
-                            <button className="delete yellow text-white" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant}>✗</button>
+                            <div className="form-check-selected">
+                                    <label className="form-check-label-selected" htmlFor="defaultCheck">
+                            <div key={restaurant.id} className="result-block-selected">
+                                <div className="grouping-nested-elements">
+                                    <div className="restaurant-name">
+                                        {restaurant.name}
+                                    </div>
+                                    <div className="button-div">
+                                        <button className="delete yellow text-white" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
+                                    </div>
+                                </div>
                             </div>
                             </label>
                             </div>
-                            </div>
-                            
                         ))
                     ) : (
                             <div>
                             </div>
                         )}
-</div>
+                </div>
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
                         <div className="row">
                             <div className="col-sm-12 justify-content-center">

@@ -10,14 +10,29 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
-.picker-card {
-    background-color: #eb5c00;
+.result-block-selected {
+    color: rgb(88, 86, 86);
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+.picker-card-selected {
     overflow: hidden;
     background: linear-gradient(70deg, #eb5c00, #e17f00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin-bottom: 30px;
 }
-
+.form-check-selected {
+    width: 33%;
+}
+.form-check-label-selected {
+    width: 100%;
+    padding: 3%;
+}
 .search_box {
     min-height: 60px;
     padding-top: 3%;
@@ -102,6 +117,20 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     float: right;
     border-radius: 5px;
     margin-bottom: 3px;
+    top: -7px;
+}
+.grouping-nested-elements{
+    display: inline-block;
+    width: 100%;
+}
+.restaurant-name {
+    width: 80%;
+    display: inline-block;
+    vertical-align: top;
+}
+.button-div {
+    display: inline-block;
+    width: 20%;
 }
 
 @media only screen and (max-height: 526px){ 
@@ -113,6 +142,8 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
         display: inline-block;
     }
 }
+
+/* Media queries to adjust the size of the results displayed on multiple screen sizes */
 /* Mobile screens */
 @media (max-height: 526px){ 
     #search-results-card {
