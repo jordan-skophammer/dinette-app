@@ -274,8 +274,8 @@ class Search extends Component {
                         </div>
                     </div>
                 <br/>
+                {this.state.votingArray.length > 0 ? ( 
                 <div className="row picker-card-selected">
-                {/* <div className="col-md-12 pick-card orange"> */}
                 {this.state.votingArray.length >= 1 ? (
                         this.state.votingArray.map(restaurant => (
                             <div className="form-check-selected">
@@ -298,19 +298,16 @@ class Search extends Component {
                             </div>
                         )}
                 </div>
+                ): (<br/>)} 
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
                         <div className="row">
-                            <div className="col-sm-12 justify-content-center">
-                                <div className="btn btn-lg yellow text-white">
-                                    {/* <a href="/ballot"> */}
-                                    <div>
-                                        <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
-                                        </div>
-                                        
-
-                                    {/* </a> */}
+                            
+                                <div className="col-sm-4"></div>
+                                <div className="col-sm-4">
+                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
                                 </div>
-                            </div>
+                                <div className="col-sm-4"></div>
+                            
                         </div>
                     ) : (
                             <div className="row">
