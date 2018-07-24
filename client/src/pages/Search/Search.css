@@ -116,7 +116,7 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     position: relative;
     float: right;
     border-radius: 5px;
-    margin-bottom: 3px;
+    font-size: 85%;
     top: -7px;
 }
 .grouping-nested-elements{
