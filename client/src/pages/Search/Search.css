@@ -12,7 +12,12 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     overflow-x: hidden;
 }
 
- 
+.picker-card {
+    background-color: #eb5c00;
+    overflow: hidden;
+    background: linear-gradient(70deg, #eb5c00, #e17f00);
+    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
 
 .search_box {
     min-height: 60px;

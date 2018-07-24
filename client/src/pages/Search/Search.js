@@ -26,7 +26,9 @@ class Search extends Component {
         this.handleRoulette = this.handleRoulette.bind(this);
     }
 
-    
+    componentDidMount() {
+        sessionStorage.clear()
+    }
 
     handleChange(event){
         this.setState({value: event.target.value})
@@ -200,7 +202,7 @@ class Search extends Component {
                                 <p className="details" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-                            <input className="form-check-input" data-state="unchecked" type="checkbox" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} id="defaultCheck"></input>
+                            <button className="form-check-input" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></button>
                         </div>
                     </div>
                 ))
@@ -264,13 +266,18 @@ class Search extends Component {
                         </div>
                     </div>
                 <br/>
-                <div className="row orange">
-                {this.state.votingArray.length >= 1 && this.state.votingArray.length < 6 ? (
+                <div className="row ">
+                {/* <div className="col-md-12 pick-card orange"> */}
+                {this.state.votingArray.length >= 1 ? (
                         this.state.votingArray.map(restaurant => (
-                            <div className="col-md-12">
+                            <div className="col-md-12 picker-card orange">
+                            <div className="form-check">
+                                    <label className="form-check-label" htmlFor="defaultCheck">
                             <div key={restaurant.id} className="result-block">
                             {restaurant.name}
-                            <button className="delete yellow" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant}>✗</button>
+                            <button className="delete yellow text-white" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant}>✗</button>
+                            </div>
+                            </label>
                             </div>
                             </div>
                             
@@ -283,11 +290,9 @@ class Search extends Component {
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
                         <div className="row">
                             <div className="col-sm-12 justify-content-center">
-                                <div className="btn btn-lg yellow text-white">
                                     <a href="/ballot">
-                                        <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
+                                        <button  className= "btn btn-lg text-white yellow" id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
                                     </a>
-                                </div>
                             </div>
                         </div>
                     ) : (
