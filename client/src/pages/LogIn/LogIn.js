@@ -27,8 +27,8 @@ class LogIn extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    let currentURL = window.location.origin;
-    currentURL = "http://localhost:3001/auth/login" ? "http://localhost:3000/auth/login" : window.location.origin;
+    // let currentURL = window.location.origin;
+    // currentURL = "http://localhost:3001/auth/login" ? "http://localhost:3000/auth/login" : window.location.origin;
 
     if (this.state.loginPassword && this.state.loginUserName) {
       let userLogin = {
@@ -37,14 +37,14 @@ class LogIn extends Component {
       }
 
       axios
-        .post(currentURL, userLogin)
+        .post("/auth/login", userLogin)
         .then(response => {
           // console.log('----response from axios request----');
           // console.log(response);
           if (!response.data.errmsg) {
             console.log('success')
             this.setState({
-              redirectTo: "window.location.replace("/")"
+              redirectTo: window.location.replace("/"),
             });
           } else {
             console.log('error logging in')
