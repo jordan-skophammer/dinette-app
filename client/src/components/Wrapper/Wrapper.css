@@ -4,7 +4,10 @@
     z-index: -1;
     height: 100vh;
     min-width: 100%; 
-    background-image: url("./restaurant.jpg");
+    /* Image without photoshopping */
+    /* background-image: url("./restaurant.jpg"); */
+    /* Photoshopped background (can be reversed) */
+    background-image: url("./restaurant2.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
