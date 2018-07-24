@@ -90,12 +90,14 @@ class Search extends Component {
 
     createFireBaseVoteSession(){
         let restaurantsArray = sessionStorage.getItem("restaurants")
+        sessionStorage.setItem("voteOwner", "dummy owner")
         console.log(restaurantsArray, ' is restaurantsArray')
         let voteObject = {
-            // username: this.props.user.local.userName,
-            username: "dummy owner",
+            username: this.props.firstName,
+            // username: "test owner",
             restaurantsArr: restaurantsArray
         }
+        console.log("vote session info:",this.props.firstName)
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
@@ -284,9 +286,11 @@ class Search extends Component {
                         <div className="row">
                             <div className="col-sm-12 justify-content-center">
                                 <div className="btn btn-lg yellow text-white">
-                                    <a href="/ballot">
+                                    {/* <a href="/ballot"> */}
+                                    <div>
                                         <button  id="saveRestaurants" onClick={this.createFireBaseVoteSession}>Add to Group Vote</button>
-                                    </a>
+                                    {/* </a> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>

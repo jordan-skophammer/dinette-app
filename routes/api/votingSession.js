@@ -21,6 +21,7 @@ router.post("/new",function(req, res){
     // let username = req.body("username")
     console.log(req.body)
     let username = req.body.username
+    console.log("username: ",username)
     let restaurantsArrayVar = JSON.parse(req.body.restaurantsArr)
     console.log.restaurantsArrayVar
     // database.ref('voteSessions/'+username).set({
