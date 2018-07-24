@@ -23,7 +23,7 @@ app.use(require('cookie-parser')());
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dinette-app');
 mongoose.Promise = Promise;
-const db = mongoose.connection;
+const db = mongoose.connection(MONGODB_URI);
 
 // handle mongo error
 db.on('error', console.error.bind(console, 'connection error'));
