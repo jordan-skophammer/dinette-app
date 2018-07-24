@@ -93,6 +93,13 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     top: 0;
 }
 
+.delete {
+    position: relative;
+    float: right;
+    border-radius: 5px;
+    margin-bottom: 3px;
+}
+
 @media only screen and (max-height: 526px){ 
     .details{
         display: inline-block;

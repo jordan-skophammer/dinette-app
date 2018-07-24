@@ -270,7 +270,7 @@ class Search extends Component {
                             <div className="col-md-12">
                             <div key={restaurant.id} className="result-block">
                             {restaurant.name}
-                            <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant}>✗</button>
+                            <button className="delete yellow" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant}>✗</button>
                             </div>
                             </div>
                             
