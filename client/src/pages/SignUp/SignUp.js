@@ -28,8 +28,8 @@ class SignUp extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    let currentURL = window.location.origin;
-    currentURL = "http://localhost:3001/auth/signup" ? "http://localhost:3000/auth/signup" : window.location.origin;
+    // let currentURL = window.location.origin;
+    // currentURL = "http://localhost:3001/auth/signup" ? "http://localhost:3000/auth/signup" : window.location.origin;
 
     if (this.state.password === this.state.confirmPassword) {
       let newUser = {
@@ -43,7 +43,7 @@ class SignUp extends Component {
       // console.log(newUser);
 
       axios
-        .post(currentURL, newUser)
+        .post("/auth/signup", newUser)
         .then(response => {
           console.log(response);
           if (!response.data.errmsg) {
