@@ -44,7 +44,7 @@ class LogIn extends Component {
           if (!response.data.errmsg) {
             console.log('success')
             this.setState({
-              redirectTo: window.location.replace("/")
+              redirectTo: "window.location.replace("/")"
             });
           } else {
             console.log('error logging in')

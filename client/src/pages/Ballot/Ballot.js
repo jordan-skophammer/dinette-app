@@ -32,7 +32,7 @@ class Ballot extends Component {
     loadSessionStorage = () => {
         let restaurantsString = sessionStorage.getItem("restaurants")
         let restaurants = JSON.parse(restaurantsString)
-        let restaurantsVal = restaurants.restaurants
+        // let restaurantsVal = restaurants.restaurants
         let resultsString = sessionStorage.getItem("results")
         let results
         if (resultsString === null) {
@@ -41,8 +41,10 @@ class Ballot extends Component {
         else {
             results = JSON.parse(resultsString)
         }
-        this.setState({...restaurants, restaurantsVal})
+        this.setState({...restaurants, restaurants})
         this.setState({...results,results})
+        // console.log(restaurantsVal)
+        console.log(restaurants)
     }
 
     addToResults = (value) => {
@@ -93,6 +95,7 @@ class Ballot extends Component {
             owner: voteOwner
         }
         API.voteToFirebase(voteObject)
+        sessionStorage.setItem("results","")
 
     }
 

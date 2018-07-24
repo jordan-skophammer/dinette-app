@@ -30,17 +30,35 @@ router.post("/new",function(req, res){
     // })
     database.ref('voteSessions/'+username).set({
         userName: username,
-        votes: [],
+        votes: [""],
         restaurants: restaurantsArrayVar
       })
     // database.ref().set({
     //     whyfailing: "Why/"
     // })
     // .then(function(data){res.send("Congratulations!")})
-}
-
-    
+}   
 )
+
+router.post("/submit", function(req,res){
+    console.log("**************post vote information************")
+    // database.ref('voteSessions/'+username).on("value", function(snapshot){
+    //     let sessionData = snapshot.val()
+    //     console.log(sessionData)
+    // })
+    // console.log(req.body)
+    let owner = req.body.owner
+    let ballot = req.body.votes
+    let sessionID = Date.now()
+    console.log("Date stamp is ", sessionID)
+    let voteObject = {
+        sessionID : ballot
+    }
+
+    database.ref('voteSessions/'+owner+"/votes").set(
+        voteObject
+    )
+})
 
 router.get("/:username", function(req, res){
     console.log("********JOIN VOTE SESSION**********")
