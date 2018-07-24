@@ -7,7 +7,6 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
   */
 #search-results-card {
     padding: 30px;
-    height: 400px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -114,3 +113,22 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
         display: inline-block;
     }
 }
+/* Mobile screens */
+@media (max-height: 526px){ 
+    #search-results-card {
+        height: 300px;
+    }
+}
+/* Smaller computer screens/tablets */
+@media (max-height: 620px){ 
+    #search-results-card {
+        height: 425px;
+    }
+}
+/* Regular computer screen  */
+@media (min-height: 621px){ 
+    #search-results-card {
+        height: 600px;
+    }
+}
+
