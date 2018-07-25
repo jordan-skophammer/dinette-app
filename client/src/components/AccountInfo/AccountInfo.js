@@ -1,18 +1,21 @@
 import React from "react";
+import "./AccountInfo.css";
 
 const AccountInfo = (props) => {
   if (props.loggedIn === true) {
     return (
-      <div className="card">
+      <div className="card account-card">
         {console.log(props)}
         <div className="card-body">
-          <h3>Username: {props.user.local.userName}</h3>
+          <h3><b>Username:</b> {props.user.local.userName}</h3>
           <br />
-          <h3>Name: {props.user.firstName} {props.user.lastName}</h3>
+          <h3><b>Name:</b> {props.user.firstName} {props.user.lastName}</h3>
           <br />
-          <h3>Zip Code: {props.user.zipcode}</h3>
+          <h3><b>Zip Code:</b> {props.user.zipcode}</h3>
           <br />
-          <button className="btn green" data-toggle="modal" data-target="#editAccountModal">Edit Account</button>
+          <button className="btn yellow" data-toggle="modal" data-target="#editAccountModal">Edit Account</button>
+          <a href="/ballot"><button  className="btn orange">Go To Ballot</button></a>
+          <button className="btn green">Close Ballot</button>
         </div>
       </div>
     )
