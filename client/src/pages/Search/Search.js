@@ -155,7 +155,7 @@ class Search extends Component {
         // by storing the names of favorited restaurants in the state, and checking 
         // against the state each time user favorites a restaurant
         let alreadyFavorited = this.state.favoritedRestaurants
-        if (alreadyFavorited.indexOf(value.name) === -1 && alreadyFavorited.length > 6) {
+        if (alreadyFavorited.indexOf(value.name) === -1 && alreadyFavorited.length < 6) {
         // ***************
             // This logic grabs what currently is in the session storage 
             // and transforms it in order to manipulate it
