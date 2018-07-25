@@ -114,7 +114,6 @@ class Search extends Component {
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
-        window.location.href = '/ballot'
     }
 
     
