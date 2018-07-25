@@ -110,6 +110,7 @@ class Search extends Component {
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
+        window.location.href = '/ballot'
     }
 
     
@@ -277,10 +278,14 @@ class Search extends Component {
                 </div>
 
                 <div className={"row " + this.state.visibility}>
-
-                    <div className="col-md-12 orange" id="search-results-card">
+                <div className="col-md-12 pick-card orange">
                         <h3 className="text-white text-center">Search Results</h3>
-                        <br/>                               
+                        <h3 className="instructions-small">Click on the + to add to a group vote</h3>
+                        </div>
+<br/>
+                    <div className="col-md-12 orange" id="search-results-card">
+                        {/* <h3 className="text-white text-center">Search Results</h3>
+                        <h3 className="instructions-small">Click on the + to add to a group vote</h3> */}
                         {results}
                     </div>
                 </div>
