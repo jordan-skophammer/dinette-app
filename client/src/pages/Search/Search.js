@@ -22,7 +22,9 @@ class Search extends Component {
             votingArray: [],
             savedArray: [],
             favoritedRestaurants: [],
-            modal: false
+            modal: false,
+            goodbye: false,
+            sendAwayMsg: "Thank you for submitting your group vote!"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +43,7 @@ class Search extends Component {
 
     toggle() {
         this.setState({
-          modal: !this.state.modal});
+        modal: !this.state.modal});
     }
     
     handleSubmit(event){
@@ -107,7 +109,7 @@ class Search extends Component {
         console.log(restaurantsArray, ' is restaurantsArray')
         let voteObject = {
 
-            username: "test owner",
+            username: userName,
             restaurantsArr: restaurantsArray
         }
         console.log("vote session info:",this.props.firstName)
@@ -155,7 +157,7 @@ class Search extends Component {
         // by storing the names of favorited restaurants in the state, and checking 
         // against the state each time user favorites a restaurant
         let alreadyFavorited = this.state.favoritedRestaurants
-        if (alreadyFavorited.indexOf(value.name) == -1) {
+        if (alreadyFavorited.indexOf(value.name) === -1 && alreadyFavorited.length < 5) {
         // ***************
             // This logic grabs what currently is in the session storage 
             // and transforms it in order to manipulate it
@@ -165,19 +167,30 @@ class Search extends Component {
                 savedArray.push(storage, value)
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             // if there's something in session storage and it is an array
-            } else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
+                } 
+
+            else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
                 savedArray = storage
+                
                 //if value is not already in saved, pushes it
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+                // Should handle the duplicates? //
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+
                 if (savedArray.includes(value) === false){
                     savedArray.push(value)
                 //if value was already in saved and is now unchecked, delete from saved
-                } else {
+                } 
+                
+                else {
                     let index = savedArray.indexOf(value)
                     savedArray.splice(index, 1)
                 }
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             // if there's nothing in session storage yet
-            } else if (!sessionStorage.getItem("restaurants")){
+            } 
+
+            else if (!sessionStorage.getItem("restaurants")) {
                 savedArray.push(value)
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             }
@@ -238,7 +251,7 @@ class Search extends Component {
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
                             
-                            <i className="fas fa-plus form-check-input" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
+                            <i className="fas fa-plus form-check-input" style={{position:"relative"}} onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
                         
                             </div>
                     </div>
@@ -282,10 +295,14 @@ class Search extends Component {
                 </div>
 
                 <div className={"row " + this.state.visibility}>
-
-                    <div className="col-md-12 orange" id="search-results-card">
+                <div className="col-md-12 pick-card orange">
                         <h3 className="text-white text-center">Search Results</h3>
-                        <br/>                               
+                        <h3 className="instructions-small">Click on the + to add to a group vote</h3>
+                        </div>
+<br/>
+                    <div className="col-md-12 orange" id="search-results-card">
+                        {/* <h3 className="text-white text-center">Search Results</h3>
+                        <h3 className="instructions-small">Click on the + to add to a group vote</h3> */}
                         {results}
                     </div>
                 </div>
@@ -302,7 +319,7 @@ class Search extends Component {
                             </div>
                         </div>
                     </div>
-                <br/>
+                <br/>                
                 {this.state.votingArray.length > 0 ? ( 
                 <div className="row picker-card-selected">
                 {this.state.votingArray.length >= 1 ? (
@@ -315,7 +332,7 @@ class Search extends Component {
                                         {restaurant.name}
                                     </div>
                                     <div className="button-div">
-                                        <button className="delete yellow text-white" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
+                                        <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
                                     </div>
                                 </div>
                             </div>
