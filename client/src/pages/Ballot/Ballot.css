@@ -48,43 +48,19 @@ ol {
 .instructions {
     font-size: 150%;
     text-align: center;
-    padding: 5%;
-    margin: 2% auto 7% auto;
+    margin: 5% auto 9% auto;
     background-color: white;
-    width: 75%;
-    border-radius: 10px;
     color: rgb(86,86,86);
     font-weight: lighter;
-}
-.result-block-negative {
-    background-color: rgb(204, 204, 204 );
-    color: white;
-    font-style: oblique;
-    text-shadow: 1px 1px 5px black;
-    /* rgb(86, 86, 86); */
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    -webkit-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
-            box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
-}
-.result-block-negative:hover {
-    /* background: linear-gradient(70deg, #90c209, #b5cf1e); */
-    background: -webkit-linear-gradient(20deg, #ffae00, #ffbb00);
-    background: -o-linear-gradient(20deg, #ffae00, #ffbb00);
-    background: linear-gradient(70deg, #ffae00, #ffbb00);
-}
-
-h4 {
-    font-size: 1.5rem;
-    text-align: center;
     background: white;
-    padding: 2% 2% 2%;
-    margin: 1% 30% 5% 30%;
+    padding: 5%;
     border-radius: 5px;
     font-family: lobster;
 }
-
+.limited-width { 
+    width: 33%;
+    margin: auto;
+}
 
 @media screen and (max-width: 900px){ 
     .instructions {

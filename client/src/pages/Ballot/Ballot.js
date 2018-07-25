@@ -9,7 +9,10 @@ import API from "../../utils/API";
 // import { Bar } from 'react-chartjs-2';
 // import API from "../../utils/API";
 // import Search from "./Search";
-
+const instructionCustom = {
+    width:"75%", 
+    marginBottom: "2%"
+};
 
 class Ballot extends Component {
     // "restaurants" is the array of unranked restaurants
@@ -123,20 +126,20 @@ class Ballot extends Component {
         console.log("ranked: ", rankedNum)
         // Not chosen anything yet
         if (rankedNum === 0) {
-            message = "Available options"
+            message = `All options`
         }
         // has ranked more one restaurant, but not all of them
         else if (rankedNum > 0 && unrankedNum !== 0) {
-            message = "Remaining options"
+            message = "Remaining options:"
         }        
         // has ranked all restaurants
         else if (unrankedNum === 0) {
-            message = ""
+            message = "Done!"
         }
         console.log("Message: ", message)
         this.setState({chooseMessage: message})
     } 
-
+    
     render() {
         return (
             <Wrapper>
@@ -149,7 +152,9 @@ class Ballot extends Component {
                         {this.state.results && this.state.results.length ? (
                                 <ol type="1">
                                     <VoteResults>
-                                        <h4>My Favorites</h4>
+                                    <div className="limited-width">
+                                        <h4 className="instructions">My Favorites:</h4>
+                                    </div>
                                     {this.state.results.map(result => (
                                         <RankedRestaurants key={result.id}>
                                             <li className="ordered_items">
@@ -170,16 +175,18 @@ class Ballot extends Component {
                             ) : (
                                     <div className="row"></div>
                                 )}
-                        {/* relocation ends here */}
-
+                        
+                            {/* Replaced by New Message Logic */}
                             {this.state.results.length < 1 && this.state.restaurants ? 
-                                (<h3 className="instructions">These are the options selected by your vote organizer.<br/>Click on your favorite places to rank them!</h3>) 
+                                (<h3 className="instructions" style={instructionCustom}>These are the options selected by your vote organizer. <br/>Click on your favorite places to rank them!</h3>) 
                                 : 
                                 (<div className="row"></div>)}
                         { this.state.restaurants ? (
                             <VoteList>
-                                <h4>{this.state.chooseMessage}</h4>
-
+                                {this.state.results.length > 0 ? 
+                                (<div className="limited-width">
+                                    <h4 className="instructions">{this.state.chooseMessage}</h4>
+                                </div>) : (<br/>)}
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
                                         {restaurant.name}
