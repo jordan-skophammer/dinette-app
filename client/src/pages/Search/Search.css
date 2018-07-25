@@ -134,6 +134,18 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     width: 20%;
 }
 
+.instructions-small {
+    font-size: 150%;
+    text-align: center;
+    padding: 1%;
+    margin: 1% auto 1% auto;
+    background-color: white;
+    width: 75%;
+    border-radius: 10px;
+    color: rgb(86,86,86);
+    font-weight: lighter;
+}
+
 @media only screen and (max-height: 526px){ 
     .details{
         display: inline-block;
