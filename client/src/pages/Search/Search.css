@@ -48,7 +48,9 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
 
 }
-
+.relative {
+    position: relative;
+}
 .address {
     margin-bottom: 0;
 }
@@ -79,6 +81,9 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     width: 100%;
     font-size: 100%;
 }
+.form-check-input:active {
+    color: #eb5c00;
+}
 
 /* .yellow-btn {
     background: linear-gradient(70deg, #ff9100, #ffbb00);
@@ -88,7 +93,6 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 .details {
     size: .4rem;
     color: #eb5c00;
-
     text-decoration: underline;
     font-style: italic;
     margin-bottom: 5px;
@@ -115,10 +119,21 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 .delete {
     position: relative;
     float: right;
-    border-radius: 5px;
+    border-radius: 100%;
     font-size: 85%;
     top: -7px;
+    background: -webkit-linear-gradient(20deg, #ffae00, #ffbb00);
+    background: -o-linear-gradient(20deg, #ffae00, #ffbb00);
+    background: linear-gradient(70deg, #ffae00, #ffbb00);
+    color: white;
 }
+.delete:hover {
+    color: #FC541B;
+}
+.delete:active {
+    color: #FC541B;
+}
+
 .grouping-nested-elements{
     display: inline-block;
     width: 100%;

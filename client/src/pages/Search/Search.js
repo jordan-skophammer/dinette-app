@@ -22,7 +22,9 @@ class Search extends Component {
             votingArray: [],
             savedArray: [],
             favoritedRestaurants: [],
-            modal: false
+            modal: false,
+            goodbye: false,
+            sendAwayMsg: "Thank you for submitting your group vote!"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -249,7 +251,7 @@ class Search extends Component {
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
                             
-                            <i className="fas fa-plus form-check-input" onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
+                            <i className="fas fa-plus form-check-input" style={{position:"relative"}} onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
                         
                             </div>
                     </div>
@@ -330,7 +332,7 @@ class Search extends Component {
                                         {restaurant.name}
                                     </div>
                                     <div className="button-div">
-                                        <button className="delete yellow text-white" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
+                                        <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
                                     </div>
                                 </div>
                             </div>

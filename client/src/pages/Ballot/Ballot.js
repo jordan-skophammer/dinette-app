@@ -12,13 +12,18 @@ import API from "../../utils/API";
 
 
 class Ballot extends Component {
-
-
+    // "restaurants" is the array of unranked restaurants
+    // "results" is the array of ranked restaurants
     constructor(props) {
         super(props);
         this.state = {
             restaurants: [],
-            results: []
+            results: [],
+            chooseMessage: "",
+            ranked: 0,
+            unranked: 0,
+            goodbye: false,
+            sendAwayMsg: "Thank you for participating to the vote!"
         }
     }
     // handleResult(event) {
@@ -27,6 +32,7 @@ class Ballot extends Component {
 
     componentDidMount() {
         this.loadSessionStorage();
+        this.optionsInstructions(0,this.state.unranked)
     }
 
     loadSessionStorage = () => {
@@ -34,7 +40,8 @@ class Ballot extends Component {
         let restaurants = JSON.parse(restaurantsString)
         let restaurantsVal = restaurants.restaurants
         let resultsString = sessionStorage.getItem("results")
-        let results
+        let results;
+        console.log("restaurantsVal: ", restaurantsVal)
         if (resultsString === null) {
             results = []
         }
@@ -43,6 +50,7 @@ class Ballot extends Component {
         }
         this.setState({...restaurants, restaurantsVal})
         this.setState({...results,results})
+        this.setState({unranked: restaurantsVal.length})
         // console.log(restaurantsVal)
         console.log(restaurants)
     }
@@ -60,7 +68,12 @@ class Ballot extends Component {
 
         sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
         sessionStorage.setItem("results", JSON.stringify(results))
-        this.setState({...this.state, results, restaurants})
+        
+        let rankedNum = this.state.ranked + 1;
+        let unrankedNum = this.state.unranked - 1;
+        
+        this.setState({...this.state, results, restaurants, ranked: rankedNum, unranked: unrankedNum})
+        this.optionsInstructions(rankedNum,unrankedNum)
     }
 
     removeFromResults = (value) => {
@@ -75,8 +88,12 @@ class Ballot extends Component {
 
         sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
         sessionStorage.setItem("results", JSON.stringify(results))
-        
-        this.setState({...this.state, results, restaurants})
+
+        let rankedNum = this.state.ranked - 1;
+        let unrankedNum = this.state.unranked + 1;
+
+        this.setState({...this.state, results, restaurants, ranked: rankedNum, unranked: unrankedNum})
+        this.optionsInstructions(rankedNum, unrankedNum)
     }
 
     handleInputChange = event => {
@@ -98,7 +115,27 @@ class Ballot extends Component {
         // sessionStorage.setItem("results",null)
 
     }
-
+    optionsInstructions = (rankedNum, unrankedNum) => {
+        let message;
+        /* generate instruction message depending on how many options are 
+         left to choose from */
+        console.log("unranked: ", unrankedNum)
+        console.log("ranked: ", rankedNum)
+        // Not chosen anything yet
+        if (rankedNum === 0) {
+            message = "Available options"
+        }
+        // has ranked more one restaurant, but not all of them
+        else if (rankedNum > 0 && unrankedNum !== 0) {
+            message = "Remaining options"
+        }        
+        // has ranked all restaurants
+        else if (unrankedNum === 0) {
+            message = ""
+        }
+        console.log("Message: ", message)
+        this.setState({chooseMessage: message})
+    } 
 
     render() {
         return (
@@ -112,12 +149,12 @@ class Ballot extends Component {
                         {this.state.results && this.state.results.length ? (
                                 <ol type="1">
                                     <VoteResults>
-
+                                        <h4>My Favorites</h4>
                                     {this.state.results.map(result => (
                                         <RankedRestaurants key={result.id}>
                                             <li className="ordered_items">
                                             {result.name}
-                                            <i className="far fa-check-square form-check-input" onClick={() => this.removeFromResults(result)} value={result}></i>
+                                            <i className="far fa-check-square form-check-input" style={{position:"relative"}} onClick={() => this.removeFromResults(result)} value={result}></i>
                                             </li>
                                         </RankedRestaurants>
                                     ))}
@@ -134,17 +171,20 @@ class Ballot extends Component {
                                     <div className="row"></div>
                                 )}
                         {/* relocation ends here */}
+
                             {this.state.results.length < 1 && this.state.restaurants ? 
                                 (<h3 className="instructions">These are the options selected by your vote organizer.<br/>Click on your favorite places to rank them!</h3>) 
                                 : 
                                 (<div className="row"></div>)}
                         { this.state.restaurants ? (
                             <VoteList>
+                                <h4>{this.state.chooseMessage}</h4>
+
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
                                         {restaurant.name}
 
-                                        <i className="far fa-square form-check-input" onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></i>
+                                        <i className="far fa-square form-check-input" style={{position:"relative"}} onClick={() => this.addToResults(restaurant)} value={restaurant} id="defaultCheck"></i>
                                         
                                     </RestaurantOption>
                                 ))}
