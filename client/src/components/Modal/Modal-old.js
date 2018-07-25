@@ -1,24 +1,19 @@
-import React, { Component } from "react";
-import { Modal, ModalBody} from 'reactstrap';
+import React from "react";
 import "./Modal.css"
-export default class Modal2 extends Component {
-    constructor(props) {
-      super(props);
-    }
-  
-    render() {
-        return (
-            <div>
-            <Modal isOpen={this.props.modal} toggle={this.props.toggle}>
-            <div className="orange text-white">
-                <ModalBody>
-                <div id="carouselExampleControls" className="carousel slide photos-holder" data-ride="carousel">
-                        <div className="carousel-inner justify-content-center">
+
+const Modal = ({photos, firstPhoto, restName, phone, address, hours, rating, reviews}) => (
+    <div className="modal fade" id="detailsModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+            <div className="modal-content orange text-white">
+                <div className="modal-body">
+
+                    <div id="carouselExampleControls" className="carousel slide photos-holder" data-ride="carousel">
+                        <div className="carousel-inner">
                             <div className="carousel-item active">
-                                <img className="rest-img" src={this.props.firstPhoto} alt=""/>
+                                <img className="rest-img" src={firstPhoto} alt=""/>
                             </div>
 
-                            {this.props.photos.slice(1).map(url => (
+                            {photos.slice(1).map(url => (
                                 <div className="carousel-item" key={url}>
                                     <img className="rest-img" src={url} alt=""/>
                                 </div>
@@ -34,25 +29,27 @@ export default class Modal2 extends Component {
                             <span className="sr-only">Next</span>
                         </a>
                     </div>
+
+
                  
                     <br/>
 
-                    <h3 id="restName">{this.props.restName}</h3>
-                    <p>{this.props.address}</p>
-                    <p>{this.props.phone}</p>
+                    <h3 id="restName">{restName}</h3>
+                    <p>{address}</p>
+                    <p>{phone}</p>
 
                     <p><b>Hours:</b></p>
-                    {this.props.hours.map(day => (
+                    {hours.map(day => (
                         <p className="hours">{day}</p>
                     ))}
                     <br/>
 
-                    <p><b>Rating: {this.props.rating}</b></p>
+                    <p><b>Rating: {rating}</b></p>
                     <br/>
 
                     <p><b>Reviews</b></p>
                     <div className="reviews-holder">
-                        {this.props.reviews.map(review => (
+                        {reviews.map(review => (
                             <div className="result-block">
                                 <p><b>{review[2]}</b></p>
                                 <p className="hours">{review[0]}</p>
@@ -60,12 +57,22 @@ export default class Modal2 extends Component {
                             </div>
                         ))}
                     </div>
-                </ModalBody>
-                {this.props.children}
                 </div>
-            </Modal>
+                <div className="modal-footer">
+                    <button type="button" className="btn yellow text-white" data-dismiss="modal">Close</button>
+                </div>
             </div>
-        );
-    }
+        </div>
+    </div>
+)
 
-  }
+
+
+
+
+
+
+
+
+
+export default Modal;

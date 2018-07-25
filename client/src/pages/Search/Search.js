@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./Search.css"
 import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
-import Modal from "../../components/Modal"
+import Modal2 from "../../components/Modal"
+import { ModalFooter} from 'reactstrap'
 
 class Search extends Component {
     constructor(props) {
@@ -21,10 +22,12 @@ class Search extends Component {
             votingArray: [],
             savedArray: [],
             favoritedRestaurants: [],
+            modal: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRoulette = this.handleRoulette.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidMount() {
@@ -36,8 +39,9 @@ class Search extends Component {
         // console.log(this.state.value)
     }
 
-    controlSpinner(){
-
+    toggle() {
+        this.setState({
+          modal: !this.state.modal});
     }
     
     handleSubmit(event){
@@ -135,6 +139,7 @@ class Search extends Component {
         // console.log(modalInfo)
         this.setState({modalArray: modalInfo})
         console.log(this.state.modalArray[0[0]])
+        this.toggle()
     }
     
 
@@ -340,7 +345,7 @@ class Search extends Component {
                         
             </div>
             
-            <Modal
+            <Modal2
                 key = {this.state.modalArray[1]}
                 photos = {this.state.modalArray[0]}
                 firstPhoto = {this.state.modalArray[0][0]}
@@ -350,7 +355,13 @@ class Search extends Component {
                 phone = {this.state.modalArray[4]}
                 rating = {this.state.modalArray[5]}
                 reviews = {this.state.modalArray[6]}
-            />
+                modal = {this.state.modal}
+                toggle = {this.toggle}
+            >
+                <ModalFooter>
+                <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
+                </ModalFooter>
+            </Modal2>
             
         </Wrapper>
 
