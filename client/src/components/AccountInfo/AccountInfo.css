@@ -1,4 +1,4 @@
 .account-card {
-    border: 5px solid #b5cf1e;
-    padding-bottom: 3%;
+    border: 5px solid #b5cf1e !important;
+    padding-bottom: 3% !important;
 }
