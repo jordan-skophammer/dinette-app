@@ -21,11 +21,11 @@ class App extends PureComponent {
     this.state = {
       loggedIn: false,
       user: {
-        firstName: "first",
-        lastName: "last",
-        zipcode: 55104,
+        firstName: "",
+        lastName: "",
+        zipcode: "",
         local: {
-          userName: "user"
+          userName: ""
         },
       }
     }
@@ -74,6 +74,7 @@ class App extends PureComponent {
           loggedIn: false,
           user: null
         })
+        window.location.replace("/");
       }
     })
   }
