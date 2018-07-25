@@ -150,7 +150,7 @@ class Search extends Component {
         // by storing the names of favorited restaurants in the state, and checking 
         // against the state each time user favorites a restaurant
         let alreadyFavorited = this.state.favoritedRestaurants
-        if (alreadyFavorited.indexOf(value.name) == -1) {
+        if (alreadyFavorited.indexOf(value.name) === -1 && alreadyFavorited.length > 6) {
         // ***************
             // This logic grabs what currently is in the session storage 
             // and transforms it in order to manipulate it
@@ -160,19 +160,30 @@ class Search extends Component {
                 savedArray.push(storage, value)
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             // if there's something in session storage and it is an array
-            } else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
+                } 
+
+            else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
                 savedArray = storage
+                
                 //if value is not already in saved, pushes it
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+                // Should handle the duplicates? //
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+
                 if (savedArray.includes(value) === false){
                     savedArray.push(value)
                 //if value was already in saved and is now unchecked, delete from saved
-                } else {
+                } 
+                
+                else {
                     let index = savedArray.indexOf(value)
                     savedArray.splice(index, 1)
                 }
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             // if there's nothing in session storage yet
-            } else if (!sessionStorage.getItem("restaurants")){
+            } 
+
+            else if (!sessionStorage.getItem("restaurants")) {
                 savedArray.push(value)
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             }
@@ -297,7 +308,7 @@ class Search extends Component {
                             </div>
                         </div>
                     </div>
-                <br/>
+                <br/>                
                 {this.state.votingArray.length > 0 ? ( 
                 <div className="row picker-card-selected">
                 {this.state.votingArray.length >= 1 ? (
