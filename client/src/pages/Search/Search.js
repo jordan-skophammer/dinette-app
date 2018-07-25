@@ -103,7 +103,7 @@ class Search extends Component {
         console.log(restaurantsArray, ' is restaurantsArray')
         let voteObject = {
 
-            username: "test owner",
+            username: userName,
             restaurantsArr: restaurantsArray
         }
         console.log("vote session info:",this.props.firstName)
