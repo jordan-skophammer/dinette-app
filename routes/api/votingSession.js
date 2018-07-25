@@ -15,6 +15,14 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+router.post("/winner", function(req,res){
+    let winner=req.body.winner
+    let owner=req.body.owner
+    database.ref("voteSessions/"+owner+"/winner").set(winner)
+})
+
+
+
 router.post("/new",function(req, res){
     console.log("************MAKE VOTE SESSION************")
     // console.log(req.body)
@@ -31,7 +39,7 @@ router.post("/new",function(req, res){
     // })
     database.ref('voteSessions/'+username).set({
         userName: username,
-        votes: [""],
+        votes: {ballot: [""]},
         restaurants: restaurantsArrayVar
       })
     // database.ref().set({
@@ -42,23 +50,17 @@ router.post("/new",function(req, res){
 )
 
 router.post("/submit", function(req,res){
-    console.log("**************post vote information************")
-    // database.ref('voteSessions/'+username).on("value", function(snapshot){
-    //     let sessionData = snapshot.val()
-    //     console.log(sessionData)
-    // })
-    // console.log(req.body)
+    console.log("**************post vote information************" )
+    let currentSnap
     let owner = req.body.owner
-    let ballot = req.body.votes
-    let sessionID = Date.now()
-    console.log("Date stamp is ", sessionID)
-    let voteObject = {
-        sessionID : ballot
-    }
+    let voteObject = req.body.votes
+    console.log("*******************************************************************************")
+    let newPostRef = database.ref('voteSessions/'+owner+"/votes/ballot").push(voteObject)
+    let newPostID = newPostRef.key
+    console.log(newPostID)
+    res.send(newPostID)
 
-    database.ref('voteSessions/'+owner+"/votes").set(
-        voteObject
-    )
+    
 })
 
 router.get("/:username", function(req, res){
