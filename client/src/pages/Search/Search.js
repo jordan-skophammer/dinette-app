@@ -229,7 +229,7 @@ class Search extends Component {
             results = (
                 this.state.results.map(restaurant => (
                     <div key = {restaurant.result.name} className="result-block">
-                        <div className="form-check">
+                        <div className="form-check-results">
                             <label className="form-check-label">
                                 <h5 className="restName" href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>
                                 {restaurant.result.name}

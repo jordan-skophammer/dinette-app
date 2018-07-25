@@ -1,4 +1,4 @@
-.form-check {
+.form-check-results {
     padding-left: 0;
 }
 /* We are re-using this element/styling in ballot.js, but the styling here takes over 
@@ -154,13 +154,15 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 /* Smaller computer screens/tablets */
 @media (max-height: 620px){ 
     #search-results-card {
-        height: 425px;
+        min-height: 300px;
+        max-height: 425px;
     }
 }
 /* Regular computer screen  */
 @media (min-height: 621px){ 
     #search-results-card {
-        height: 600px;
+        min-height: 300px;
+        max-height: 550px;
     }
 }
 
