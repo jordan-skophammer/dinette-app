@@ -1,7 +1,7 @@
 import React from "react";
 
 const AccountInfo = (props) => {
-  if (props.loggedIn === true) {
+  // if (props.loggedIn === true) {
     return (
       <div className="card">
         {console.log(props)}
@@ -16,20 +16,20 @@ const AccountInfo = (props) => {
         </div>
       </div>
     )
-  } else {
-    return (
-      <div>
-        <div className="card">
-          <div className="card-body">
-            <h3>You're not logged in yet!</h3>
-          </div>
-        </div>
-        <div className="row home-btn text-center justify-content-center text-white">
-          <a href="/login" className="login">Log In</a> <span className="or">&nbsp; or &nbsp; </span><a href="/SignUp" className="login">Sign Up</a>
-        </div>
-      </div>
-    )
-  }
+  // } else {
+  //   return (
+  //     <div>
+  //       <div className="card">
+  //         <div className="card-body">
+  //           <h3>You're not logged in yet!</h3>
+  //         </div>
+  //       </div>
+  //       <div className="row home-btn text-center justify-content-center text-white">
+  //         <a href="/login" className="login">Log In</a> <span className="or">&nbsp; or &nbsp; </span><a href="/SignUp" className="login">Sign Up</a>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 }
 
 export default AccountInfo;
