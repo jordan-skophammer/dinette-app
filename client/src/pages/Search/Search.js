@@ -3,6 +3,7 @@ import "./Search.css"
 import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
 import Modal2 from "../../components/Modal"
+import VoteModal from "../../components/VoteCreatedModal"
 import { ModalFooter} from 'reactstrap'
 
 class Search extends Component {
@@ -23,6 +24,7 @@ class Search extends Component {
             savedArray: [],
             favoritedRestaurants: [],
             modal: false,
+            voteModal: false,
             goodbye: false,
             sendAwayMsg: "Thank you for submitting your group vote!"
         };
@@ -42,8 +44,10 @@ class Search extends Component {
     }
 
     toggle() {
-        this.setState({
-        modal: !this.state.modal});
+        this.setState({modal: !this.state.modal});
+    }
+    toggleVoteModal() {
+        this.setState({voteModal: !this.state.voteModal})
     }
     
     handleSubmit(event){
@@ -103,6 +107,8 @@ class Search extends Component {
     }
 
     createFireBaseVoteSession(userName){
+        // this.toggleVoteModal()
+        this.setState({voteModal: true})
         console.log(`Local user: ${userName}`);
         let restaurantsArray = sessionStorage.getItem("restaurants")
         sessionStorage.setItem("voteOwner", "dummy owner")
@@ -116,6 +122,7 @@ class Search extends Component {
             
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
+        
     }
 
     
@@ -348,7 +355,7 @@ class Search extends Component {
                             
                                 <div className="col-sm-4"></div>
                                 <div className="col-sm-4">
-                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
                                 </div>
                                 <div className="col-sm-4"></div>
                             
@@ -377,6 +384,15 @@ class Search extends Component {
                 <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
                 </ModalFooter>
             </Modal2>
+
+            <VoteModal
+                toggle = {this.toggleVoteModal}
+                modal = {this.state.voteModal}
+            >
+                <ModalFooter>
+                <button type="button" className="btn yellow text-white" onClick= {() => this.toggleVoteModal()}>Close</button>
+                </ModalFooter>
+            </VoteModal>
             
         </Wrapper>
 
