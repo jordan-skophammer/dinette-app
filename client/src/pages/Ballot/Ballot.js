@@ -116,7 +116,8 @@ class Ballot extends Component {
         }
         API.voteToFirebase(voteObject).then(function(response){
             console.log("response",response.data)
-            localStorage.setItem("lastVoted", response.data)
+            let voteRecord = [voteOwner, response.data]
+            localStorage.setItem("lastVoted",voteRecord)
             sessionStorage.setItem("results",null)
         
         })
