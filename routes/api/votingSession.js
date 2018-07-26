@@ -25,27 +25,18 @@ router.post("/winner", function(req,res){
 
 router.post("/new",function(req, res){
     console.log("************MAKE VOTE SESSION************")
-    // console.log(req.body)
-    // let username = req.body("username")
     console.log(req.body)
     let username = req.body.username
     console.log("username: ",username)
     let restaurantsArrayVar = JSON.parse(req.body.restaurantsArr)
-    console.log.restaurantsArrayVar
-    // database.ref('voteSessions/'+username).set({
-    //     isOpen: 1,
-    //     voteEntries: "",
-    //     restaurants: restaurantsArrayVar
-    // })
+    let timestamp = Date.now()
     database.ref('voteSessions/'+username).set({
         userName: username,
-        votes: {ballot: [""]},
-        restaurants: restaurantsArrayVar
+        votes: {ballot:[""]},
+        restaurants: restaurantsArrayVar,
+        timestamp: timestamp
       })
-    // database.ref().set({
-    //     whyfailing: "Why/"
-    // })
-    // .then(function(data){res.send("Congratulations!")})
+
 }   
 )
 
@@ -55,10 +46,12 @@ router.post("/submit", function(req,res){
     let owner = req.body.owner
     let voteObject = req.body.votes
     console.log("*******************************************************************************")
-    let newPostRef = database.ref('voteSessions/'+owner+"/votes/ballot").push(voteObject)
-    let newPostID = newPostRef.key
-    console.log(newPostID)
-    res.send(newPostID)
+    database.ref('voteSessions/'+owner+"/votes/ballot").push(voteObject).then(function(){
+        let timestamp = Date.now()
+        let stringStamp = JSON.stringify(timestamp)
+        res.send(stringStamp)
+    })
+    
 
     
 })
@@ -66,7 +59,7 @@ router.post("/submit", function(req,res){
 router.get("/:username", function(req, res){
     console.log("********JOIN VOTE SESSION**********")
     let username = req.params.username
-    database.ref('voteSessions/'+username).on("value", function(snapshot){
+    database.ref('voteSessions/'+username).once("value", function(snapshot){
         console.log(snapshot.val())
         res.send(snapshot.val())
     })

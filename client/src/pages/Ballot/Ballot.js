@@ -119,8 +119,13 @@ class Ballot extends Component {
             votes: parsedVoteState,
             owner: voteOwner
         }
-        API.voteToFirebase(voteObject)
-        // sessionStorage.setItem("results",null)
+    API.voteToFirebase(voteObject).then(function(response){
+            console.log("response",response.data)
+            let voteRecord = [voteOwner, response.data]
+            localStorage.setItem("lastVoted",voteRecord)
+            sessionStorage.setItem("results",null)
+        
+        })
     }
     optionsInstructions = (rankedNum, unrankedNum) => {
         let message;
