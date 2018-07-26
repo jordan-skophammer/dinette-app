@@ -4,10 +4,10 @@ nav {
   box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
-.main-link {
-    color: white;
+.navbar-brand {
+    color: white !important;
     font-family: 'Lobster', cursive;
-    font-size: 25pt;
+    font-size: 25pt !important;
     margin-left: 2%;
  }
 
