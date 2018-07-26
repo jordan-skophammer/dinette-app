@@ -55,7 +55,7 @@ class Ballot extends Component {
         this.setState({...results,results})
         this.setState({unranked: restaurantsVal.length})
         // console.log(restaurantsVal)
-        console.log(restaurants)
+        console.log(restaurantsVal)
     }
 
     addToResults = (value) => {
@@ -115,7 +115,7 @@ class Ballot extends Component {
             owner: voteOwner
         }
         API.voteToFirebase(voteObject)
-        // sessionStorage.setItem("results",null)
+        sessionStorage.setItem("results",null)
 
     }
     optionsInstructions = (rankedNum, unrankedNum) => {
