@@ -19,7 +19,7 @@ router.get('/id', function (req, res) {
   }
 });
 
-router.put('/update', function (req, res) {
+router.patch('/update', function (req, res) {
   console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport.user)}`);
   console.log(req.body);
   
