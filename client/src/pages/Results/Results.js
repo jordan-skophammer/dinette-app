@@ -38,7 +38,7 @@ render() {
 <br/>
                     <div className="col-md-12 orange" id="search-results-card">
                         
-                        {winner}
+                        {/* {winner} */}
                     </div>
                 </div>
                 ):(
