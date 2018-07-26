@@ -31,11 +31,25 @@ class JoinVote extends Component {
                 if (res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                console.log(res.data)
                 sessionStorage.setItem("restaurants",JSON.stringify(res.data))
-                console.log(sessionStorage.getItem("restaurants"))
                 sessionStorage.setItem("voteOwner",this.state.value)
-                window.location.href = "/ballot"
+                if (localStorage.getItem("lastVoted")){
+                    let lastVoted = localStorage.getItem("lastVoted")
+                    let lastVotedParsed = lastVoted.split(",")
+                    let lastOwner = lastVotedParsed[0]
+                    let lastTimestamp = lastVotedParsed[1]
+                    let creationStamp = parseInt(res.data.timestamp)
+                    if (lastOwner === this.state.value && lastTimestamp > creationStamp){
+                        window.location.href = "/result"
+                    } else {
+                        window.location.href = "/ballot"
+                    }
+                    
+
+                } else {
+                    window.location.href = "/ballot"
+                }
+                
 
             })
     }
