@@ -294,12 +294,12 @@ class Search extends Component {
                     <img className={this.state.loading} src="../../spinner.svg" alt=""/>
                 </div>
 
-                <div className={"row " + this.state.visibility}>
-                <div className="col-md-12 pick-card orange">
+                <div className={"row orange " + this.state.visibility}>
+                    <div className="col-md-12 pick-card">
                         <h3 className="text-white text-center">Search Results</h3>
-                        <h3 className="instructions-small">Click on the + to add to a group vote</h3>
-                        </div>
-<br/>
+                        <p className="instructions-small">Click on the + to add to a group vote</p>
+                    </div>
+                    <br/>
                     <div className="col-md-12 orange" id="search-results-card">
                         {/* <h3 className="text-white text-center">Search Results</h3>
                         <h3 className="instructions-small">Click on the + to add to a group vote</h3> */}
@@ -324,9 +324,8 @@ class Search extends Component {
                 <div className="row picker-card-selected">
                 {this.state.votingArray.length >= 1 ? (
                         this.state.votingArray.map(restaurant => (
-                            <div className="form-check-selected">
-                                    <label className="form-check-label-selected" htmlFor="defaultCheck">
-                            <div key={restaurant.id} className="result-block-selected">
+                            
+                            <div key={restaurant.id} className="result-block-selected col-sm-6 col-md-4">
                                 <div className="grouping-nested-elements">
                                     <div className="restaurant-name">
                                         {restaurant.name}
@@ -336,8 +335,7 @@ class Search extends Component {
                                     </div>
                                 </div>
                             </div>
-                            </label>
-                            </div>
+                            
                         ))
                     ) : (
                             <div>
