@@ -31,6 +31,7 @@ render() {
         <Wrapper>
             <div>
                 {this.state.winner ? (
+
                                         <div className="row ">
                                         {this.state.winner.map(restaurant => (
                                             <div>
@@ -44,6 +45,7 @@ render() {
                                         )
                                         )}
                                         </div>
+
                 ):(
                     <div>
                         <h3 className="instructions-small">Results not in!</h3>
