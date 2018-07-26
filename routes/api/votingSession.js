@@ -31,7 +31,7 @@ router.post("/new",function(req, res){
     let username = req.body.username
     console.log("username: ",username)
     let restaurantsArrayVar = JSON.parse(req.body.restaurantsArr)
-    console.log.restaurantsArrayVar
+    console.log("got to 34")
     // database.ref('voteSessions/'+username).set({
     //     isOpen: 1,
     //     voteEntries: "",
@@ -39,7 +39,7 @@ router.post("/new",function(req, res){
     // })
     database.ref('voteSessions/'+username).set({
         userName: username,
-        votes: {ballot: [""]},
+        votes: {ballot: test},
         restaurants: restaurantsArrayVar
       })
     // database.ref().set({
@@ -66,7 +66,7 @@ router.post("/submit", function(req,res){
 router.get("/:username", function(req, res){
     console.log("********JOIN VOTE SESSION**********")
     let username = req.params.username
-    database.ref('voteSessions/'+username).on("value", function(snapshot){
+    database.ref('voteSessions/'+username).once("value", function(snapshot){
         console.log(snapshot.val())
         res.send(snapshot.val())
     })
