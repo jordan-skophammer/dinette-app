@@ -3,19 +3,22 @@ import "./Search.css"
 import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
 import Modal2 from "../../components/Modal"
-import { ModalFooter} from 'reactstrap'
+import { ModalFooter } from 'reactstrap'
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
             rouletteResults: [],
-            roulettePick: {result:{
-                name: "name",
-                address_components: "address"}},
+            roulettePick: {
+                result: {
+                    name: "name",
+                    address_components: "address"
+                }
+            },
             results: [],
             value: "",
-            modalArray: [[1,2], "name", "address", [1,2], "phone", "rating", [1,2]],
+            modalArray: [[1, 2], "name", "address", [1, 2], "phone", "rating", [1, 2]],
             visibility: "hidden",
             rouletteVisable: "hidden",
             loading: "hidden",
@@ -36,60 +39,62 @@ class Search extends Component {
         sessionStorage.clear()
     }
 
-    handleChange(event){
-        this.setState({value: event.target.value})
+    handleChange(event) {
+        this.setState({ value: event.target.value })
         // console.log(this.state.value)
     }
 
     toggle() {
         this.setState({
-        modal: !this.state.modal});
+            modal: !this.state.modal
+        });
     }
-    
-    handleSubmit(event){
+
+    handleSubmit(event) {
         // console.log("Data was submitted: ", this.state.value);
-        this.setState({loading: "visible", visibility:"hidden", rouletteVisable:"hidden"})
+        this.setState({ loading: "visible", visibility: "hidden", rouletteVisable: "hidden" })
         event.preventDefault();
-        if(this.state.value.length > 0) {
+        if (this.state.value.length > 0) {
             API.getRestaurants(this.state.value)
                 .then(res => {
                     // console.log(res.statusText)
-                    if(res.status !== 200) {
+                    if (res.status !== 200) {
                         throw new Error(res.statusText)
                     }
                     // console.log(res)
-                    if (res.data !== "No Results Found"){
-                        this.setState({...this.state,results: res.data})
+                    if (res.data !== "No Results Found") {
+                        this.setState({ ...this.state, results: res.data })
                     } else {
                         console.log("No Results found")
-                        this.setState({...this.state,results: ["No Results Found"]})
+                        this.setState({ ...this.state, results: ["No Results Found"] })
                     }
-                    this.setState({visibility: "", loading: "hidden"})
+                    this.setState({ visibility: "", loading: "hidden" })
 
                 })
-            }
+        }
         else {
-            this.setState({visibility: "hidden", loading: "hidden"})
-            }
+            this.setState({ visibility: "hidden", loading: "hidden" })
+        }
     }
 
-    handleRoulette(event){
+    handleRoulette(event) {
         // console.log("Data was submitted: ", this.state.value);
         sessionStorage.clear()
-        this.setState({loading: "visible", visibility:"hidden", rouletteVisable:"hidden"})
+        this.setState({ loading: "visible", visibility: "hidden", rouletteVisable: "hidden" })
+
         event.preventDefault();
         API.getRestaurants(this.state.value)
             .then(res => {
                 // console.log(res.statusText)
-                if(res.status !== 200) {
+                if (res.status !== 200) {
                     throw new Error(res.statusText)
                 }
                 // console.log(res)
-                if (res.data !== "No Results Found"){
-                    this.setState({...this.state,r: res.data})
+                if (res.data !== "No Results Found") {
+                    this.setState({ ...this.state, r: res.data })
                 } else {
                     console.log("no results found")
-                    this.setState({...this.state,results: ["No Results Found"]})
+                    this.setState({ ...this.state, results: ["No Results Found"] })
                 }
                 this.randomPick(res.data)
 
@@ -98,12 +103,12 @@ class Search extends Component {
 
     randomPick = (data) => {
         console.log("roulette picked")
-        let pick = data[Math.floor(Math.random()*data.length)]
-        this.setState({roulettePick: pick, rouletteVisable: "", loading: "hidden"})
+        let pick = data[Math.floor(Math.random() * data.length)]
+        this.setState({ roulettePick: pick, rouletteVisable: "", loading: "hidden" })
         console.log(pick)
     }
 
-    createFireBaseVoteSession(userName){
+    createFireBaseVoteSession(userName) {
         console.log(`Local user: ${userName}`);
         let restaurantsArray = sessionStorage.getItem("restaurants")
         sessionStorage.setItem("voteOwner", "dummy owner")
@@ -113,21 +118,21 @@ class Search extends Component {
             username: userName,
             restaurantsArr: restaurantsArray
         }
-        console.log("vote session info:",this.props.firstName)
-            
+        console.log("vote session info:", this.props.firstName)
+
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
     }
 
-    
 
-    populateModal(photos, name, location, hours, phone, rating, review){
+
+    populateModal(photos, name, location, hours, phone, rating, review) {
         let photosArray = []
-        if(!photos){
+        if (!photos) {
             photosArray = [1]
         } else {
             photos.forEach(photo => {
-                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference="+ photo.photo_reference + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=" + photo.photo_reference + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
                 photosArray.push(url)
             })
         }
@@ -140,16 +145,16 @@ class Search extends Component {
         })
         let modalInfo = [photosArray, name, location, hours, phone, rating, reviewsArray];
         // console.log(modalInfo)
-        this.setState({modalArray: modalInfo})
+        this.setState({ modalArray: modalInfo })
         console.log(this.state.modalArray[0[0]])
         this.toggle()
     }
-    
+
 
 
     addToSessionStorage = (value) => {
         console.log("Name of object we are adding to Session Storage: ", value.name)
-        sessionStorage.setItem("voted", []) 
+        sessionStorage.setItem("voted", [])
         let savedArray = []
         let storage = JSON.parse(sessionStorage.getItem("restaurants"))
         console.log("parsed data from local storage: ", storage)
@@ -159,44 +164,44 @@ class Search extends Component {
         // against the state each time user favorites a restaurant
         let alreadyFavorited = this.state.favoritedRestaurants
         if (alreadyFavorited.indexOf(value.name) === -1 && alreadyFavorited.length < 5) {
-        // ***************
+            // ***************
             // This logic grabs what currently is in the session storage 
             // and transforms it in order to manipulate it
-            
+
             // if there's something in session storage but it's not an array
-            if (sessionStorage.getItem("restaurants") && !Array.isArray(storage)){
+            if (sessionStorage.getItem("restaurants") && !Array.isArray(storage)) {
                 savedArray.push(storage, value)
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
-            // if there's something in session storage and it is an array
-                } 
+                // if there's something in session storage and it is an array
+            }
 
             else if (sessionStorage.getItem("restaurants") && Array.isArray(storage) && storage.length <= 5) {
                 savedArray = storage
-                
+
                 //if value is not already in saved, pushes it
                 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
                 // Should handle the duplicates? //
                 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
 
-                if (savedArray.includes(value) === false){
+                if (savedArray.includes(value) === false) {
                     savedArray.push(value)
-                //if value was already in saved and is now unchecked, delete from saved
-                } 
-                
+                    //if value was already in saved and is now unchecked, delete from saved
+                }
+
                 else {
                     let index = savedArray.indexOf(value)
                     savedArray.splice(index, 1)
                 }
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
-            // if there's nothing in session storage yet
-            } 
+                // if there's nothing in session storage yet
+            }
 
             else if (!sessionStorage.getItem("restaurants")) {
                 savedArray.push(value)
                 sessionStorage.setItem("restaurants", JSON.stringify(savedArray))
             }
-        
-        // ***************
+
+            // ***************
             alreadyFavorited.push(value.name)
             this.setState(...this.state, alreadyFavorited)
         }
@@ -215,22 +220,22 @@ class Search extends Component {
         // unfavorited (so that they can be re-selected if need be)
         let alreadyFavorited = this.state.favoritedRestaurants
         let restaurantToRemove = alreadyFavorited.indexOf(value.name)
-        alreadyFavorited.splice(restaurantToRemove,1)
+        alreadyFavorited.splice(restaurantToRemove, 1)
         // **********************
         let index = this.state.votingArray.indexOf(value)
         let left = this.state.votingArray.slice(0, index)
         let right = this.state.votingArray.slice(index + 1)
         let votingArray = [...left, ...right]
         sessionStorage.setItem("restaurants", JSON.stringify(votingArray))
-        this.setState({...this.state, alreadyFavorited, votingArray})
+        this.setState({ ...this.state, alreadyFavorited, votingArray })
     }
 
-    render () {
+    render() {
         let roulettePick = this.state.roulettePick
         let results;
         let displayRoulette
-        if (this.state.results[0] === "No Results Found" ){
-            console.log(this.state.results,"************************")
+        if (this.state.results[0] === "No Results Found") {
+            console.log(this.state.results, "************************")
             results = (
                 this.state.results.map(result => (
                     <h3 className="text-center text-white">{result}</h3>
@@ -242,19 +247,19 @@ class Search extends Component {
         } else {
             results = (
                 this.state.results.map(restaurant => (
-                    <div key = {restaurant.result.name} className="result-block">
+                    <div key={restaurant.result.name} className="result-block">
                         <div className="form-check-results">
                             <label className="form-check-label">
                                 <h5 className="restName" href="#searchModal" data-toggle="modal" data-target="#detailsModal" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>
-                                {restaurant.result.name}
+                                    {restaurant.result.name}
                                 </h5>
                                 <p className="details" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-                            
-                            <i className="fas fa-plus form-check-input" style={{position:"relative"}} onClick= {() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
-                        
-                            </div>
+
+                            <i className="fas fa-plus form-check-input" style={{ position: "relative" }} onClick={() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
+
+                        </div>
                     </div>
                 ))
             )
@@ -267,119 +272,129 @@ class Search extends Component {
                 </div>
             )
         }
-        return(
-        <Wrapper>
-            <br/>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="search_box green row">
-                                <div className="col-sm-8">
-                                    <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Enter a landmark or zipcode"></input>
-                                </div>
-                                <div className="col-sm-2 search-col">
-                                    <button className="btn btn-lg text-white yellow"  id="search" onClick={this.handleSubmit}>Search</button>
-                                    
-                                </div>
-                                <div className="col-sm-2 roulette-col">
-                                    <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <br/>
-                {/* <iframe src="https://giphy.com/embed/3o7bu3XilJ5BOiSGic" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/youtube-loading-gif-3o7bu3XilJ5BOiSGic">via GIPHY</a></p> */}
-                <div className="row justify-content-center spinner-div">
-                    <img className={this.state.loading} src="../../spinner.svg" alt=""/>
-                </div>
+        return (
+            <Wrapper>
+                <br />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="search_box green row">
+                                    <div className="col-sm-8">
+                                        <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Enter a landmark or zipcode"></input>
+                                    </div>
+                                    <div className="col-sm-2 search-col">
+                                        <button className="btn btn-lg text-white yellow" id="search" onClick={this.handleSubmit}>Search</button>
 
-                <div className={"row orange " + this.state.visibility}>
-                    <div className="col-md-12 pick-card">
-                        <h3 className="text-white text-center">Search Results</h3>
-                        <p className="instructions-small">Click on the + to add to a group vote</p>
+                                    </div>
+                                    <div className="col-sm-2 roulette-col">
+                                        <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <br/>
-                    <div className="col-md-12 orange" id="search-results-card">
-                        {/* <h3 className="text-white text-center">Search Results</h3>
+                    <br />
+                    {/* <iframe src="https://giphy.com/embed/3o7bu3XilJ5BOiSGic" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/youtube-loading-gif-3o7bu3XilJ5BOiSGic">via GIPHY</a></p> */}
+                    <div className="row justify-content-center spinner-div">
+                        <img className={this.state.loading} src="../../spinner.svg" alt="" />
+                    </div>
+
+                    <div className={"row orange " + this.state.visibility}>
+                        <div className="col-md-12 pick-card">
+                            <h3 className="text-white text-center">Search Results</h3>
+                            {this.state.votingArray < 1 ? (
+                                <p className="instructions-small">Click on the + to add to a group vote
+                        </p>
+                            ) : (
+                                    <div>
+                                        <p className="instructions-small">Choose 2-5 restaurants to set up a group vote
+                                        <br/>
+                                        Search another location for more results! </p>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <br />
+                        <div className="col-md-12 orange" id="search-results-card">
+                            {/* <h3 className="text-white text-center">Search Results</h3>
                         <h3 className="instructions-small">Click on the + to add to a group vote</h3> */}
-                        {results}
+                            {results}
+                        </div>
                     </div>
-                </div>
-                <div className={"row " + this.state.rouletteVisable}>
-                    <div className="col-md-12 pick-card orange">
+                    <div className={"row " + this.state.rouletteVisable}>
+                        <div className="col-md-12 pick-card orange">
                             <h2 className="text-white text-center">Your Pick</h2>
-                            <br/>
+                            <br />
                             <div className="result-block">
                                 <div className="form-check">
                                     <label className="form-check-label" htmlFor="defaultCheck">
-                                    {displayRoulette}
-                                    </label> 
+                                        {displayRoulette}
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <br/>                
-                {this.state.votingArray.length > 0 ? ( 
-                <div className="row picker-card-selected">
-                {this.state.votingArray.length >= 1 ? (
-                        this.state.votingArray.map(restaurant => (
-                            
-                            <div key={restaurant.id} className="result-block-selected col-sm-6 col-md-4">
-                                <div className="grouping-nested-elements">
-                                    <div className="restaurant-name">
-                                        {restaurant.name}
+                    <br />
+                    {this.state.votingArray.length > 0 ? (
+                        <div className="row picker-card-selected">
+                            {this.state.votingArray.length >= 1 ? (
+                                this.state.votingArray.map(restaurant => (
+
+                                    <div key={restaurant.id} className="result-block-selected col-sm-6 col-md-4">
+                                        <div className="grouping-nested-elements">
+                                            <div className="restaurant-name">
+                                                {restaurant.name}
+                                            </div>
+                                            <div className="button-div">
+                                                <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="button-div">
-                                        <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
+
+                                ))
+                            ) : (
+                                    <div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                        ))
-                    ) : (
-                            <div>
-                            </div>
-                        )}
-                </div>
-                ): (<br/>)} 
-                    {this.state.votingArray.length > 1 && this.state.votingArray.length < 6  ? (
+                                )}
+                        </div>
+                    ) : (<br />)}
+                    {this.state.votingArray.length > 1 && this.state.votingArray.length < 6 ? (
                         <div className="row">
-                            
-                                <div className="col-sm-4"></div>
-                                <div className="col-sm-4">
-                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
-                                </div>
-                                <div className="col-sm-4"></div>
-                            
+
+                            <div className="col-sm-4"></div>
+                            <div className="col-sm-4">
+                                <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                            </div>
+                            <div className="col-sm-4"></div>
+
                         </div>
                     ) : (
                             <div className="row">
                             </div>
                         )}
-                        
-            </div>
-            
-            <Modal2
-                key = {this.state.modalArray[1]}
-                photos = {this.state.modalArray[0]}
-                firstPhoto = {this.state.modalArray[0][0]}
-                restName = {this.state.modalArray[1]}
-                address = {this.state.modalArray[2]}
-                hours = {this.state.modalArray[3]}
-                phone = {this.state.modalArray[4]}
-                rating = {this.state.modalArray[5]}
-                reviews = {this.state.modalArray[6]}
-                modal = {this.state.modal}
-                toggle = {this.toggle}
-            >
-                <ModalFooter>
-                <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
-                </ModalFooter>
-            </Modal2>
-            
-        </Wrapper>
+
+                </div>
+
+                <Modal2
+                    key={this.state.modalArray[1]}
+                    photos={this.state.modalArray[0]}
+                    firstPhoto={this.state.modalArray[0][0]}
+                    restName={this.state.modalArray[1]}
+                    address={this.state.modalArray[2]}
+                    hours={this.state.modalArray[3]}
+                    phone={this.state.modalArray[4]}
+                    rating={this.state.modalArray[5]}
+                    reviews={this.state.modalArray[6]}
+                    modal={this.state.modal}
+                    toggle={this.toggle}
+                >
+                    <ModalFooter>
+                        <button type="button" className="btn yellow text-white" onClick={() => this.toggle()}>Close</button>
+                    </ModalFooter>
+                </Modal2>
+
+            </Wrapper>
 
 
         )
