@@ -14,6 +14,16 @@ const EditAccountForm = (props) => (
             />
             </div>
             <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input 
+                type="text" 
+                className="form-control" 
+                name="password" 
+                placeholder="Enter new password"
+                onChange={props.handleChange}
+            />
+            </div>
+            <div className="form-group">
             <label htmlFor="zipcode">Default Zipcode</label>
             <input 
                 type="text" 
@@ -26,6 +36,7 @@ const EditAccountForm = (props) => (
             <button 
                 type="submit"
                 className="btn yellow"
+                data-dismiss="modal"
                 onClick={props.handleSubmit}            >
             Save Changes
             </button>
