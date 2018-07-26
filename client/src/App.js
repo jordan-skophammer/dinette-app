@@ -9,6 +9,7 @@ import User from "./pages/User";
 import SignUp from "./pages/SignUp";
 import Account from "./pages/Account";
 import JoinVote from "./pages/JoinVote";
+import Results from "./pages/Results";
 import './App.css';
 import NavBar from "./components/NavBar";
 // import logo from './logo.svg';
@@ -41,7 +42,7 @@ class App extends PureComponent {
           loggedIn: true,
           user: response.data
         })
-        console.log(this.state);
+        // console.log(this.state);
       } else if (response.data && this.state.user === response.data) {
         console.log("user data already stored in state");
       } else {
@@ -96,6 +97,7 @@ class App extends PureComponent {
           <Route path="/SignUp" component={SignUp} />
           <Route path="/Account" render={ () => <Account loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/JoinVote" component={JoinVote}/>
+          <Route path="/Results" component={Results}/>
         </div>
       </Router>
       </div>
