@@ -75,6 +75,7 @@ class Search extends Component {
 
     handleRoulette(event){
         // console.log("Data was submitted: ", this.state.value);
+        sessionStorage.clear()
         this.setState({loading: "visible", visibility:"hidden", rouletteVisable:"hidden"})
         event.preventDefault();
         API.getRestaurants(this.state.value)
