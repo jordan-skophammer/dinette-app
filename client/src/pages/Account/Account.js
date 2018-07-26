@@ -26,12 +26,12 @@ class Account extends Component {
     event.preventDefault();
 
     let updateUser = {
-      userName: this.state.userName,
-      zipcode: this.state.zipcode,
+      'local.userName': this.state.userName,
+      'zipcode': this.state.zipcode,
     }
 
     axios
-      .put("/user/update", updateUser)
+      .patch("/user/update", updateUser)
       .then(response => {
         console.log(response);
         if (!response.data.errmsg) {
@@ -63,7 +63,10 @@ class Account extends Component {
             <div className="modal-dialog" role="document">
               <div className="modal-content edit-account-modal">
                 <div className="modal-body">
-                  <EditAccountForm />
+                  <EditAccountForm 
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                  />
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn yellow" data-dismiss="modal">Close</button>
