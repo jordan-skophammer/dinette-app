@@ -31,21 +31,28 @@ render() {
         <Wrapper>
             <div>
                 {this.state.winner ? (
-            <div className="row ">
-                <div className="col-md-12 pick-card orange">
-                        <h3 className="text-white text-center">Vote Results</h3>
-                        </div>
-<br/>
-                    <div className="col-md-12 orange" id="search-results-card">
-                        
-                        {/* {winner} */}
-                    </div>
-                </div>
+
+                                        <div className="row ">
+                                        {this.state.winner.map(restaurant => (
+                                            <div>
+                                                <div className="col-md-12 pick-card orange">
+                                                    <h3 className="text-white text-center">Vote Results</h3>
+                                                </div>
+                                                <div className="col-md-12 orange" id="search-results-card">
+                                                        {restaurant}
+                                                </div>
+                                            </div>
+                                        )
+                                        )}
+                                        </div>
+
                 ):(
-                    <h3 className="instructions-small">Results not in!</h3>
+                    <div>
+                        <h3 className="instructions-small">Results not in!</h3>
+                    </div>
                 )
                 }
-                </div>
+            </div>
            </Wrapper>
     )
 }
