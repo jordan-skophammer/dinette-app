@@ -26,8 +26,7 @@ const EditAccountForm = (props) => (
             <button 
                 type="submit"
                 className="btn yellow"
-                onClick={props.handleSubmit}
-            >
+                onClick={props.handleSubmit}            >
             Save Changes
             </button>
         </form>
