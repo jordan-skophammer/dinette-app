@@ -15,6 +15,7 @@ class Account extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind();
     this.handleChange = this.handleChange.bind();
+    // this.endVote = this.endVote.bind();
   }
 
   handleChange = (event) => {
@@ -29,6 +30,10 @@ class Account extends Component {
       userName: this.state.userName,
       zipcode: this.state.zipcode,
     }
+  
+  // endVote = () => {
+
+  // }
 
     axios
       .put("/user/update", updateUser)
