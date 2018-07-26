@@ -69,7 +69,7 @@ const SignUpForm = (props) => (
                   <button 
                     type="submit"
                     className="btn yellow"
-                    onClick={props.submitClicked}
+                    onClick={props.handleSubmit}
                     >
                     Submit
                   </button>

@@ -21,11 +21,11 @@ class App extends PureComponent {
     this.state = {
       loggedIn: false,
       user: {
-        firstName: "first",
-        lastName: "last",
-        zipcode: 55104,
+        firstName: "",
+        lastName: "",
+        zipcode: "",
         local: {
-          userName: "user"
+          userName: ""
         },
       }
     }
@@ -41,7 +41,7 @@ class App extends PureComponent {
           loggedIn: true,
           user: response.data
         })
-        console.log(this.state);
+        // console.log(this.state);
       } else if (response.data && this.state.user === response.data) {
         console.log("user data already stored in state");
       } else {
@@ -74,6 +74,7 @@ class App extends PureComponent {
           loggedIn: false,
           user: null
         })
+        window.location.replace("/");
       }
     })
   }

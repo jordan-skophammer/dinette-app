@@ -5,7 +5,7 @@ const NavBar = props => {
   if (props.loggedIn === true) {
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
-        <a className="navbar-brand" href="/">Dinette</a>
+        <a className="main-link" href="/">Dinette</a>
         <button className="navbar-toggler hidden-sm-up ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon ml-auto"></span>
         </button>
