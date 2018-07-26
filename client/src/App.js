@@ -41,7 +41,7 @@ class App extends PureComponent {
           loggedIn: true,
           user: response.data
         })
-        console.log(this.state);
+        // console.log(this.state);
       } else if (response.data && this.state.user === response.data) {
         console.log("user data already stored in state");
       } else {
