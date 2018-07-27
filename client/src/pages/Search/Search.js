@@ -4,6 +4,7 @@ import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
 import Modal2 from "../../components/Modal"
 import VoteModal from "../../components/VoteCreatedModal"
+import InstructionsModal from "../../components/InstructionsModal"
 import { ModalFooter} from 'reactstrap'
 
 class Search extends Component {
@@ -28,12 +29,14 @@ class Search extends Component {
             favoritedRestaurants: [],
             modal: false,
             voteModal: false,
+            instructionsModal: false,
             goodbye: false,
             sendAwayMsg: "Thank you for submitting your group vote!"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRoulette = this.handleRoulette.bind(this);
+        this.handleInstructionsModal = this.handleInstructionsModal.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -51,6 +54,9 @@ class Search extends Component {
     }
     toggleVoteModal() {
         this.setState({voteModal: !this.state.voteModal})
+    }
+    handleInstructionsModal() {
+        this.setState({instructionsModal: !this.state.instructionsModal})
     }
 
     handleSubmit(event) {
@@ -309,18 +315,7 @@ class Search extends Component {
 
                     <div className={"row orange " + this.state.visibility}>
                         <div className="col-md-12 pick-card">
-                            <h3 className="text-white text-center">Search Results</h3>
-                            {this.state.votingArray < 1 ? (
-                                <p className="instructions-small">Click on the + to add to a group vote
-                        </p>
-                            ) : (
-                                    <div>
-                                        <p className="instructions-small">Choose 2-5 restaurants to set up a group vote
-                                        <br/>
-                                        Search another location for more results! </p>
-                                    </div>
-                                )
-                            }
+                            <h3 className="text-white text-center">Search Results <i className= "fas fa-info-circle" onClick={this.handleInstructionsModal}></i></h3>
                         </div>
                         <br />
                         <div className="col-md-12 orange" id="search-results-card">
@@ -410,6 +405,17 @@ class Search extends Component {
                 <button type="button" className="btn yellow text-white" onClick= {() => this.toggleVoteModal()}>Close</button>
                 </ModalFooter>
             </VoteModal>
+
+            <InstructionsModal 
+                toggle = {this.state.instructionsModal}
+                modal = {this.state.instructionsModal}
+            >
+                <ModalFooter>
+                <button type="button" className="btn yellow text-white" onClick= {() => this.handleInstructionsModal()}>Close</button>
+                </ModalFooter>
+
+            </InstructionsModal>
+
             
         </Wrapper>
 
