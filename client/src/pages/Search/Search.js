@@ -3,7 +3,8 @@ import "./Search.css"
 import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
 import Modal2 from "../../components/Modal"
-import { ModalFooter } from 'reactstrap'
+import VoteModal from "../../components/VoteCreatedModal"
+import { ModalFooter} from 'reactstrap'
 
 class Search extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class Search extends Component {
             savedArray: [],
             favoritedRestaurants: [],
             modal: false,
+            voteModal: false,
             goodbye: false,
             sendAwayMsg: "Thank you for submitting your group vote!"
         };
@@ -45,9 +47,10 @@ class Search extends Component {
     }
 
     toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
+        this.setState({modal: !this.state.modal});
+    }
+    toggleVoteModal() {
+        this.setState({voteModal: !this.state.voteModal})
     }
 
     handleSubmit(event) {
@@ -108,7 +111,10 @@ class Search extends Component {
         console.log(pick)
     }
 
-    createFireBaseVoteSession(userName) {
+
+    createFireBaseVoteSession(userName){
+        // this.toggleVoteModal()
+        this.setState({voteModal: true})
         console.log(`Local user: ${userName}`);
         let restaurantsArray = sessionStorage.getItem("restaurants")
         sessionStorage.setItem("voteOwner", "dummy owner")
@@ -122,6 +128,7 @@ class Search extends Component {
 
         // API.makeVoteSession(sessionStorage.getItem("restaurants"))
         API.makeVoteSession(voteObject)
+        
     }
 
 
@@ -361,40 +368,49 @@ class Search extends Component {
                     ) : (<br />)}
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6 ? (
                         <div className="row">
-
-                            <div className="col-sm-4"></div>
-                            <div className="col-sm-4">
-                                <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
-                            </div>
-                            <div className="col-sm-4"></div>
+                            
+                                <div className="col-sm-4"></div>
+                                <div className="col-sm-4">
+                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                                </div>
+                                <div className="col-sm-4"></div>
 
                         </div>
                     ) : (
                             <div className="row">
                             </div>
                         )}
+                        
+            </div>
+            
+            <Modal2
+                key = {this.state.modalArray[1]}
+                photos = {this.state.modalArray[0]}
+                firstPhoto = {this.state.modalArray[0][0]}
+                restName = {this.state.modalArray[1]}
+                address = {this.state.modalArray[2]}
+                hours = {this.state.modalArray[3]}
+                phone = {this.state.modalArray[4]}
+                rating = {this.state.modalArray[5]}
+                reviews = {this.state.modalArray[6]}
+                modal = {this.state.modal}
+                toggle = {this.toggle}
+            >
+                <ModalFooter>
+                <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
+                </ModalFooter>
+            </Modal2>
 
-                </div>
-
-                <Modal2
-                    key={this.state.modalArray[1]}
-                    photos={this.state.modalArray[0]}
-                    firstPhoto={this.state.modalArray[0][0]}
-                    restName={this.state.modalArray[1]}
-                    address={this.state.modalArray[2]}
-                    hours={this.state.modalArray[3]}
-                    phone={this.state.modalArray[4]}
-                    rating={this.state.modalArray[5]}
-                    reviews={this.state.modalArray[6]}
-                    modal={this.state.modal}
-                    toggle={this.toggle}
-                >
-                    <ModalFooter>
-                        <button type="button" className="btn yellow text-white" onClick={() => this.toggle()}>Close</button>
-                    </ModalFooter>
-                </Modal2>
-
-            </Wrapper>
+            <VoteModal
+                toggle = {this.toggleVoteModal}
+                modal = {this.state.voteModal}
+            >
+                <ModalFooter>
+                <button type="button" className="btn yellow text-white" onClick= {() => this.toggleVoteModal()}>Close</button>
+                </ModalFooter>
+            </VoteModal>
+            
+        </Wrapper>
 
 
         )
