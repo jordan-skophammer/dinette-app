@@ -19,7 +19,8 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.2);
-    /* width: 100%; */
+    overflow: hidden;
+    height: 85%;
 }
 
 .picker-card-selected {
@@ -194,4 +195,10 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
         max-height: 450px;
     }
 }
+/* adjusting the size of the font for medium screens */
 
+@media (max-width: 992px) and (min-width: 576px) {
+    .restaurant-name {
+        font-size: 75%;
+    }
+}
