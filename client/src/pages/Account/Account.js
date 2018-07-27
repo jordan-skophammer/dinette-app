@@ -72,7 +72,6 @@ class Account extends Component {
       return (
         <div>
           <Wrapper>
-            {/* {console.log(props)} */}
             <div className="row text-center">
               <div className="col-md-3" />
               <div className="col-md-6">

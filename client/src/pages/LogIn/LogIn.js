@@ -20,8 +20,6 @@ class LogIn extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    // console.log(this.state);
-    
   }
 
   handleSubmit = (event) => {
@@ -36,10 +34,7 @@ class LogIn extends Component {
       axios
         .post("/auth/login", userLogin)
         .then(response => {
-          // console.log('----response from axios request----');
-          // console.log(response);
           if (!response.data.errmsg) {
-            console.log('success')
             this.setState({
               redirectTo: window.location.replace("/"),
             });
