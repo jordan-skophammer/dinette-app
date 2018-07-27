@@ -38,7 +38,7 @@
     margin: auto;
 }
 .add-restaurant {
-    width: 30%;
+    /* width: 40%; */
     min-width: 110px;
 }
 ol {
@@ -48,14 +48,14 @@ ol {
 .instructions {
     font-size: 150%;
     text-align: center;
-    margin: 5% auto 9% auto;
+    margin: auto auto 9% auto;
     background-color: white;
     color: rgb(86,86,86);
-    font-weight: lighter;
+    font-weight: 400;
     background: white;
     padding: 5%;
     border-radius: 5px;
-    font-family: lobster;
+    /* font-family: lobster; */
 }
 .limited-width { 
     width: 33%;

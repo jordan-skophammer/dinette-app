@@ -157,13 +157,15 @@ class Ballot extends Component {
                     <br />
                     <div className="container list-overflow-container results-card">
                         {/* relocation starts here */}
-                        
+                        <br/>
                         {this.state.results && this.state.results.length ? (
                                 <ol type="1">
+                                    <h2 className="text-center text-white">My Ranking:</h2>
+                                    <br/>
                                     <VoteResults>
-                                    <div className="limited-width">
+                                    {/* <div className="limited-width">
                                         <h4 className="instructions">My Favorites:</h4>
-                                    </div>
+                                    </div> */}
                                     {this.state.results.map(result => (
                                         <RankedRestaurants key={result.id}>
                                             <li className="ordered_items">
@@ -175,7 +177,7 @@ class Ballot extends Component {
                                     <br />
                                         <div className="container horizontal_align">
                                             <div className="center">
-                                                <button type="vote" className="btn btn-primary add-restaurant" onClick={() => this.pushVoteToFirebase()}>Vote</button>
+                                                <button type="vote" className="btn btn-lg yellow text-white add-restaurant" onClick={() => this.pushVoteToFirebase()}>Cast Vote</button>
                                             </div>
                                         </div>
                                     </VoteResults>
@@ -187,15 +189,20 @@ class Ballot extends Component {
                         
                             {/* Replaced by New Message Logic */}
                             {this.state.results.length < 1 && this.state.restaurants ? 
-                                (<h3 className="instructions" style={instructionCustom}>These are the options selected by your vote organizer. <br/>Click on your favorite places to rank them!</h3>) 
+                                (<h3 className="instructions" style={instructionCustom}>These are the restaurants selected by your vote organizer. <br/>Click on your favorite places to rank them!</h3>) 
                                 : 
                                 (<div className="row"></div>)}
                         { this.state.restaurants ? (
                             <VoteList>
                                 {this.state.results.length > 0 ? 
-                                (<div className="limited-width">
-                                    <h4 className="instructions">{this.state.chooseMessage}</h4>
-                                </div>) : (<br/>)}
+                                (
+                                <div>
+                                    <br/>
+                                    <h2 className="text-center text-white">{this.state.chooseMessage}</h2>
+                                    <br/>
+                                </div>) 
+                                
+                                : (<br/>)}
                                 {this.state.restaurants.map(restaurant => (
                                     <RestaurantOption key={restaurant.id}>
                                         {restaurant.name}
