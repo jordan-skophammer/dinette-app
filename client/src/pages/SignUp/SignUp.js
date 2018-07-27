@@ -35,7 +35,7 @@ class SignUp extends Component {
         zipcode: this.state.zipcode,
       }
 
-      // console.log(newUser);
+      console.log(newUser);
 
       axios
         .post("/auth/signup", newUser)
@@ -61,7 +61,7 @@ class SignUp extends Component {
         <Wrapper>
           <SignUpForm
             handleChange={this.handleChange}
-            submitClicked={this.handleSubmit}
+            handleSubmit={this.handleSubmit}
             userName={this.state.userName}
             password={this.state.password}
             confirmPassword={this.state.confirmPassword}
