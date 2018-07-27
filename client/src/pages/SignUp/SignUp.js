@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../../components/Wrapper"
 import SignUpForm from "../../components/SignUpForm"
@@ -13,6 +14,7 @@ class SignUp extends Component {
       firstName: '',
       lastName: '',
       zipcode: '',
+      redirectTo: null,
     };
     this.handleSubmit = this.handleSubmit.bind();
     this.handleChange = this.handleChange.bind();
@@ -43,7 +45,10 @@ class SignUp extends Component {
           console.log(response);
           if (!response.data.errmsg) {
             console.log('success')
-            window.location.reload("/login");
+            this.setState({
+              redirectTo: window.location.replace("/login"),
+            });
+            // window.location.reload("/login");
           } else {
             console.log('duplicate')
           }
@@ -56,6 +61,9 @@ class SignUp extends Component {
   }
 
   render() {
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
+    }
     return (
       <div>
         <Wrapper>
