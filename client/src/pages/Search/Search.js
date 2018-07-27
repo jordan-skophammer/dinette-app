@@ -82,8 +82,8 @@ class Search extends Component {
 
     handleRoulette(event) {
         // console.log("Data was submitted: ", this.state.value);
-        sessionStorage.clear()
-        this.setState({ loading: "visible", visibility: "hidden", rouletteVisable: "hidden" })
+        // this.componentDidMount();
+        this.setState({ loading: "visible", visibility: "hidden", rouletteVisable: "hidden", votingArray: []})
 
         event.preventDefault();
         API.getRestaurants(this.state.value)
@@ -94,9 +94,9 @@ class Search extends Component {
                 }
                 // console.log(res)
                 if (res.data !== "No Results Found") {
-                    this.setState({ ...this.state, r: res.data })
+                    this.setState({ ...this.state, results: res.data })
                 } else {
-                    console.log("no results found")
+                    console.log("No results found")
                     this.setState({ ...this.state, results: ["No Results Found"] })
                 }
                 this.randomPick(res.data)
@@ -107,7 +107,7 @@ class Search extends Component {
     randomPick = (data) => {
         console.log("roulette picked")
         let pick = data[Math.floor(Math.random() * data.length)]
-        this.setState({ roulettePick: pick, rouletteVisable: "", loading: "hidden" })
+        this.setState({ roulettePick: pick, rouletteVisable: "", loading: "hidden"})
         console.log(pick)
     }
 
