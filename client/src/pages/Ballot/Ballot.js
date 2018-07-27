@@ -40,62 +40,67 @@ class Ballot extends Component {
 
     loadSessionStorage = () => {
         let restaurantsString = sessionStorage.getItem("restaurants")
-        let restaurants = JSON.parse(restaurantsString)
-        let restaurantsVal = restaurants.restaurants
+        let restaurantsParsed = JSON.parse(restaurantsString)
+        let restaurants;
+        
+        if (restaurantsParsed.restaurants) {
+            restaurants = restaurantsParsed.restaurants 
+        }
+        else {
+            restaurants = restaurantsParsed
+        }
+        
         let resultsString = sessionStorage.getItem("results")
         let results;
-        console.log("restaurantsVal: ", restaurantsVal)
+
         if (resultsString === null) {
             results = []
         }
         else {
             results = JSON.parse(resultsString)
         }
-        this.setState({...restaurants, restaurantsVal})
         this.setState({...results,results})
-        this.setState({unranked: restaurantsVal.length})
-        // console.log(restaurantsVal)
-        console.log(restaurantsVal)
+        this.setState({...restaurants,restaurants})
+        this.setState({unranked: restaurants.length, ranked: results.length})
     }
 
     addToResults = (value) => {
         // getting the index of the restaurant clicked in the "restaurant" array
         let index = this.state.restaurants.indexOf(value)
-        
-        let left = this.state.restaurants.slice(0, index)
-        let right = this.state.restaurants.slice(index+1)
-        
-        let restaurants = [...left, ...right]
-        let results = [...this.state.results, value]
+        let unrankedRestaurants = this.state.restaurants;
+        let rankedRestaurants = this.state.results;
+        // we grab the value, splice it from the restaurants array
+        // and push it to the results array
+        unrankedRestaurants.splice(index, 1)
+        rankedRestaurants.push(value)
 
-
-        sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
-        sessionStorage.setItem("results", JSON.stringify(results))
+        sessionStorage.setItem("restaurants", JSON.stringify(unrankedRestaurants))
+        sessionStorage.setItem("results", JSON.stringify(rankedRestaurants))
         
         let rankedNum = this.state.ranked + 1;
         let unrankedNum = this.state.unranked - 1;
         
-        this.setState({...this.state, results, restaurants, ranked: rankedNum, unranked: unrankedNum})
+        this.setState({...this.state, unrankedRestaurants, rankedRestaurants, ranked: rankedNum, unranked: unrankedNum})
         this.optionsInstructions(rankedNum,unrankedNum)
     }
 
     removeFromResults = (value) => {
         // getting the index of the restaurant clicked in the "results" array
         let index = this.state.results.indexOf(value)
-        
-        let left = this.state.results.slice(0, index)
-        let right = this.state.results.slice(index + 1)
+        let unrankedRestaurants = this.state.restaurants;
+        let rankedRestaurants = this.state.results;
+        // we grab the value, splice it from the results array
+        // and push it to the restaurants array
+        rankedRestaurants.splice(index, 1)
+        unrankedRestaurants.push(value)
 
-        let results = [...left, ...right]
-        let restaurants = [...this.state.restaurants, value]
-
-        sessionStorage.setItem("restaurants", JSON.stringify(restaurants))
-        sessionStorage.setItem("results", JSON.stringify(results))
+        sessionStorage.setItem("restaurants", JSON.stringify(unrankedRestaurants))
+        sessionStorage.setItem("results", JSON.stringify(rankedRestaurants))
 
         let rankedNum = this.state.ranked - 1;
         let unrankedNum = this.state.unranked + 1;
 
-        this.setState({...this.state, results, restaurants, ranked: rankedNum, unranked: unrankedNum})
+        this.setState({...this.state, unrankedRestaurants, rankedRestaurants, ranked: rankedNum, unranked: unrankedNum})
         this.optionsInstructions(rankedNum, unrankedNum)
     }
 
@@ -114,19 +119,22 @@ class Ballot extends Component {
             votes: parsedVoteState,
             owner: voteOwner
         }
-        API.voteToFirebase(voteObject)
-        sessionStorage.setItem("results",null)
-
+    API.voteToFirebase(voteObject).then(function(response){
+            console.log("response",response.data)
+            let voteRecord = [voteOwner, response.data]
+            localStorage.setItem("lastVoted",voteRecord)
+            sessionStorage.setItem("results",null)
+        
+        })
     }
     optionsInstructions = (rankedNum, unrankedNum) => {
         let message;
         /* generate instruction message depending on how many options are 
          left to choose from */
-        console.log("unranked: ", unrankedNum)
-        console.log("ranked: ", rankedNum)
+        
         // Not chosen anything yet
         if (rankedNum === 0) {
-            message = `All options`
+            message = `Remaining options`
         }
         // has ranked more one restaurant, but not all of them
         else if (rankedNum > 0 && unrankedNum !== 0) {
@@ -139,6 +147,7 @@ class Ballot extends Component {
         console.log("Message: ", message)
         this.setState({chooseMessage: message})
     } 
+
     
     render() {
         return (
