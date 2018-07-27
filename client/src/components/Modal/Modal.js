@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Modal, ModalBody} from 'reactstrap';
 import "./Modal.css"
 export default class Modal2 extends Component {
-    constructor(props) {
-      super(props);
-    }
   
     render() {
         return (

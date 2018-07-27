@@ -3,9 +3,6 @@ import { Modal, ModalBody} from 'reactstrap';
 import "./VoteCreatedModal.css"
 
 export default class VoteCreatedModal extends Component {
-    constructor(props) {
-      super(props);
-    }
   
     render() {
         return (
