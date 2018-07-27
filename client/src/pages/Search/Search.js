@@ -46,7 +46,6 @@ class Search extends Component {
 
     handleChange(event) {
         this.setState({ value: event.target.value })
-        // console.log(this.state.value)
     }
 
     toggle() {
@@ -60,17 +59,15 @@ class Search extends Component {
     }
 
     handleSubmit(event) {
-        // console.log("Data was submitted: ", this.state.value);
         this.setState({ loading: "visible", visibility: "hidden", rouletteVisable: "hidden" })
         event.preventDefault();
         if (this.state.value.length > 0) {
             API.getRestaurants(this.state.value)
                 .then(res => {
-                    // console.log(res.statusText)
                     if (res.status !== 200) {
                         throw new Error(res.statusText)
                     }
-                    // console.log(res)
+
                     if (res.data !== "No Results Found") {
                         this.setState({ ...this.state, results: res.data })
                     } else {
@@ -87,18 +84,15 @@ class Search extends Component {
     }
 
     handleRoulette(event) {
-        // console.log("Data was submitted: ", this.state.value);
-        // this.componentDidMount();
         this.setState({ loading: "visible", visibility: "hidden", rouletteVisable: "hidden", votingArray: []})
 
         event.preventDefault();
         API.getRestaurants(this.state.value)
             .then(res => {
-                // console.log(res.statusText)
                 if (res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                // console.log(res)
+
                 if (res.data !== "No Results Found") {
                     this.setState({ ...this.state, results: res.data })
                 } else {
@@ -111,7 +105,6 @@ class Search extends Component {
     }
 
     randomPick = (data) => {
-        console.log("roulette picked")
         let pick = data[Math.floor(Math.random() * data.length)]
         this.setState({ roulettePick: pick, rouletteVisable: "", loading: "hidden"})
         console.log(pick)
@@ -119,7 +112,6 @@ class Search extends Component {
 
 
     createFireBaseVoteSession(userName){
-        // this.toggleVoteModal()
         this.setState({voteModal: true})
         console.log(`Local user: ${userName}`);
         let restaurantsArray = sessionStorage.getItem("restaurants")
@@ -157,7 +149,6 @@ class Search extends Component {
             reviewsArray.push(individualReview)
         })
         let modalInfo = [photosArray, name, location, hours, phone, rating, reviewsArray];
-        // console.log(modalInfo)
         this.setState({ modalArray: modalInfo })
         console.log(this.state.modalArray[0[0]])
         this.toggle()
@@ -269,9 +260,7 @@ class Search extends Component {
                                 <p className="details" onClick={() => this.populateModal(restaurant.result.photos, restaurant.result.name, restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name, restaurant.result.opening_hours.weekday_text, restaurant.result.formatted_phone_number, restaurant.result.rating, restaurant.result.reviews)}>details</p>
                                 <p className="address">{restaurant.result.address_components[0].short_name + " " + restaurant.result.address_components[1].short_name + " " + restaurant.result.address_components[3].short_name}</p>
                             </label>
-
                             <i className="fas fa-plus form-check-input" style={{ position: "relative" }} onClick={() => this.addToSessionStorage(restaurant.result)} value={restaurant.result.name} ></i>
-
                         </div>
                     </div>
                 ))
@@ -298,7 +287,6 @@ class Search extends Component {
                                     </div>
                                     <div className="col-sm-2 search-col">
                                         <button className="btn btn-lg text-white yellow" id="search" onClick={this.handleSubmit}>Search</button>
-
                                     </div>
                                     <div className="col-sm-2 roulette-col">
                                         <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
@@ -364,19 +352,16 @@ class Search extends Component {
                     ) : (<br />)}
                     {this.state.votingArray.length > 1 && this.state.votingArray.length < 6 ? (
                         <div className="row">
-                            
-                                <div className="col-sm-4"></div>
-                                <div className="col-sm-4">
-                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
-                                </div>
-                                <div className="col-sm-4"></div>
-
+                            <div className="col-sm-4"></div>
+                            <div className="col-sm-4">
+                                <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                            </div>
+                            <div className="col-sm-4"></div>
                         </div>
                     ) : (
                             <div className="row">
                             </div>
-                        )}
-                        
+                        )}          
             </div>
             
             <Modal2
@@ -393,7 +378,7 @@ class Search extends Component {
                 toggle = {this.toggle}
             >
                 <ModalFooter>
-                <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
+                    <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
                 </ModalFooter>
             </Modal2>
 
@@ -402,7 +387,7 @@ class Search extends Component {
                 modal = {this.state.voteModal}
             >
                 <ModalFooter>
-                <button type="button" className="btn yellow text-white" onClick= {() => this.toggleVoteModal()}>Close</button>
+                    <button type="button" className="btn yellow text-white" onClick= {() => this.toggleVoteModal()}>Close</button>
                 </ModalFooter>
             </VoteModal>
 
@@ -410,16 +395,12 @@ class Search extends Component {
                 toggle = {this.state.instructionsModal}
                 modal = {this.state.instructionsModal}
             >
-                <ModalFooter>
+            <ModalFooter>
                 <button type="button" className="btn yellow text-white" onClick= {() => this.handleInstructionsModal()}>Close</button>
-                </ModalFooter>
+            </ModalFooter>
 
-            </InstructionsModal>
-
-            
-        </Wrapper>
-
-
+            </InstructionsModal>   
+            </Wrapper>
         )
     }
 }

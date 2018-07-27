@@ -42,13 +42,11 @@ class SignUp extends Component {
       axios
         .post("/auth/signup", newUser)
         .then(response => {
-          console.log(response);
+
           if (!response.data.errmsg) {
-            console.log('success')
             this.setState({
               redirectTo: window.location.replace("/login"),
             });
-            // window.location.reload("/login");
           } else {
             console.log('duplicate')
           }
