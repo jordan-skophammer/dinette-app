@@ -347,8 +347,8 @@ class Search extends Component {
                         <div className="row picker-card-selected">
                             {this.state.votingArray.length >= 1 ? (
                                 this.state.votingArray.map(restaurant => (
-
-                                    <div key={restaurant.id} className="result-block-selected col-sm-6 col-md-4">
+                                    <div className="col-sm-6 col-md-4">
+                                    <div key={restaurant.id} className="result-block-selected col-sm-10 col-md-12">
                                         <div className="grouping-nested-elements">
                                             <div className="restaurant-name">
                                                 {restaurant.name}
@@ -358,7 +358,8 @@ class Search extends Component {
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div className="col-md-1"></div>
+                                    </div>
                                 ))
                             ) : (
                                     <div>
