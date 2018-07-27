@@ -91,7 +91,11 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     background: linear-gradient(70deg, #ff9100, #ffbb00);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
 } */
-
+.fa-info-circle {
+    font-size: 60%;
+    margin-left: 1%;
+    vertical-align: super;
+}
 .details {
     size: .4rem;
     color: #eb5c00;
