@@ -56,6 +56,15 @@ router.post("/submit", function(req,res){
     
 })
 
+router.post("/end", function(req,res){
+    console.log("*********************ENDING VOTE FOR",req.body.userName,"**********************")
+    let owner = req.body.userName
+    let winnerObject = ({winner: req.body.winner})
+    database.ref("voteSessions/"+owner).push(winnerObject).then(function(){
+        res.send("Winner Posted")
+    })
+})
+
 router.get("/:username", function(req, res){
     console.log("********JOIN VOTE SESSION**********")
     let username = req.params.username
@@ -64,5 +73,7 @@ router.get("/:username", function(req, res){
         res.send(snapshot.val())
     })
 })
+
+
 
 module.exports = router;

@@ -32,10 +32,13 @@ export default {
   //   return axios.get('/user/id');
   // },
   getVoteSession: (userName) => {
-    return axios.get("/api/vote/" + userName)
+    return axios.get("/api/vote/getsession" + userName)
   },
   voteToFirebase: (voteObject) => {
     return axios.post("/api/vote/submit", voteObject)
+  },
+  setWinner: (winnerObject) => {
+    return axios.post("/api/vote/end", winnerObject)
   }
 };
 
