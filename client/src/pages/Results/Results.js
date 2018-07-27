@@ -30,7 +30,7 @@ render() {
     return (
         <Wrapper>
             <div>
-                {/* {this.state.winner ? (
+                {this.state.winner ? (
             <div className="row ">
                 <div className="col-md-12 pick-card orange">
                         <h3 className="text-white text-center">Vote Results</h3>
@@ -44,7 +44,7 @@ render() {
                 ):(
                     <h3 className="instructions-small">Results not in!</h3>
                 )
-                } */}
+                }
                 </div>
            </Wrapper>
     )

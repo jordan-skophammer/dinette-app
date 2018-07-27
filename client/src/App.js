@@ -97,7 +97,7 @@ class App extends PureComponent {
           <Route path="/SignUp" component={SignUp} />
           <Route path="/Account" render={ () => <Account loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/JoinVote" component={JoinVote}/>
-          {/* <Route path="/Results" component={Results}/> */}
+          <Route path="/Results" component={Results}/>
         </div>
       </Router>
       </div>
