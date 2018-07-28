@@ -8,55 +8,59 @@ class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            winner: []
+            winner: "",
+            visibility: "hidden"
+
         }
-}
-componentDidMount(){
-    this.loadSessionStorage();
-}
-
-loadSessionStorage = () => {
-    if (sessionStorage.getItem("winner")){
-    let resultsString = sessionStorage.getItem("winner")
-    let winner = JSON.parse(resultsString)
-    this.setState({winner: winner})
-    } else {
-        console.log("no winners")
     }
-}
+    componentDidMount() {
+        this.loadSessionStorage();
+    }
+
+    loadSessionStorage = () => {
+        if (sessionStorage.getItem("restaurants")) {
+            let resultsString = sessionStorage.getItem("restaurants")
+            let winnerObj = JSON.parse(resultsString)
+            this.setState({ winner: winnerObj.winner.name })
+            console.log(winnerObj.winner.name)
+            console.log(this.state.winner)
+            // console.log(this.state.winner)
+        } else {
+            console.log("no winners")
+
+        }
+    }
 
 
-render() {
-    return (
-        <Wrapper>
-            <div>
-                
-                {this.state.winner.length>0 ? (
 
-                                        <div className="row ">
-                                        {this.state.winner.map(restaurant => (
-                                            <div>
-                                                <div className="col-md-12 pick-card orange">
-                                                    <h3 className="text-white text-center">Vote Results</h3>
-                                                </div>
-                                                <div className="col-md-12 orange" id="search-results-card">
-                                                        {restaurant}
-                                                </div>
-                                            </div>
-                                        )
-                                        )}
-                                        </div>
+    render() {
+        return (
+            <Wrapper>
+                <div>
 
-                ):(
+                    {this.state.winner = "" ? ( 
                     <div>
                         <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
                     </div>
-                )
+                    ):(
+                    <div className="row ">
 
+                        <div>
+                            <div className="col-md-12 pick-card orange">
+                                <h3 className="text-white text-center">Winner!</h3>
+                            </div>
+                            <div className="col-md-12 orange text-white text-center" id="search-results-card">
+                                {this.state.winner}
+                            </div>
+                        </div>
+                        
+                </div>
+                    )
                 }
-            </div>
-           </Wrapper>
-    )
-}
-}
+                </div>
+            </Wrapper>
+                        )
+    }
+    }
+
 export default Results;
