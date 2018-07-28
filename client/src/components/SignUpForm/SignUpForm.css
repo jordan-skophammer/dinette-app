@@ -4,12 +4,21 @@
 
 .signup-card {
     background-color: #eb5c00;
-    min-width: 40% !important;
+    padding: 30px;
+    width: 500px;
+    height: 675px;
+    /* min-width: 80% !important; */
     background: linear-gradient(70deg, #94ca03, #bed736);
     box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
-    padding: 1%;
+    /* padding: 1%; */
 }
 
 button {
     margin: 3px !important;
+}
+
+@media only screen and (max-width: 500px){ 
+    .signup-card{
+        padding: 15px;
+    }
 }
