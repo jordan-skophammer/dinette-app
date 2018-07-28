@@ -320,11 +320,20 @@ class Account extends Component {
     }
   
         console.log("winner", winnerName)
+
+        let winnerObj
+
+        response.data.restaurants.map(restaurant=>{
+          if(winnerName === restaurant.name){
+            winnerObj = restaurant
+          }
+
+        })
         
         // let winner = response.data.restaurants[1]
-        // let winnerObject = ({owner: userName, winner: winner})
-        // console.log("Winner is", winner)
-        // API.setWinner(winnerObject)
+        let winnerObject = ({owner: userName, winner: winnerObj})
+        console.log("Winner is", winnerObj)
+        API.setWinner(winnerObject)
 
         
       })
