@@ -39,7 +39,7 @@ class Results extends Component {
         if (this.state.winner === "none"){
             renderedMessage = (
                 <div>
-                    <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
+                    <h3 className="instructions-small winner-section">Results not in! Results will be calculated after the vote is closed.</h3>
                 </div>
             )
         } else {
