@@ -392,12 +392,12 @@ class Search extends Component {
             </VoteModal>
 
             <InstructionsModal 
-                toggle = {this.state.instructionsModal}
+                toggle = {this.handleInstructionsModal}
                 modal = {this.state.instructionsModal}
             >
-            <ModalFooter>
-                <button type="button" className="btn yellow text-white" onClick= {() => this.handleInstructionsModal()}>Close</button>
-            </ModalFooter>
+                <ModalFooter>
+                    <button type="button" className="btn yellow text-white" onClick= {() => this.handleInstructionsModal()}>Close</button>
+                </ModalFooter>
 
             </InstructionsModal>   
             </Wrapper>

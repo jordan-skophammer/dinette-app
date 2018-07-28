@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Modal, ModalBody} from 'reactstrap';
 import "./Modal.css"
+
 export default class Modal2 extends Component {
-  
     render() {
         return (
             <div>
@@ -31,7 +31,7 @@ export default class Modal2 extends Component {
                             <span className="sr-only">Next</span>
                         </a>
                     </div>
-                 
+                
                     <br/>
 
                     <h3 id="restName">{this.props.restName}</h3>
@@ -48,15 +48,16 @@ export default class Modal2 extends Component {
                     <br/>
 
                     <p><b>Reviews</b></p>
+                    {/* Key */}
                     <div className="reviews-holder">
                         {this.props.reviews.map(review => (
-                            <div key={review[0]} className="result-block">
+                            <div key={review.toString()} className="result-block">
                                 <p><b>{review[2]}</b></p>
                                 <p className="hours">{review[0]}</p>
-                                <p>{review[4]}</p>
+                                <p> {review[4]}</p>
                             </div>
                         ))}
-                    </div>
+                    </div> 
                 </ModalBody>
                 {this.props.children}
                 </div>
@@ -65,4 +66,4 @@ export default class Modal2 extends Component {
         );
     }
 
-  }
+}
