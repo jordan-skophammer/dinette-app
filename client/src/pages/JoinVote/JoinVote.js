@@ -31,8 +31,7 @@ class JoinVote extends Component {
                 if (res.status !== 200) {
                     throw new Error(res.statusText)
                 }
-                sessionStorage.setItem("restaurants",JSON.stringify(res.data))
-                sessionStorage.setItem("voteOwner",this.state.value)
+
                 if (res.data.winner){
 
                     console.log(res.data)
@@ -42,6 +41,9 @@ class JoinVote extends Component {
                     return
                 }
                 if (localStorage.getItem("lastVoted")){
+                    sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+                    sessionStorage.setItem("voteOwner",this.state.value)
+                    sessionStorage.setItem("winner", "no winner")
                     let lastVoted = localStorage.getItem("lastVoted")
                     let lastVotedParsed = lastVoted.split(",")
                     let lastOwner = lastVotedParsed[0]
@@ -50,11 +52,15 @@ class JoinVote extends Component {
                     if (lastOwner === this.state.value && lastTimestamp > creationStamp){
                         window.location.href = "/results"
                     } else {
+                        sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+                        sessionStorage.setItem("voteOwner",this.state.value)
                         window.location.href = "/ballot"
                     }
                     
 
                 } else {
+                    sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+                    sessionStorage.setItem("voteOwner",this.state.value)
                     window.location.href = "/ballot"
                 }
                 
