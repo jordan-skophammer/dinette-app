@@ -178,20 +178,20 @@ class Account extends Component {
         let candidates = response.data.restaurants.map(restaurant => restaurant.name)
         let votes = Object.values(response.data.votes.ballot)
         // let restaurants = response.data.votes.ballot
-        let votesParsed = []
+        let votesPreParsed = []
       
         console.log("restaurants",votes)
         let trash = votes.shift()
         console.log("candidate" ,candidates)
         let i = 0
         votes.map(ballot => {
-          votesParsed.push([])
+          votesPreParsed.push([])
           let r = 0
           ballot.map(restaurant=>{
-            votesParsed[i].push([])
+            votesPreParsed[i].push([])
             candidates.map(candidate=>{
               if(candidate===restaurant.name){
-                votesParsed[i][r] = (candidates.indexOf(candidate)+1).toString()
+                votesPreParsed[i][r] = (candidates.indexOf(candidate)+1).toString()
               }
             })
             r++
@@ -199,11 +199,22 @@ class Account extends Component {
           i++
         })
 
-        console.log(votesParsed)
+        console.log("votes unparsed",votesPreParsed)
+        // let votesParsed = []
+        // let iter = 0
+        // votesPreParsed.map(ballot=>{
+        //   votesParsed.push([])
+        //   ballot.map(vote=>{
+        //     votesParsed[iter].unshift(vote)
+        //   })
+        //   iter++
+        // })
+        // console.log("votes parsed",votesParsed)
+        // console.log("check", votesPreParsed)
 
         //******************DO YOUR MAGIC HERE!!! */
 
-        let winnerName = findWinner(candidates, votesParsed)
+        let winnerName = findWinner(candidates, votesPreParsed)
         function removeCandidates(voteList, lowestCandidates) {
           const result = [];
           voteList.forEach(function (oneSetOfVotes) {
@@ -280,13 +291,13 @@ class Account extends Component {
       
           return 'no winner';
       }
-      function findWinner(candidates, votesParsed){
+      function findWinner(candidates, votes){
       if (!Array.isArray(candidates) || !candidates.length) {
           console.log('no candidates');
           return;
       }
   
-      if (!Array.isArray(votesParsed) || !votesParsed.length) {
+      if (!Array.isArray(votes) || !votes.length) {
           console.log('no votes');
           return;
       }
@@ -294,7 +305,7 @@ class Account extends Component {
       let tallies;
   
       while (true) {
-          tallies = calcTallies(votesParsed);
+          tallies = calcTallies(votes);
   
           if (tallies.highestPct >= 0.5) {
               return winner(candidates, tallies.highest);
@@ -304,11 +315,11 @@ class Account extends Component {
               return winner(candidates, tallies.highest);
           }
   
-          votesParsed = removeCandidates(votesParsed, tallies.lowest);
+          votes = removeCandidates(votes, tallies.lowest);
       }
     }
   
-        console.log(winnerName)
+        console.log("winner", winnerName)
         
         // let winner = response.data.restaurants[1]
         // let winnerObject = ({owner: userName, winner: winner})
