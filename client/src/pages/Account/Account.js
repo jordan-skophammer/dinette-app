@@ -286,10 +286,11 @@ class Account extends Component {
           });
       
           if (out.length) {
-              return out.join(' + ');
+            //   return out.join(' + ');
+              return out[0];
           }
-      
-          return 'no winner';
+          
+        //   return 'no winner';
       }
       function findWinner(candidates, votes){
       if (!Array.isArray(candidates) || !candidates.length) {
