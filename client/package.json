@@ -17,12 +17,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-
-  "root": "build/",
-  "clean_urls": false,
-  "routes": {
-    "/**": "index.html"
   }
-
 }
