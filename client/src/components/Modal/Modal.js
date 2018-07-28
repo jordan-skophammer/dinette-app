@@ -40,7 +40,7 @@ export default class Modal2 extends Component {
 
                     <p><b>Hours:</b></p>
                     {this.props.hours.map(day => (
-                        <p className="hours">{day}</p>
+                        <p key={day} className="hours">{day}</p>
                     ))}
                     <br/>
 
@@ -50,7 +50,7 @@ export default class Modal2 extends Component {
                     <p><b>Reviews</b></p>
                     <div className="reviews-holder">
                         {this.props.reviews.map(review => (
-                            <div className="result-block">
+                            <div key={review[0]} className="result-block">
                                 <p><b>{review[2]}</b></p>
                                 <p className="hours">{review[0]}</p>
                                 <p>{review[4]}</p>

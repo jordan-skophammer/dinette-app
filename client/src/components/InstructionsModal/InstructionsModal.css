@@ -1,0 +1,10 @@
+.instructions_modal{
+    font-size: 100%;
+    text-align: center;
+    margin: 3% 15% 3% 15%;
+    background-color: white;
+    color: rgb(86,86,86);
+    font-weight: 400;
+    background: white;
+    border-radius: 5px;
+}

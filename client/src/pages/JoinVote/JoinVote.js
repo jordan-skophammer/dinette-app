@@ -33,6 +33,10 @@ class JoinVote extends Component {
                 }
                 sessionStorage.setItem("restaurants",JSON.stringify(res.data))
                 sessionStorage.setItem("voteOwner",this.state.value)
+                if (res.data.winner){
+                    window.location.href = "/result"
+                    return
+                }
                 if (localStorage.getItem("lastVoted")){
                     let lastVoted = localStorage.getItem("lastVoted")
                     let lastVotedParsed = lastVoted.split(",")

@@ -36,6 +36,9 @@ export default {
   },
   voteToFirebase: (voteObject) => {
     return axios.post("/api/vote/submit", voteObject)
+  },
+  setWinner: (winnerObject) => {
+    return axios.post("/api/vote/end", winnerObject)
   }
 };
 

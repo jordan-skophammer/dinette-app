@@ -63,10 +63,6 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     width: 100%;
 }
 
-/* .col-sm-3 {
-    margin: 0px !important;
-} */
-
 #search, #roulette {
     width: 100%;
     margin: 3px !important;
@@ -87,10 +83,11 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     color: #eb5c00;
 }
 
-/* .yellow-btn {
-    background: linear-gradient(70deg, #ff9100, #ffbb00);
-    box-shadow: 3px 4px 8px 0px rgba(0, 0, 0, 0.2);
-} */
+.fa-info-circle {
+    font-size: 60%;
+    margin-left: 1%;
+    vertical-align: super;
+}
 
 .details {
     size: .4rem;
@@ -123,7 +120,6 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
     float: right;
     border-radius: 100%;
     font-size: 85%;
-    /* top: -7px; */
     background: -webkit-linear-gradient(20deg, #ffae00, #ffbb00);
     background: -o-linear-gradient(20deg, #ffae00, #ffbb00);
     background: linear-gradient(70deg, #ffae00, #ffbb00);
@@ -148,12 +144,10 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 }
 .button-div {
     display: inline-block;
-    /* float: right; */
     width: 30%;
 }
 
 .instructions-small {
-    /* font-size: 150%; */
     text-align: center;
     padding: 1%;
     margin: 1% auto 1% auto;

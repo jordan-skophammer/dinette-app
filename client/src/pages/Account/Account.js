@@ -5,6 +5,7 @@ import "./Account.css";
 import Wrapper from "../../components/Wrapper"
 import AccountInfo from "../../components/AccountInfo";
 import EditAccountForm from "../../components/EditAccountForm";
+import API from "../../utils/API"
 
 class Account extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class Account extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind();
     this.handleChange = this.handleChange.bind();
-    // this.endVote = this.endVote.bind();
+    this.endVote = this.endVote.bind();
   }
 
   handleChange = (event) => {
@@ -42,9 +43,7 @@ class Account extends Component {
       }
     }
   
-  // endVote = () => {
 
-  // }
 
       axios
         .patch("/user/update", updateUser)
@@ -60,17 +59,27 @@ class Account extends Component {
         })
     }
 
+    endVote = (userName) => {
+      console.log("end vote")
+      // let userName = this.state.userName
+      console.log(userName)
+      API.getVoteSession(userName).then(function(response){
+        //DO MAGIC HERE
+        console.log(response.data)
+      })
+    }
+
     render() {
       return (
         <div>
           <Wrapper>
-            {/* {console.log(props)} */}
             <div className="row text-center">
               <div className="col-md-3" />
               <div className="col-md-6">
                 <AccountInfo
                   loggedIn={this.props.loggedIn}
                   user={this.props.user}
+                  endVote={this.endVote}
                 />
               </div>
               <div className="col-md-3" />
