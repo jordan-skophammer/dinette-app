@@ -34,8 +34,10 @@ class JoinVote extends Component {
 
                 if (res.data.winner){
 
-                    console.log(res.data)
-                    sessionStorage.setItem("winner", res.data.winner)
+                    console.log("winner",res.data.winner)
+                    let winner = JSON.stringify(res.data)
+                    sessionStorage.setItem("winner", winner)
+                    console.log("pass to results")
                     window.location.href = "/results"
 
                     return

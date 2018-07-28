@@ -20,6 +20,7 @@ class Results extends Component {
 
     loadSessionStorage = () => {
         let winnerString = sessionStorage.getItem("winner")
+        // let winnerStringParsed = JSON.parse(winnerString)
         console.log(winnerString)
 
         if (winnerString === "no winner") {
