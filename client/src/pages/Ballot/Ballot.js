@@ -127,6 +127,7 @@ class Ballot extends Component {
             sessionStorage.setItem("results",null)
         
         })
+        sessionStorage.setItem("winner", "no winner")
         window.location.href = "/results"
     }
 
