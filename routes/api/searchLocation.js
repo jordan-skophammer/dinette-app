@@ -7,7 +7,10 @@ const placesKey = [
     "AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY",
     "AIzaSyDoymHNEqUV0nVSOmEVwU4_hnNOiKu1RGc",
     "AIzaSyBsefQtQyAz_GgHERwuEkFClAWIl7eFUvs",
-    "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+    "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI",
+    "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
+    "AIzaSyDKEGYGd5UiJq3vrxqWnZuSqL9wQT2ZolQ",
+    "AIzaSyA__tDa6ku9CpYU82CRzug_8UWfQ6w-KuM"
 ]
 let placesKeyIter = 0
 
