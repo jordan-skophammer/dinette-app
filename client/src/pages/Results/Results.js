@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Wrapper from "../../components/Wrapper";
+import "./Results.css"
 
 
 
@@ -8,7 +9,7 @@ class Results extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            winner: "",
+            winner: "none",
             visibility: "hidden"
 
         }
@@ -18,21 +19,14 @@ class Results extends Component {
     }
 
     loadSessionStorage = () => {
-        let resultsString = sessionStorage.getItem("restaurants")
-        let winnerObj = JSON.parse(resultsString)
-        console.log(winnerObj)
+        let winnerString = sessionStorage.getItem("winner")
+        console.log(winnerString)
 
-
-        if (winnerObj.winner.name) {
-            
-            this.setState({ winner: winnerObj.winner.name })
-            console.log(winnerObj.winner.name)
-            console.log(this.state.winner)
-            // console.log(this.state.winner)
-        } else {
+        if (winnerString === "no winner") {
             console.log("no winners")
-            // console.log(sessionStorage)
-
+        } else {
+            this.setState({ winner: winnerString })
+            console.log(this.state.winner)
         }
     }
 
@@ -41,7 +35,7 @@ class Results extends Component {
     render() {
         let renderedMessage;
 
-        if (this.state.winner.length < 1){
+        if (this.state.winner === "none"){
             renderedMessage = (
                 <div>
                     <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
@@ -49,16 +43,12 @@ class Results extends Component {
             )
         } else {
             renderedMessage = (
-                <div className="row ">
-
-                        <div>
-                            <div className="col-md-12 pick-card orange">
-                                <h3 className="text-white text-center">Winner!</h3>
+                <div className="row justify-content-center">
+                        <br/>
+                            <div className="col-md-8 green winner-section">
+                                <h3 className="text-white text-center">Winner:</h3>
+                                <h1 className="text-white text-center">{this.state.winner}</h1>
                             </div>
-                            <div className="col-md-12 orange text-white text-center" id="search-results-card">
-                                {this.state.winner}
-                            </div>
-                        </div>
                         
                 </div>
             )
