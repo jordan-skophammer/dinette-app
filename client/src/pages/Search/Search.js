@@ -154,8 +154,6 @@ class Search extends Component {
         this.toggle()
     }
 
-
-
     addToSessionStorage = (value) => {
         console.log("Name of object we are adding to Session Storage: ", value.name)
         sessionStorage.setItem("voted", [])
@@ -354,7 +352,15 @@ class Search extends Component {
                         <div className="row">
                             <div className="col-sm-4"></div>
                             <div className="col-sm-4">
-                                <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                                {/* a place for ternary */}
+                                {this.props.loggedIn ? 
+                                (
+                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
+                                ) : (
+                                    <a href="/account"><button className="btn btn-lg yellow text-white">Sign up/Log in to start a ballot</button></a>
+                                    )
+                                }
+                            
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
