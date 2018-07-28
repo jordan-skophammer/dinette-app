@@ -34,9 +34,11 @@ class JoinVote extends Component {
                 sessionStorage.setItem("restaurants",JSON.stringify(res.data))
                 sessionStorage.setItem("voteOwner",this.state.value)
                 if (res.data.winner){
+
                     console.log(res.data)
                     sessionStorage.setItem("winner", res.data.winner)
                     window.location.href = "/result"
+
                     return
                 }
                 if (localStorage.getItem("lastVoted")){
@@ -46,7 +48,7 @@ class JoinVote extends Component {
                     let lastTimestamp = lastVotedParsed[1]
                     let creationStamp = parseInt(res.data.timestamp)
                     if (lastOwner === this.state.value && lastTimestamp > creationStamp){
-                        window.location.href = "/result"
+                        window.location.href = "/results"
                     } else {
                         window.location.href = "/ballot"
                     }

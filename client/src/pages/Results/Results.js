@@ -19,7 +19,7 @@ loadSessionStorage = () => {
     if (sessionStorage.getItem("winner")){
     let resultsString = sessionStorage.getItem("winner")
     let winner = JSON.parse(resultsString)
-    this.setState({...winner, winner})
+    this.setState({winner: winner})
     } else {
         console.log("no winners")
     }
@@ -30,7 +30,7 @@ render() {
     return (
         <Wrapper>
             <div>
-                {this.state.winner ? (
+                {this.state.winner.length>0 ? (
 
                                         <div className="row ">
                                         {this.state.winner.map(restaurant => (
@@ -48,7 +48,7 @@ render() {
 
                 ):(
                     <div>
-                        <h3 className="instructions-small">Results not in!</h3>
+                        <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
                     </div>
                 )
                 }
