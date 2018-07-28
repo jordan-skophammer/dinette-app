@@ -1,4 +1,7 @@
 "use strict";
+// to delete random "0" key in vote object
+delete vote[0];
+let voteArrayOfObjects = Object.values(vote);
 
 const votes = [
     ['2', '1', '3'],
@@ -100,7 +103,7 @@ module.exports = function findWinner(candidates, votes) {
         console.log('no votes');
         return;
     }
-    
+
     let tallies;
 
     while (true) {
