@@ -32,7 +32,7 @@ class Account extends Component {
           if (res.data.winner){
 
               console.log(res.data)
-              sessionStorage.setItem("winner", res.data.winner)
+              sessionStorage.setItem("winner", JSON.stringify(res.data.winner))
               window.location.href = "/results"
 
               return
