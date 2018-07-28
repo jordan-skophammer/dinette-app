@@ -127,6 +127,7 @@ class Ballot extends Component {
             sessionStorage.setItem("results",null)
         
         })
+        window.location.href = "/results"
     }
 
     endVote = (userName) => {
