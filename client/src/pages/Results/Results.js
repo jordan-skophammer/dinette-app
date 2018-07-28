@@ -25,8 +25,11 @@ class Results extends Component {
             console.log("no winners")
         } else {
             let winnerStringParsed = JSON.parse(winnerString)
-            console.log(winnerStringParsed.winner.name)
-            this.setState({ winner: winnerStringParsed.winner.name })
+            console.log(winnerStringParsed.winner)
+            let w = winnerStringParsed.winner
+            let address = `${w.address_components[0].short_name} ${w.address_components[1].short_name}, ${w.address_components[3].short_name}, ${w.address_components[5].short_name} ${w.address_components[7].short_name}`
+            
+            this.setState({ winner: [w.name, address] })
             console.log(this.state.winner)
         }
     }
@@ -48,7 +51,9 @@ class Results extends Component {
                         <br/>
                             <div className="col-md-8 green winner-section">
                                 <h3 className="text-white text-center">Winner:</h3>
-                                <h1 className="text-white text-center">{this.state.winner}</h1>
+                                <h1 className="text-white text-center">{this.state.winner[0]}</h1>
+                                <p className="text-center">{this.state.winner[1]}</p>
+                                
                             </div>
                         
                 </div>
