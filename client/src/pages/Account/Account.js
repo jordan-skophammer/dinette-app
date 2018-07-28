@@ -66,15 +66,38 @@ class Account extends Component {
       API.getVoteSession(userName).then(function(response){
         //DO MAGIC HERE
         console.log(response.data)
-        let candidates = []
-        candidates.push(response.data.restaurants.map(restaurant => restaurant.name))
-        let votes = []
-        // console.log(response.data.votes.ballot[1][0])
-        console.log(candidates)
-        let winner = response.data.restaurants[1]
-        let winnerObject = ({owner: userName, winner: winner})
-        console.log("Winner is", winner)
-        API.setWinner(winnerObject)
+        let candidates = response.data.restaurants.map(restaurant => restaurant.name)
+        let votes = Object.values(response.data.votes.ballot)
+        // let restaurants = response.data.votes.ballot
+        let votesParsed = []
+      
+        console.log("restaurants",votes)
+        let trash = votes.shift()
+        console.log("candidate" ,candidates)
+        let i = 0
+        votes.map(ballot => {
+          votesParsed.push([])
+          let r = 0
+          ballot.map(restaurant=>{
+            votesParsed[i].push([])
+            candidates.map(candidate=>{
+              if(candidate===restaurant.name){
+                votesParsed[i][r] = (candidates.indexOf(candidate)+1).toString()
+              }
+            })
+            r++
+          })
+          i++
+        })
+
+        console.log(votesParsed)
+
+        //******************DO YOUR MAGIC HERE!!! */
+        
+        // let winner = response.data.restaurants[1]
+        // let winnerObject = ({owner: userName, winner: winner})
+        // console.log("Winner is", winner)
+        // API.setWinner(winnerObject)
 
         
       })
