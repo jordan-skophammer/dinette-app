@@ -58,9 +58,10 @@ router.post("/submit", function (req, res) {
 
 router.post("/end", function(req,res){
     console.log("*********************ENDING VOTE FOR",req.body.userName,"**********************")
-    let owner = req.body.userName
+    let owner = req.body.owner
     let winnerObject = ({winner: req.body.winner})
-    database.ref("voteSessions/"+owner).push(winnerObject).then(function(){
+    database.ref("voteSessions/"+owner).set(winnerObject).then(function(){
+        console.log("winner posted")
         res.send("Winner Posted")
     })
 })

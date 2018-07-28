@@ -66,6 +66,17 @@ class Account extends Component {
       API.getVoteSession(userName).then(function(response){
         //DO MAGIC HERE
         console.log(response.data)
+        let candidates = []
+        candidates.push(response.data.restaurants.map(restaurant => restaurant.name))
+        let votes = []
+        // console.log(response.data.votes.ballot[1][0])
+        console.log(candidates)
+        let winner = response.data.restaurants[1]
+        let winnerObject = ({owner: userName, winner: winner})
+        console.log("Winner is", winner)
+        API.setWinner(winnerObject)
+
+        
       })
     }
 
