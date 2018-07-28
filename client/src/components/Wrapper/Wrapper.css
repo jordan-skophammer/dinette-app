@@ -1,5 +1,6 @@
 .wrapper {
-    overflow: hidden;
+    overflow-x: hidden;
+    /* overflow: scroll; */
 }
 
 .wrapper-img {
