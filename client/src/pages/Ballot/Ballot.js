@@ -41,7 +41,7 @@ class Ballot extends Component {
     loadSessionStorage = () => {
         // array of unranked restaurants is parsed from sessionStorage if it exists, if not, an empty array is created
         let restaurants = [];
-        if (sessionStorage.getItem("restaurants") !== null) {
+        if (sessionStorage.getItem("restaurants") !== null && sessionStorage.getItem("restaurants") !== "null") {
             let restaurantsParsed = JSON.parse(sessionStorage.getItem("restaurants"))
             // this handles the case where data comes from Firebase (because the data is then structured differently)
             if (restaurantsParsed.restaurants) {
@@ -51,9 +51,10 @@ class Ballot extends Component {
                 restaurants = restaurantsParsed
             }
         }
+
         // same for ranked restaurants
         let results = []        
-        if (sessionStorage.getItem("results") !== null) {
+        if (sessionStorage.getItem("results") !== null && sessionStorage.getItem("results") !== "null") {
             results = JSON.parse(sessionStorage.getItem("results"))
         }
         
