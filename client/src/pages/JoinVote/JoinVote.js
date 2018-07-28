@@ -34,6 +34,8 @@ class JoinVote extends Component {
                 sessionStorage.setItem("restaurants",JSON.stringify(res.data))
                 sessionStorage.setItem("voteOwner",this.state.value)
                 if (res.data.winner){
+                    console.log(res.data)
+                    sessionStorage.setItem("winner", res.data.winner)
                     window.location.href = "/result"
                     return
                 }
