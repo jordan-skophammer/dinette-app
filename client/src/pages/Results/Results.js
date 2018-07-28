@@ -18,15 +18,20 @@ class Results extends Component {
     }
 
     loadSessionStorage = () => {
-        if (sessionStorage.getItem("restaurants")) {
-            let resultsString = sessionStorage.getItem("restaurants")
-            let winnerObj = JSON.parse(resultsString)
+        let resultsString = sessionStorage.getItem("restaurants")
+        let winnerObj = JSON.parse(resultsString)
+        console.log(winnerObj)
+
+
+        if (winnerObj.winner.name) {
+            
             this.setState({ winner: winnerObj.winner.name })
             console.log(winnerObj.winner.name)
             console.log(this.state.winner)
             // console.log(this.state.winner)
         } else {
             console.log("no winners")
+            // console.log(sessionStorage)
 
         }
     }
@@ -34,16 +39,17 @@ class Results extends Component {
 
 
     render() {
-        return (
-            <Wrapper>
-                <div>
+        let renderedMessage;
 
-                    {this.state.winner = "" ? ( 
-                    <div>
-                        <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
-                    </div>
-                    ):(
-                    <div className="row ">
+        if (this.state.winner.length < 1){
+            renderedMessage = (
+                <div>
+                    <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
+                </div>
+            )
+        } else {
+            renderedMessage = (
+                <div className="row ">
 
                         <div>
                             <div className="col-md-12 pick-card orange">
@@ -55,8 +61,15 @@ class Results extends Component {
                         </div>
                         
                 </div>
-                    )
-                }
+            )
+        }
+
+
+        return (
+            <Wrapper>
+                <div>
+
+                    {renderedMessage}
                 </div>
             </Wrapper>
                         )
