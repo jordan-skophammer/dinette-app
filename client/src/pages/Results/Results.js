@@ -30,6 +30,7 @@ render() {
     return (
         <Wrapper>
             <div>
+                
                 {this.state.winner.length>0 ? (
 
                                         <div className="row ">
@@ -51,6 +52,7 @@ render() {
                         <h3 className="instructions-small">Results not in! Results will be calculated after the vote is closed.</h3>
                     </div>
                 )
+
                 }
             </div>
            </Wrapper>

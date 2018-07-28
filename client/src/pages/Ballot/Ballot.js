@@ -26,7 +26,9 @@ class Ballot extends Component {
             ranked: 0,
             unranked: 0,
             goodbye: false,
-            sendAwayMsg: "Thank you for participating to the vote!"
+            sendAwayMsg: "Thank you for participating to the vote!",
+            loggedIn: props.loggedIn, 
+            userName: props.user.local.userName
         }
     }
     // handleResult(event) {
@@ -125,6 +127,18 @@ class Ballot extends Component {
         
         })
     }
+
+    endVote = (userName) => {
+        console.log("end vote")
+        // let userName = this.state.userName
+        console.log(userName)
+        API.getVoteSession(userName).then(function(response){
+          //DO MAGIC HERE
+          console.log(response.data)
+        })
+      }
+
+
     optionsInstructions = (rankedNum, unrankedNum) => {
         let message;
         /* generate instruction message depending on how many options are 
@@ -225,6 +239,7 @@ class Ballot extends Component {
                                     </div>
                                 </div>
                             )}
+                            <button className="btn btn-lg text-white yellow" id="end" onClick={() => this.endVote()}>Close vote session</button>
                         </div>
                         
                     </div>
