@@ -59,12 +59,13 @@ class Account extends Component {
         })
     }
 
-    endVote = (event) => {
+    endVote = (userName) => {
       console.log("end vote")
-      let userName = this.state.userName
+      // let userName = this.state.userName
+      console.log(userName)
       API.getVoteSession(userName).then(function(response){
         //DO MAGIC HERE
-        console.log(response)
+        console.log(response.data)
       })
     }
 
