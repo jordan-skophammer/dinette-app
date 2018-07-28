@@ -24,6 +24,7 @@
     "concurrently": "^3.5.0",
     "nodemon": "^1.11.0"
   },
+  
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
@@ -42,7 +43,13 @@
     "passport-local": "^1.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
     "reactstrap": "^6.3.0"
   },
-  "description": ""
+  "description": "",
+  "root": "build/",
+  "clean_urls": false,
+  "routes": {
+    "/**": "index.html"
+  }
 }
