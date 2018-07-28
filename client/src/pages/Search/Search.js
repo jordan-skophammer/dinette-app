@@ -137,7 +137,7 @@ class Search extends Component {
             photosArray = [1]
         } else {
             photos.forEach(photo => {
-                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=" + photo.photo_reference + "&key=AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI"
+                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photoreference=" + photo.photo_reference + "&key=AIzaSyA7ShTohscXJsfMoV5iS5ecpmMrBnKnkcs"
                 photosArray.push(url)
             })
         }
