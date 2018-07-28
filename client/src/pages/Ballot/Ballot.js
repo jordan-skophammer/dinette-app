@@ -125,6 +125,7 @@ class Ballot extends Component {
             sessionStorage.setItem("results",null)
         
         })
+        window.location.href = "/results"
     }
     optionsInstructions = (rankedNum, unrankedNum) => {
         let message;
