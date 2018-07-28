@@ -37,7 +37,7 @@ class JoinVote extends Component {
 
                     console.log(res.data)
                     sessionStorage.setItem("winner", res.data.winner)
-                    window.location.href = "/result"
+                    window.location.href = "/results"
 
                     return
                 }
