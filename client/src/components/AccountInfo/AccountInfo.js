@@ -14,7 +14,7 @@ const AccountInfo = (props) => {
           <h3><b>Zip Code:</b> {props.user.zipcode}</h3>
           <br />
           <button className="btn yellow" data-toggle="modal" data-target="#editAccountModal">Edit Account</button>
-          <a href="/ballot"><button  className="btn orange">Go To Ballot</button></a>
+          <div><button  className="btn orange" onClick={()=>props.goToBallot(props.user.local.userName)}>Go To Ballot</button></div>
           <button className="btn green" onClick={()=>props.endVote(props.user.local.userName)}>Close Ballot</button>
         </div>
       </div>

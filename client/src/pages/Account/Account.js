@@ -18,6 +18,52 @@ class Account extends Component {
     this.handleChange = this.handleChange.bind();
     this.endVote = this.endVote.bind();
     this.findWinner = this.findWinner.bind();
+    this.goToBallot = this.goToBallot.bind();
+  }
+
+  goToBallot = (userName) => {
+    API.getVoteSession(userName)
+      .then(res => {
+          // console.log(res.statusText)
+          if (res.status !== 200) {
+              throw new Error(res.statusText)
+          }
+
+          if (res.data.winner){
+
+              console.log(res.data)
+              sessionStorage.setItem("winner", res.data.winner)
+              window.location.href = "/results"
+
+              return
+          }
+          if (localStorage.getItem("lastVoted")){
+              sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+              sessionStorage.setItem("voteOwner",userName)
+              sessionStorage.setItem("winner", "no winner")
+              let lastVoted = localStorage.getItem("lastVoted")
+              let lastVotedParsed = lastVoted.split(",")
+              let lastOwner = lastVotedParsed[0]
+              let lastTimestamp = lastVotedParsed[1]
+              let creationStamp = parseInt(res.data.timestamp)
+              if (lastOwner === userName && lastTimestamp > creationStamp){
+                  window.location.href = "/results"
+              } else {
+                  sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+                  sessionStorage.setItem("voteOwner",userName)
+                  window.location.href = "/ballot"
+              }
+              
+
+          } else {
+              sessionStorage.setItem("restaurants",JSON.stringify(res.data))
+              sessionStorage.setItem("voteOwner",userName)
+              window.location.href = "/ballot"
+          }
+          
+
+      })
+
   }
 
   handleChange = (event) => {
@@ -352,6 +398,7 @@ class Account extends Component {
                   user={this.props.user}
                   endVote={this.endVote}
                   findWinner={this.findWinner}
+                  goToBallot={this.goToBallot}
                 />
               </div>
               <div className="col-md-3" />
