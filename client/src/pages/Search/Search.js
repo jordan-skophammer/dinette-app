@@ -5,6 +5,7 @@ import Wrapper from "../../components/Wrapper"
 import Modal2 from "../../components/Modal"
 import VoteModal from "../../components/VoteCreatedModal"
 import InstructionsModal from "../../components/InstructionsModal"
+import SearchBar from "../../components/SearchBar"
 import { ModalFooter} from 'reactstrap'
 
 class Search extends Component {
@@ -277,24 +278,16 @@ class Search extends Component {
                 <br />
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-12">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="search_box green row">
-                                    <div className="col-sm-8">
-                                        <input type="text" className="form-control" id="searchLocation" value={this.state.value} onChange={this.handleChange} placeholder="Enter a landmark or zipcode"></input>
-                                    </div>
-                                    <div className="col-sm-2 search-col">
-                                        <button className="btn btn-lg text-white yellow" id="search" onClick={this.handleSubmit}>Search</button>
-                                    </div>
-                                    <div className="col-sm-2 roulette-col">
-                                        <button className="btn btn-lg text-white orange" id="roulette" onClick={this.handleRoulette}>Roulette</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+
+                        <SearchBar
+                        handleSubmit = {this.handleSubmit}
+                        value = {this.state.value} 
+                        handleChange = {this.handleChange}
+                        handleRoulette = {this.handleRoulette}
+                        />
                     </div>
                     <br />
-                    {/* <iframe src="https://giphy.com/embed/3o7bu3XilJ5BOiSGic" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/youtube-loading-gif-3o7bu3XilJ5BOiSGic">via GIPHY</a></p> */}
+                    
                     <div className="row justify-content-center spinner-div">
                         <img className={this.state.loading} src="../../spinner.svg" alt="" />
                     </div>
