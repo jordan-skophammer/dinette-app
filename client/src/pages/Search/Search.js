@@ -7,7 +7,9 @@ import VoteModal from "../../components/VoteCreatedModal"
 import InstructionsModal from "../../components/InstructionsModal"
 import SearchBar from "../../components/SearchBar"
 import { ModalFooter} from 'reactstrap'
-
+import SearchResults from "../../components/SearchResults";
+import RouletteResultsDiv from "../../components/RouletteResultsDiv"
+import SelectedRestaurants from "../../components/SelectedRestaurants"
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -250,6 +252,12 @@ class Search extends Component {
         } else {
             results = (
                 this.state.results.map(restaurant => (
+
+                    // <IndividualRestaurant
+                    //     populateModal = {this.populateModal}
+                    //     addToSessionStorage = {this.addToSessionStorage}
+
+                    // />
                     <div key={restaurant.result.name} className="result-block">
                         <div className="form-check-results">
                             <label className="form-check-label">
@@ -277,8 +285,8 @@ class Search extends Component {
             <Wrapper>
                 <br />
                 <div className="container">
-                    <div className="row">
 
+                    <div className="row">
                         <SearchBar
                         handleSubmit = {this.handleSubmit}
                         value = {this.state.value} 
@@ -291,76 +299,29 @@ class Search extends Component {
                     <div className="row justify-content-center spinner-div">
                         <img className={this.state.loading} src="../../spinner.svg" alt="" />
                     </div>
+                    
+                    <SearchResults
+                        visibility = {this.state.visibility}
+                        handleInstructionsModal = {this.handleInstructionsModal}
+                        results = {this.state.results}
+                    />
 
-                    <div className={"row orange " + this.state.visibility}>
-                        <div className="col-md-12 pick-card">
-                            <h3 className="text-white text-center">Search Results <i className= "fas fa-info-circle" onClick={this.handleInstructionsModal}></i></h3>
-                        </div>
-                        <br />
-                        <div className="col-md-12 orange" id="search-results-card">
-                            {/* <h3 className="text-white text-center">Search Results</h3>
-                        <h3 className="instructions-small">Click on the + to add to a group vote</h3> */}
-                            {results}
-                        </div>
-                    </div>
-                    <div className={"row " + this.state.rouletteVisable}>
-                        <div className="col-md-12 pick-card orange">
-                            <h2 className="text-white text-center">Your Pick</h2>
-                            <br />
-                            <div className="result-block">
-                                <div className="form-check">
-                                    <label className="form-check-label" htmlFor="defaultCheck">
-                                        {displayRoulette}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <RouletteResultsDiv
+                        rouletteVisable = {this.state.rouletteVisable}
+                        displayRoulette = {this.displayRoulette}
+                    />
+
                     <br />
-                    {this.state.votingArray.length > 0 ? (
-                        <div className="row picker-card-selected">
-                            {this.state.votingArray.length >= 1 ? (
-                                this.state.votingArray.map(restaurant => (
-                                    <div className="col-sm-6 col-md-4">
-                                    <div key={restaurant.id} className="result-block-selected col-sm-10 col-md-12">
-                                        <div className="grouping-nested-elements">
-                                            <div className="restaurant-name">
-                                                {restaurant.name}
-                                            </div>
-                                            <div className="button-div">
-                                                <button className="delete" onClick={() => this.removeFromSessionStorage(restaurant)} value={restaurant.name}>✗</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1"></div>
-                                    </div>
-                                ))
-                            ) : (
-                                    <div>
-                                    </div>
-                                )}
-                        </div>
-                    ) : (<br />)}
-                    {this.state.votingArray.length > 1 && this.state.votingArray.length < 6 ? (
-                        <div className="row">
-                            <div className="col-sm-4"></div>
-                            <div className="col-sm-4">
-                                {/* a place for ternary */}
-                                {this.props.loggedIn ? 
-                                (
-                                    <button className="btn btn-lg yellow text-white" id="saveRestaurants" onClick={() => this.createFireBaseVoteSession(this.props.user.local.userName)}>Add to Group Vote</button>
-                                ) : (
-                                    <a href="/account"><button className="btn btn-lg yellow text-white">Sign up/Log in to start a ballot</button></a>
-                                    )
-                                }
-                            
-                            </div>
-                            <div className="col-sm-4"></div>
-                        </div>
-                    ) : (
-                            <div className="row">
-                            </div>
-                        )}          
+
+                    <SelectedRestaurants
+                        votingArray = {this.state.votingArray}
+                        removeFromSessionStorage = {this.removeFromSessionStorage}
+                        loggedIn = {this.props.loggedIn}
+                        createFireBaseVoteSession = {this.createFireBaseVoteSession}
+                        username = {this.props.user.local.userName}
+                        // this.createFireBaseVoteSession(this.props.user.local.userName)}
+                    />
+
             </div>
             
             <Modal2
