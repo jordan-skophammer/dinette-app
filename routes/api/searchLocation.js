@@ -3,6 +3,7 @@ const axios = require ("axios")
 
 //************** DROP THE NEW PLACES KEY HERE ******************* */
 const placesKey = [
+    "AIzaSyCj_UVMaXzY0HGCWOZSuu2PtKMVSDBZQLE",
     "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
     "AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY",
     "AIzaSyDoymHNEqUV0nVSOmEVwU4_hnNOiKu1RGc",
