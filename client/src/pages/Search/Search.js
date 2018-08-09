@@ -31,7 +31,6 @@ class Search extends Component {
             savedArray: [],
             favoritedRestaurants: [],
             modal: false,
-            voteModal: false,
             instructionsModal: false,
             goodbye: false,
             sendAwayMsg: "Thank you for submitting your group vote!"
@@ -54,9 +53,7 @@ class Search extends Component {
     toggle() {
         this.setState({modal: !this.state.modal});
     }
-    toggleVoteModal() {
-        this.setState({voteModal: !this.state.voteModal})
-    }
+
     handleInstructionsModal() {
         this.setState({instructionsModal: !this.state.instructionsModal})
     }
@@ -112,26 +109,6 @@ class Search extends Component {
         this.setState({ roulettePick: pick, rouletteVisable: "", loading: "hidden"})
         console.log(pick)
     }
-
-
-    createFireBaseVoteSession(userName){
-        this.setState({voteModal: true})
-        console.log(`Local user: ${userName}`);
-        let restaurantsArray = sessionStorage.getItem("restaurants")
-        sessionStorage.setItem("voteOwner", "dummy owner")
-        console.log(restaurantsArray, ' is restaurantsArray')
-        let voteObject = {
-
-            username: userName,
-            restaurantsArr: restaurantsArray
-        }
-        console.log("vote session info:", this.props.firstName)
-
-        // API.makeVoteSession(sessionStorage.getItem("restaurants"))
-        API.makeVoteSession(voteObject)
-        
-    }
-
 
 
     populateModal(photos, name, location, hours, phone, rating, review) {
@@ -303,12 +280,12 @@ class Search extends Component {
                     <SearchResults
                         visibility = {this.state.visibility}
                         handleInstructionsModal = {this.handleInstructionsModal}
-                        results = {this.state.results}
+                        results = {results}
                     />
 
                     <RouletteResultsDiv
                         rouletteVisable = {this.state.rouletteVisable}
-                        displayRoulette = {this.displayRoulette}
+                        Roulette = {displayRoulette}
                     />
 
                     <br />
@@ -341,15 +318,6 @@ class Search extends Component {
                     <button type="button" className="btn yellow text-white" onClick= {() => this.toggle()}>Close</button>
                 </ModalFooter>
             </Modal2>
-
-            <VoteModal
-                toggle = {this.toggleVoteModal}
-                modal = {this.state.voteModal}
-            >
-                <ModalFooter>
-                    <button type="button" className="btn yellow text-white" onClick= {() => this.toggleVoteModal()}>Close</button>
-                </ModalFooter>
-            </VoteModal>
 
             <InstructionsModal 
                 toggle = {this.handleInstructionsModal}

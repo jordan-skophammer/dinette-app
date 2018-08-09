@@ -3,10 +3,10 @@ const axios = require ("axios")
 
 //************** DROP THE NEW PLACES KEY HERE ******************* */
 const placesKey = [
-    "AIzaSyCj_UVMaXzY0HGCWOZSuu2PtKMVSDBZQLE",
-    "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
-    "AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY",
-    "AIzaSyDoymHNEqUV0nVSOmEVwU4_hnNOiKu1RGc",
+    // "AIzaSyCj_UVMaXzY0HGCWOZSuu2PtKMVSDBZQLE",
+    // "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
+    // "AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY",
+    // "AIzaSyDoymHNEqUV0nVSOmEVwU4_hnNOiKu1RGc",
     "AIzaSyBsefQtQyAz_GgHERwuEkFClAWIl7eFUvs",
     "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI",
     "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
@@ -91,6 +91,7 @@ function rateLimitReached(response, element, array, res){
         placesKeyIter++
         array.push(element)
         getDetailsAddToArray(array, res)
+        console.log(placesKeyIter)
     } else {
         return true
     }
