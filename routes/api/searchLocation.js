@@ -1,5 +1,6 @@
-const router = require("express").Router();
-const axios = require ("axios")
+const router = require ("express").Router();
+const axios = require ("axios");
+const request = require ("request");
 
 //************** DROP THE NEW PLACES KEY HERE ******************* */
 const placesKey = [
@@ -21,6 +22,13 @@ const nearbyQueryStringA = "https://maps.googleapis.com/maps/api/place/nearbysea
 const nearbyQueryStringB = "&radius=500&type=restaurant&key="+placesKey[placesKeyIter]
 const placesDetailsQueryStringA = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
 const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key="+placesKey[placesKeyIter]
+
+//Geolocation
+request("https://geoip-db.com/json", function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    console.log('body:', body); // Print the HTML for the Google homepage.
+});
 
 // Global variable to store results (via closure)
 let restaurantsArr = []
