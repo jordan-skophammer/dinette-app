@@ -24,6 +24,9 @@ const NavBar = props => {
             <li className="nav-item active">
               <a className="nav-link text-light" href="/" onClick={props.logout}>Log Out <span className="sr-only">(current)</span></a>
             </li>
+            <li className="nav-item active">
+              <a className="nav-link text-light" href="/howtouse">How to Use Dinette <span className="sr-only">(current)</span></a>
+            </li>
           </ul>
         </div>
       </nav>

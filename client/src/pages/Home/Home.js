@@ -22,6 +22,9 @@ class Home extends Component {
             <div className="row home-btn text-center justify-content-center text-white">
               <a href="/login" className="login">Log In</a> <span className="or">&nbsp; or &nbsp; </span><a href="/SignUp" className="login">Sign Up</a>
             </div>
+            <div className="row home-btn text-center justify-content-center text-white">
+              <a href="/howtouse" className="help">Need help?</a>
+            </div>
           </div>
         </Wrapper>
       )
