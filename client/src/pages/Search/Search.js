@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import geoLocation from "geolocation"
 import "./Search.css"
 import API from "../../utils/API"
 import Wrapper from "../../components/Wrapper"
@@ -43,7 +44,15 @@ class Search extends Component {
 
     componentDidMount() {
         sessionStorage.clear()
+        this.handelLocation()
     }
+
+    // handelLocation() {
+    //     geoLocation.getCurrentPosition(function (err, position) {
+    //         if (err) throw err
+    //         console.log(position)
+    //     })
+    // }
 
     handleChange(event) {
         this.setState({ value: event.target.value })

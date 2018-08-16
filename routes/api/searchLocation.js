@@ -1,13 +1,13 @@
 const router = require ("express").Router();
 const axios = require ("axios");
-const request = require ("request");
+const getLocation = require ("request");
 
 //************** DROP THE NEW PLACES KEY HERE ******************* */
 const placesKey = [
-    "AIzaSyCj_UVMaXzY0HGCWOZSuu2PtKMVSDBZQLE",
-    "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
-    "AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY",
-    "AIzaSyDoymHNEqUV0nVSOmEVwU4_hnNOiKu1RGc",
+    // "AIzaSyCj_UVMaXzY0HGCWOZSuu2PtKMVSDBZQLE",
+    // "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
+    // "AIzaSyCJ2pazcdZHkXUkCyXNzV2iwXPCex7ODdY",
+    // "AIzaSyDoymHNEqUV0nVSOmEVwU4_hnNOiKu1RGc",
     "AIzaSyBsefQtQyAz_GgHERwuEkFClAWIl7eFUvs",
     "AIzaSyA4KGHuQl-PcJZUjZoeY_KDEuDLYf43BWI",
     "AIzaSyBGGnmnD9Dims7WDagmrvl7K4rLr9fHRT4",
@@ -24,11 +24,12 @@ const placesDetailsQueryStringA = "https://maps.googleapis.com/maps/api/place/de
 const placesDetailsQueryStringB = "&fields=name,rating,address_component,photo,type,formatted_phone_number,opening_hours,review&key="+placesKey[placesKeyIter]
 
 //Geolocation
-request("https://geoip-db.com/json", function (error, response, body) {
-    console.log('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', body); // Print the HTML for the Google homepage.
-});
+
+// getLocation("https://geoip-db.com/json", function (error, response, body) {
+//     console.log('error:', error); // Print the error if one occurred
+//     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//     console.log('body:', body); // Print the HTML for the Google homepage.
+// });
 
 // Global variable to store results (via closure)
 let restaurantsArr = []
