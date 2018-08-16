@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import Account from "./pages/Account";
 import JoinVote from "./pages/JoinVote";
 import Results from "./pages/Results";
+import HowTo from "./pages/UseThisApp"
 import './App.css';
 import NavBar from "./components/NavBar";
 // import logo from './logo.svg';
@@ -98,6 +99,7 @@ class App extends PureComponent {
           <Route path="/Account" render={ () => <Account loggedIn={this.state.loggedIn} user={this.state.user} /> } />
           <Route path="/JoinVote" component={JoinVote}/>
           <Route path="/Results" component={Results}/>
+          <Route path="/HowToUse" component={HowTo}/>
         </div>
       </Router>
       </div>
