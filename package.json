@@ -8,7 +8,7 @@
     "client": "node scripts/start-client.js",
     "build": "node scripts/build.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "grunt build && cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
