@@ -1,21 +1,7 @@
 import axios from "axios";
-// import geoLocation from "geolocation";
-import request from "request"
 let currentURL = window.location.origin;
 
 export default {
-  // geoLocation: () => { geoLocation.getCurrentPosition(function (err, position) {
-  //   if (err) throw err
-  //   console.log(position)
-  //   this.state.value = position
-  // })},
-
-  // getLocation: request("https://geoip-db.com/json", function (error, response, body) {
-  //   console.log('error:', error); // Print the error if one occurred
-  //   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  //   console.log('body:', body); // Print the HTML for the Google homepage.
-  // }),
-
   searchRestaurants: () => axios.get("/api/restaurants/")
   // this is currently not enabled. We could use this to set default search results (from the Geolocation of the user?)
   // if so, one of the switches would be in routes > api > restaurants.js ...if this does not get re-written
