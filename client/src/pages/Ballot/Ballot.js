@@ -242,7 +242,7 @@ class Ballot extends Component {
                                     </div>
                                 </div>
                             )}
-                            <button className="btn btn-lg text-white yellow" id="end" onClick={() => this.endVote()}>Close vote session</button>
+                            {/* <button className="btn btn-lg text-white yellow" id="end" onClick={() => this.endVote()}>Close vote session</button> */}
                         </div>
                         
                     </div>

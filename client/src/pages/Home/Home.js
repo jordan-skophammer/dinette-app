@@ -35,7 +35,7 @@ class Home extends Component {
             <button className="btn btn-home btn-lg green text-white" onClick={() => window.location.href = '/search'}>Search Restaurants</button>
           </div>
           <div className="row home-btn justify-content-center">
-            <button className="btn btn-home btn-lg yellow text-white" onClick={() => window.location.href = '/ballot'}>Start a Group Vote</button>
+            <button className="btn btn-home btn-lg yellow text-white" onClick={() => window.location.href = '/joinvote'}>Join a Group Vote</button>
           </div>
           <div className="row home-btn justify-content-center">
             <button className="btn btn-home btn-lg  orange text-white" onClick={() => window.location.href = '/search'}>Restaurant Roulette</button>
