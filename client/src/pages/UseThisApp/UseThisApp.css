@@ -1,0 +1,17 @@
+.guide {
+    background-color: white;
+    padding: 30px;
+    border: 5px solid #bed736;
+}
+
+.guide a {
+    display: block;
+    padding-bottom: 10px;
+}
+
+.guideLinks {
+    padding: 8px;
+    padding-top: 15px;
+    /* background-color: rgb(231, 227, 227); */
+    margin-bottom: 20px;
+}
