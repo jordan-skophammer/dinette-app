@@ -19,13 +19,13 @@ const NavBar = props => {
               <a className="nav-link text-light" href="/joinvote">Vote <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item active">
+              <a className="nav-link text-light" href="/howtouse">How to Use Dinette <span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item active">
               <a className="nav-link text-light" href="/account">My Account <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item active">
               <a className="nav-link text-light" href="/" onClick={props.logout}>Log Out <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link text-light" href="/howtouse">How to Use Dinette <span className="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>
@@ -46,6 +46,9 @@ const NavBar = props => {
             </li>
             <li className="nav-item active">
               <a className="nav-link text-light" href="/joinvote">Vote <span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item active">
+              <a className="nav-link text-light" href="/howtouse">How to Use Dinette <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item active">
               <a className="nav-link text-light" href="/LogIn">Log In <span className="sr-only">(current)</span></a>
