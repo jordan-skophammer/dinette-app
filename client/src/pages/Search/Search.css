@@ -179,14 +179,14 @@ everything is okay ...but if that breaks things in search.js, we will re-assess)
 @media (max-width: 620px){ 
     #search-results-card {
         /* min-height: 300px; */
-        max-height: 425px;
+        max-height: 325px;
     }
 }
 /* Regular computer screen  */
 @media (min-width: 621px){ 
     #search-results-card {
         /* min-height: 300px; */
-        max-height: 450px;
+        max-height: 325px;
     }
 }
 /* adjusting the size of the font for medium screens */
