@@ -17,6 +17,12 @@ nav {
     font-size: 1.2rem;
 }
 
+.help {
+    color: white;
+    text-shadow: 1px 1px 10px rgba(32, 16, 8, 0.8);
+    font-size: 1.2rem;
+}
+
 .home-btn {
     margin-bottom: 8px;
     /* width: 100%; */
